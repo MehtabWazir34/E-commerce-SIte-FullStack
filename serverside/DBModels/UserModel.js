@@ -24,14 +24,14 @@ let theUserSchema = new mongoose.Schema({
     cartList:{
         type:[
             {
-            product:{type:[mongoose.Schema.Types.ObjectId], ref : 'products'},
+            product:{type:[mongoose.Schema.Types.ObjectId], ref : 'Product'},
             itmesQty: { type: Number, default:1}
             },
             ],
         default:[]
             },
     fvrtItems:{
-        type: [mongoose.Schema.Types.ObjectId], ref:"products"
+        type: [mongoose.Schema.Types.ObjectId], ref:"Product"
     },
 
     orderedItems:{
@@ -40,4 +40,5 @@ let theUserSchema = new mongoose.Schema({
 
 }, {timestamps: true});
 
-export default mongoose.model('UserModel', theUserSchema);
+ let theUser = mongoose.model('theUser', theUserSchema);
+export default theUser

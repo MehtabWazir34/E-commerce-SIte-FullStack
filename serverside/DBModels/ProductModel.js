@@ -26,4 +26,4 @@ let theProductSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-export default mongoose.model('ProductModel', theProductSchema);
+export default mongoose.model('Product', theProductSchema);

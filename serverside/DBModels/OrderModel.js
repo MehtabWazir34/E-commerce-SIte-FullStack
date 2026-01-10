@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 let theOrderSchema = new mongoose.Schema({
     customerName:{
-        type: mongoose.Schema.Types.ObjectId, ref: 'User',
+        type: mongoose.Schema.Types.ObjectId, ref: 'theUser',
     },
-    orderedItems:{
+    orderedItems:[{
         type:[{
-            product: {type:[mongoose.Schema.Types.ObjectId], ref:'product', required: true},
+            Product: {type:[mongoose.Schema.Types.ObjectId], ref:'Product', required: true},
             Qty: { type: Number, default: 1},
         }],
         default:[]
-    },
+    }],
     totalAmount:{
         type:[mongoose.Schema.Types.Decimal128], default: 0.0
     },
@@ -18,4 +18,4 @@ let theOrderSchema = new mongoose.Schema({
         type: String, default:"Payment Done!"
     }
 }, {timestamps: true});
-export default mongoose.model('OrderModel', theOrderSchema);
+export default mongoose.model('Order', theOrderSchema);
