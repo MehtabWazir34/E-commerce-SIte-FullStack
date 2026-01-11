@@ -1,4 +1,18 @@
 import mongoose from "mongoose";
+const priceSchema = new mongoose.Schema({
+    originalPrice: {
+        type: mongoose.Schema.Types.Decimal128,
+        required: true
+    },
+    MRPrice: {
+        type: mongoose.Schema.Types.Decimal128,
+        required: true
+    },
+    offPrice: {
+        type: mongoose.Schema.Types.Decimal128,
+        default: 0.0
+    }
+}, { _id: false });
 
 let theProductSchema = new mongoose.Schema({
     productTitle:{
@@ -11,21 +25,17 @@ let theProductSchema = new mongoose.Schema({
         type: String, required: true, 
     },
     productPrice:{
-        type: [{
-            originalPrice: {type: [mongoose.Schema.Types.Decimal128], default:0.0},
-            MRPrice: {type: [mongoose.Schema.Types.Decimal128], default:0.0},
-            offPrice: {type: [mongoose.Schema.Types.Decimal128], default:0.0}
-        }],
-        default:{originalPrice: 0.0, MRPrice:0.0, offPrice:0.0},
+        type: priceSchema, required: true
+        // default:{originalPrice: 0.0, MRPrice:0.0, offPrice:0.0},
     },
     productSize:{
-        type: String, default: [], 
+        type: [String], default: [], 
     },
     productCategory:{
-        type: String, default: []
+        type: [String], default: []
     },
     productImgs:{
-        type: String, required: true
+        type: [String], required: true
     }
 }, {timestamps: true});
 
