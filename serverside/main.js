@@ -3,6 +3,7 @@ import cors from 'cors'
 import { ConnectDb } from './DB/ConnectDB.js';
 import { configDotenv } from 'dotenv';
 import { Login, SignUp } from './ServerControllers/userControllers.js';
+import { userRoutes } from './Routes/userRoutes.js';
 
 configDotenv()
 const myApp = express();
@@ -15,11 +16,8 @@ myApp.use(cors({
 
 ConnectDb();
 
-let userRoute = Router()
-userRoute.post('/register', SignUp)
-userRoute.post('/login', Login)
 
-myApp.use("/user", userRoute);
+myApp.use("/user", userRoutes);
 
 myApp.listen(3400, ()=>{
     console.log(

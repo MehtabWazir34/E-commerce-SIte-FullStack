@@ -63,3 +63,17 @@ export const Login = async(req, res)=>{
     })
 
 }
+export const Logout = async(req, res)=>{
+    try {
+        await theUser.findByIdAndUpdate(
+            req.user.id,
+            // {refreshToken: null} 
+        );
+
+        res.status(200).json({msg:"Logged out✅", success: true})
+    } catch (error) {
+        console.log({Msg:'Error, Logout failed❌', error, success:false,}),
+        res.status(500).json({msg:"Loging out faild❌", success: false })
+        
+    }
+}

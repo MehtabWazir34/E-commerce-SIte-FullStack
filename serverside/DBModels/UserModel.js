@@ -20,6 +20,9 @@ let theUserSchema = new mongoose.Schema({
     phoneNo:{
         type: Number, required: true, unique: true
     },
+    // refreshToken:{
+    //     type:String, default: null
+    // },
 
     cartList:{
         type:[
