@@ -4,6 +4,7 @@ import { ConnectDb } from './DB/ConnectDB.js';
 import { configDotenv } from 'dotenv';
 import { Login, SignUp } from './ServerControllers/userControllers.js';
 import { userRoutes } from './Routes/userRoutes.js';
+import { addProducts } from './ServerControllers/productControllers.js';
 
 configDotenv()
 const myApp = express();
@@ -15,9 +16,11 @@ myApp.use(cors({
 }));
 
 ConnectDb();
-
+let itemRoute = Router();
+itemRoute.post('/additem', addProducts);
 
 myApp.use("/user", userRoutes);
+myApp.use('/item', itemRoute)
 
 myApp.listen(3400, ()=>{
     console.log(

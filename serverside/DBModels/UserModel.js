@@ -28,7 +28,7 @@ let theUserSchema = new mongoose.Schema({
         type:[
             {
             product:{type:[mongoose.Schema.Types.ObjectId], ref : 'Product'},
-            itmesQty: { type: Number, default:1}
+            itemQty: { type: Number, default:1}
             },
             ],
         default:[]

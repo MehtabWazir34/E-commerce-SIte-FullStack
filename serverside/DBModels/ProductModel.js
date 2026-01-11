@@ -23,7 +23,11 @@ let theProductSchema = new mongoose.Schema({
     },
     productCategory:{
         type: String, default: []
+    },
+    productImgs:{
+        type: String, required: true
     }
 }, {timestamps: true});
 
-export default mongoose.model('Product', theProductSchema);
+ const theProduct = mongoose.model('Product', theProductSchema);
+ export default theProduct
