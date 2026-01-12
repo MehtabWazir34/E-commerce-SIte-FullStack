@@ -15,26 +15,26 @@ const priceSchema = new mongoose.Schema({
 }, { _id: false });
 
 let theProductSchema = new mongoose.Schema({
-    productTitle:{
+    Title:{
         type: String, required: true, 
     },
-    productDetail:{
+    Detail:{
         type: String, required: true, 
     },
-    productName:{
+    Name:{
         type: String, required: true, 
     },
-    productPrice:{
+    Price:{
         type: priceSchema, required: true
         // default:{originalPrice: 0.0, MRPrice:0.0, offPrice:0.0},
     },
-    productSize:{
+    Size:{
         type: [String], default: [], 
     },
-    productCategory:{
+    Category:{
         type: [String], default: []
     },
-    productImgs:{
+    Imgs:{
         type: [String], required: true
     }
 }, {timestamps: true});
