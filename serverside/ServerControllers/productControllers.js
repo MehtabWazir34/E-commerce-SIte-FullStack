@@ -55,3 +55,48 @@ export const getItemById = async(req, res)=>{
              })
     }
 }
+
+export const getProductsAndApplyFilter = async(req, res)=>{
+    try {
+        let {cats, sizes, search, lowPrice, highPrice} = req.query;
+        sizes = sizes ? sizes.split(',').itemFilter(Boolean) : [];
+        cats = cats ? cats.split(',').itemFilter(Boolean) : [];     //Cats--> Categories
+        const itemFilter = {};
+
+        if(cats.length > 0){
+            itemFilter.Category = {$in: cats}
+        }
+        if(sizes.length > 0){
+            itemFilter.Size = { $in : sizes}
+        };
+        if(lowPrice || highPrice){
+            itemFilter['Price.originalPrice'] = {};
+            if(lowPrice){
+                itemFilter['Price.originalPrice'].$gte = Number(lowPrice)
+            };
+            if(highPrice){
+                itemFilter['Price.originalPrice'].$lte = Number(highPrice)
+            }
+        }
+        if(search){
+            itemFilter.$or =[
+                {Title : {$regex : search, $options : 'i'}},
+                {Detail : { $regex : search, $options : 'i'}}
+            ]
+        };
+
+        const filteredItems = await theProduct.find(itemFilter);
+        res.status(200).json({
+            succes: true,
+            filteredItems
+        })
+        
+    } catch (error) {
+        console.log("error❌", error);
+        res.status(400).json({
+            succes: true,
+            Msg:"Error"
+        })
+        
+    }
+}
