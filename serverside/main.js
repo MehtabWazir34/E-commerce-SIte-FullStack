@@ -1,9 +1,8 @@
-import express, { Router } from 'express'
 import cors from 'cors'
 import { ConnectDb } from './DB/ConnectDB.js';
 import { configDotenv } from 'dotenv';
 import { userRoutes } from './Routes/userRoutes.js';
-import { addProducts, getItemById, getProductsAndApplyFilter } from './ServerControllers/productControllers.js';
+import { productRoutes } from './Routes/productRoutes.js';
 
 configDotenv()
 const myApp = express();
@@ -15,13 +14,9 @@ myApp.use(cors({
 }));
 
 ConnectDb();
-let itemRoute = Router();
-itemRoute.post('/additem', addProducts);
-itemRoute.get('/:id', getItemById);
-itemRoute.get('/', getProductsAndApplyFilter);
 
 myApp.use("/user", userRoutes);
-myApp.use('/item', itemRoute)
+myApp.use('/products', productRoutes)
 
 myApp.listen(3400, ()=>{
     console.log(
