@@ -26,8 +26,7 @@ function Home() {
             </button>
           </div>
         </div>
-
-        {/* Right Image */}
+{/* Right side */}
         <div className="flex justify-center items-end w-full">
           <img
             src={pic1}
