@@ -17,11 +17,11 @@ function Home() {
           </p>
 
           <div className="flex gap-4 mt-2">
-            <button className="rounded-full px-6 py-2 text-sm font-semibold bg-[#FFE2AF] text-[#2c3639] hover:bg-[#F2D39A] transition">
+            <button className="rounded-full cursor-pointer px-6 py-2 text-sm font-semibold bg-[#FFE2AF] text-[#2c3639] hover:bg-[#F2D39A] transition">
               Shop Now
             </button>
 
-            <button className="rounded-full px-6 py-2 text-sm font-semibold border border-[#FFE2AF] text-[#FFE2AF] hover:bg-[#FFE2AF] hover:text-[#2c3639] transition">
+            <button className="rounded-full cursor-pointer px-6 py-2 text-sm font-semibold border border-[#FFE2AF] text-[#FFE2AF] hover:bg-[#FFE2AF] hover:text-[#2c3639] transition">
               Browse Collection
             </button>
           </div>
