@@ -1,3 +1,4 @@
+import express from 'express'
 import cors from 'cors'
 import { ConnectDb } from './DB/ConnectDB.js';
 import { configDotenv } from 'dotenv';

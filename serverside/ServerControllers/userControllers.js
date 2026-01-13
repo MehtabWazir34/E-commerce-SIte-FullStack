@@ -1,4 +1,5 @@
-import bcrypt from 'bcrypt'
+// import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
 // import { the } from "../DBModels/UserModel.js";
 import theUser from '../DBModels/UserModel.js';
