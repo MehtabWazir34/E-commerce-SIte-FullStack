@@ -21,7 +21,7 @@ myApp.use('/products', productRoutes)
 
 myApp.listen(3400, ()=>{
     console.log(
-        "Its running!"
+        `Its running! localhost:3400`
     );
     
 })

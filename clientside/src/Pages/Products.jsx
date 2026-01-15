@@ -79,7 +79,7 @@ function Products() {
             {productsList.map((item) => (
               <Link
                 key={item.id}
-                to={`/product/detail/${item.id}`}
+                to={`/product/details/${item._id}`}
                 className="w-full bg-[#f2d39a] rounded-2xl hover:scale-105 transition duration-300"
               >
                 {/* Image */}
