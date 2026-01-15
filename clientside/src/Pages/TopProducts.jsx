@@ -12,8 +12,8 @@ const products = [
 
 function ProductRow() {
   return (
-    <div className="mx-auto flex justify-center w-full">
-      <div className="flex gap-x-6 min-w-max ">
+    <div id="top-products" className="mx-auto flex justify-center w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-w-max ">
         {products.map((item) => (
           <Link
             key={item.id}
@@ -58,7 +58,10 @@ function TopProducts() {
 
       {/* Product Rows */}
       <ProductRow />
+      <div className="w-full hidden md:flex">
+
       <ProductRow />
+      </div>
 
       {/* CTA */}
       <div className="flex justify-center py-6">

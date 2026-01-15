@@ -6,6 +6,8 @@ import Login from './Pages/Login'
 import Header from './Parts/Header'
 import Home from './Pages/Home'
 import Footer from './Parts/Footer'
+import ScrollToHash from './Parts/ScrollToIds'
+import Products from './Pages/Products'
 
 function App() {
 
@@ -19,9 +21,12 @@ function App() {
         <Route path='/' element={<Home/>}/>
           <Route path='/register' element={<SignUp/>}/>
           <Route path='/login' element={<Login/>}/>
+
+          <Route path='/products' element={<Products/>}/>
         </Routes>
      
         </main>
+        <ScrollToHash/>
         <Footer/>
         
      </div>

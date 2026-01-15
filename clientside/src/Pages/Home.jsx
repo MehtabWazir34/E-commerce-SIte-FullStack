@@ -6,6 +6,7 @@ import vollyball from '../Pics/vollyball.jpg'
 import { TbCreditCardRefund, TbTruckDelivery } from "react-icons/tb";
 import {MdOutlineRecommend} from 'react-icons/md'
 import TopProducts from './TopProducts'
+import ContactForm from '../Parts/MsgForm'
 function Home() {
   return (
     <main className="w-full min-h-screen  px-6 pt-10">
@@ -51,7 +52,7 @@ function Home() {
   </h2>
 
   {/* Cards Grid */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div id='categories' className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
     {/* Cricket */}
     <div className="rounded-xl flex flex-col-reverse bg-blue-500/90 p-6 md:grid md:grid-cols-2 md:text-left text-center items-center gap-6">
@@ -152,7 +153,7 @@ function Home() {
   </div>
 </section>
 
-    <section className='w-full flex flex-col justify-center gap-4 bg-[#2c3639] rounded-2xl p-12 mx-auto'>
+    <section id='why-choose-us' className='w-full flex flex-col justify-center gap-4 bg-[#2c3639] rounded-2xl p-12 mx-auto'>
         <h2 className='text-center sm:text-lg md:text-2xl text-[#FFE2AF] pb-1 leading-tight font-bold border-b-2 border-[#FFE2AF] md:max-w-1/2 mx-auto '>Why choose Jan'Sports?</h2>
         <div className='sm:grid sm:grid-cols-1 md:flex md:justify-center sm:gap-y-12 md:gap-x-10'>
             <div className='grid grid-cols-1 hover:scale-105 transition-all duration-300 md:flex md:justify-between gap-x-2 shadow-md shadow-white/50 rounded-md p-2 text-[#F2D39A]'>
@@ -186,7 +187,7 @@ function Home() {
     </section>
 
     <TopProducts/>  
-
+    <ContactForm/>
     </main>
   )
 }
