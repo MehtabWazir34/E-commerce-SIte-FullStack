@@ -4,5 +4,5 @@ import authCheck from "../MiddleCheck/protectedAcces.js";
 
 export const productRoutes = Router();
 productRoutes.post('/addnew', authCheck, addProducts)
-productRoutes.get('/', authCheck, getProductsAndApplyFilter)
+productRoutes.get('/', getProductsAndApplyFilter)
 productRoutes.get('/:id', getItemById)
