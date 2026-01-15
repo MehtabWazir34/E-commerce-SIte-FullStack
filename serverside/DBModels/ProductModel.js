@@ -1,18 +1,27 @@
 import mongoose from "mongoose";
-const priceSchema = new mongoose.Schema({
-    originalPrice: {
-        type: mongoose.Schema.Types.Decimal128,
-        required: true
-    },
-    MRPrice: {
-        type: mongoose.Schema.Types.Decimal128,
-        required: true
-    },
-    offPrice: {
-        type: mongoose.Schema.Types.Decimal128,
-        default: 0.0
+const priceSchema = new mongoose.Schema(
+  {
+    originalPrice: { type: mongoose.Schema.Types.Decimal128, required: true },
+    mrp: { type: mongoose.Schema.Types.Decimal128, required: true },
+    offPrice: { type: mongoose.Schema.Types.Decimal128, required: true }
+  },
+  {
+    toJSON: {
+      transform: (_, ret) => {
+        if (ret.originalPrice)
+          ret.originalPrice = ret.originalPrice.toString();
+
+        if (ret.mrp)
+          ret.mrp = ret.mrp.toString();
+
+        if (ret.offPrice)
+          ret.offPrice = ret.offPrice.toString();
+        return ret;
+      }
     }
-}, { _id: false });
+  }
+);
+
 
 let theProductSchema = new mongoose.Schema({
     Title:{

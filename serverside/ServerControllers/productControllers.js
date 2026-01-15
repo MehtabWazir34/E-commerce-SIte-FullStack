@@ -55,6 +55,19 @@ export const getItemById = async(req, res)=>{
              })
     }
 }
+export const getProducts = async(req, res)=>{
+    try {
+        let products = await theProduct.find();
+        
+        res.status(200).json({
+            Msg:"Date recieved",
+            products
+        })
+    } catch (error) {
+        console.log("Err", error);
+        
+    }
+}
 
 export const getProductsAndApplyFilter = async(req, res)=>{
     try {
