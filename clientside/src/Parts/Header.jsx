@@ -18,7 +18,7 @@ function Header(){
 
                 <div className='hidden md:flex md:justify-between gap-x-4'>
             <NavLink to={'/register'} className={'cursor-pointer px-2 text-center py-1 bg-[#ffe2af] rounded-full outline-0 hover:bg-[#F2D39A] text-[#2C3639] font-semibold'}>Register account</NavLink>
-            <NavLink to={'/login'} className={'cursor-pointer px-2 text-center py-1 bg-[#ffe2af] rounded-full outline-0 hover:bg-[#F2D39A] text-[#2C3639] font-semibold'}>Login</NavLink>
+            <NavLink to={'/login'} className={'cursor-pointer px-2 text-center py-1 border border-[#ffe2af] rounded-full outline-0 hover:bg-[#F2D39A] text-[#ffe2af] hover:text-[#2c3639] font-semibold'}>Login</NavLink>
                     
                 </div>
             </div>

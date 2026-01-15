@@ -5,6 +5,7 @@ import football from '../Pics/football.jfif'
 import vollyball from '../Pics/vollyball.jpg'
 import { TbCreditCardRefund, TbTruckDelivery } from "react-icons/tb";
 import {MdOutlineRecommend} from 'react-icons/md'
+import TopProducts from './TopProducts'
 function Home() {
   return (
     <main className="w-full min-h-screen  px-6 pt-10">
@@ -115,7 +116,7 @@ function Home() {
              </Link>
       </div>
 
-      <div className="h-40 w-full flex items-center justify-center">
+      <div className="h-40 w-full flex items-center justify-center order-1 md:order-3">
         <img
           src={wears}
           alt="Sports Wear"
@@ -183,6 +184,8 @@ function Home() {
             </div>
         </div>
     </section>
+
+    <TopProducts/>  
 
     </main>
   )

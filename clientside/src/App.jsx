@@ -14,7 +14,7 @@ function App() {
      <div className='w-full h-full place-items-center'>
       <Header/>
       {/* <h2>Yes, its running.</h2> */}
-        <main className='pt-12 w-full rounded-md shadow-2xl'>
+        <main className='w-full rounded-md shadow-2xl'>
         <Routes>
         <Route path='/' element={<Home/>}/>
           <Route path='/register' element={<SignUp/>}/>
