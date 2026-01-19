@@ -9,10 +9,13 @@ export const addProducts = async(req, res)=>{
         
         const myAllProducts = [];
         for(let newItem of myProductsData){
-            const {Title, Detail, Name, Imgs, Size, Category, Price} = newItem;
+            const {Title, Detail, Name, Imgs, 
+                // Size, 
+                Category, Price} = newItem;
             const newProduct = new theProduct({
                 Title, Detail, Imgs, Name,
-                Size, Price, Category
+                // Size,
+                Price, Category
             });
 
             // const newAddedItem = await newProduct.save();
@@ -71,17 +74,19 @@ export const getProducts = async(req, res)=>{
 
 export const getProductsAndApplyFilter = async(req, res)=>{
     try {
-        let {cats, sizes, search, lowPrice, highPrice} = req.query;
-        sizes = sizes ? sizes.split(',').filter(Boolean) : [];
+        let {cats, 
+            // sizes,
+             search, lowPrice, highPrice} = req.query;
+        // sizes = sizes ? sizes.split(',').filter(Boolean) : [];
         cats = cats ? cats.split(',').filter(Boolean) : [];     //Cats--> Categories
         const itemFilter = {};
 
         if(cats.length > 0){
             itemFilter.Category = {$in: cats}
         }
-        if(sizes.length > 0){
-            itemFilter.Size = { $in : sizes}
-        };
+        // if(sizes.length > 0){
+        //     itemFilter.Size = { $in : sizes}
+        // };
         if(lowPrice || highPrice){
             itemFilter['Price.originalPrice'] = {};
             if(lowPrice){
