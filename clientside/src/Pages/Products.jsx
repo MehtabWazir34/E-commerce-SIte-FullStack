@@ -1,29 +1,36 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-
+import {InPut} from '../Inputs/InPuts'
 
 function Products() {
-    // const [category, setCat] = useState([]);
-    // const [filteredProducts, setFilteredProducts] = useState([]);
-    // const [activeCategory, setActiveCategory] = useState("All");
+  const [category, setCat] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [activeCategory, setActiveCategory] = useState([]);
+  const [priceRange, setPriceRange] = useState({'low':'', 'high':''})
     
   const [productsList, setProducts] = useState([]);
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await axios.get("http://localhost:3400/products/");
-        setProducts(res.data.products);
-        console.log(res.data.products);
-        // (res.data);
-        // setCat(res.data.filteredItems.Category);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
+  useEffect(()=>{
+   const getFilteredItems = async()=>{
+    try {
+        let params = {}
+        if(activeCategory.length) params.cats = activeCategory.join(',');
+        if(priceRange.low) params.lowPrice = priceRange.low;
+        if(priceRange.high) params.highPrice = priceRange.high;
 
-    getProducts();
-  }, []);
+        let res = await axios.get('http://localhost:3400/products/filtereditems', {params});
+        setProducts(res.data.filteredItems);
+        console.log(res.data);
+        
+
+    } catch (error) {
+      console.log("Filter err:", error);
+      
+    }
+   }
+
+   getFilteredItems();
+  }, [activeCategory, priceRange])
 
   /* Category Filter Logic */
   // const handleCategory = () => {
@@ -47,25 +54,39 @@ function Products() {
         <h4 className="text-[#ffe2af] font-semibold border-b-2 border-amber-600 pb-2 mb-4">
           Browse Categories
         </h4>
-{/* 
-        <ul className="space-y-3 text-sm">
-          {category.map((cat) => (
-            <li
-              key={cat}
-              onClick={() => handleCategory(cat)}
-              className={`cursor-pointer transition px-3 py-1 rounded-md
-                ${
-                  activeCategory === cat
-                    ? "bg-amber-500 text-black font-semibold"
-                    : "text-[#f2d39a] hover:text-white"
-                }
-                `
-              }
-            >
-              {cat}
-            </li>
-          ))}
-        </ul> */}
+<ul className="space-y-2 text-sm">
+  {["cricket", "Pants", "Shoes"].map((cat) => (
+    <li key={cat}>
+      <label className="flex items-center gap-2 text-[#f2d39a]">
+        <input
+          type="checkbox"
+          value={cat}
+          onChange={(e) =>
+            setActiveCategory((prev) =>
+              e.target.checked
+                ? [...prev, cat]
+                : prev.filter((c) => c !== cat)
+            )
+          }
+        />
+        {cat}
+      </label>
+    </li>
+  ))}
+</ul>
+<div className="mt-4">
+  <InPut type={'number'} placeholder={'Enter min price'} onChange={(a)=> setPriceRange({...priceRange, low: a.target.value})}  />
+  <InPut type={'number'} placeholder={'Enter max price'} onChange={(a)=> setPriceRange({...priceRange, high: a.target.value})} />
+  {/* <input
+    type="number"
+    placeholder="Max Price"
+    className="w-full p-1 rounded"
+    onChange={(e) =>
+      setPriceRange({ ...priceRange, high: e.target.value })
+    }
+  /> */}
+</div>
+
       </aside>
 
       {/* Products Scroll Area */}

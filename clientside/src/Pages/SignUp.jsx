@@ -50,7 +50,7 @@ function SignUp() {
         </div>
 
         {/* Form */}
-        <form onSubmit={submitForm} className="space-y-2">
+        <form onSubmit={submitForm} className="space-y-2 flex flex-col justify-center w-full">
           
           <div className="grid grid-cols-1">
             <LaBel lblFor={'fullName'} lblName={'FullName'} />
@@ -123,7 +123,7 @@ function SignUp() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full cursor-pointer mt-4 p-2 bg-[#FFE2AF] text-[#2C3639] rounded-full hover:bg-[#F2D39A] transition-colors disabled:opacity-60"
+            className="w-1/2 mx-auto cursor-pointer mt-4 p-2 bg-[#FFE2AF] text-[#2C3639] rounded-full hover:bg-[#F2D39A] transition-colors disabled:opacity-60"
           >
             {loading ? "Creating Account..." : "Create Account"}
           </button>

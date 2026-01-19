@@ -41,7 +41,7 @@ function Login() {
         </div>
 
         {/* Form */}
-        <form onSubmit={submitForm} className="space-y-4">
+        <form onSubmit={submitForm} className="space-y-4 flex flex-col justify-center w-full">
           
           <div className="grid grid-cols-1">
             <LaBel lblFor="email" 
@@ -74,9 +74,9 @@ function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full cursor-pointer mt-4 p-2 bg-[#FFE2AF] text-[#2c3639] font-semibold rounded-full hover:bg-[#F2D39A] transition-colors disabled:opacity-60"
+            className="mx-auto w-1/2 cursor-pointer mt-4 p-2 bg-[#FFE2AF] text-[#2c3639] font-semibold rounded-full hover:bg-[#F2D39A] transition-colors disabled:opacity-60"
           >
-            {loading ? "Creating Account..." : "Create Account"}
+            {loading ? "Logging In..." : "Login"}
           </button>
         </form>
         <p className="text-center text-amber-500 my-4">Don't have an account? <a href="/register" className="underline text-[#FFE2AF]">Create Now</a></p>

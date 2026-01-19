@@ -72,8 +72,8 @@ export const getProducts = async(req, res)=>{
 export const getProductsAndApplyFilter = async(req, res)=>{
     try {
         let {cats, sizes, search, lowPrice, highPrice} = req.query;
-        sizes = sizes ? sizes.split(',').itemFilter(Boolean) : [];
-        cats = cats ? cats.split(',').itemFilter(Boolean) : [];     //Cats--> Categories
+        sizes = sizes ? sizes.split(',').filter(Boolean) : [];
+        cats = cats ? cats.split(',').filter(Boolean) : [];     //Cats--> Categories
         const itemFilter = {};
 
         if(cats.length > 0){
