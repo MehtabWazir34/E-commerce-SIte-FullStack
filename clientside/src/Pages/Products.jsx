@@ -78,7 +78,7 @@ function Products() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
             {productsList.map((item) => (
               <Link
-                key={item.id}
+                key={item._id}
                 to={`/product/details/${item._id}`}
                 className="w-full bg-[#f2d39a] rounded-2xl hover:scale-105 transition duration-300"
               >

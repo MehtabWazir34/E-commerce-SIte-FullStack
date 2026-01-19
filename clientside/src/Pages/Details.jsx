@@ -34,9 +34,9 @@ function Details() {
   return (
     <section className="max-w-10/11 min-h-8/10 mt-8 rounded-2xl p-4 mx-auto bg-[#2c3639]">
 
-      <div className="w-full grid grid-cols-2 gap-6 mt-4">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
         {/* Images Section */}
-        <div className="w-7/12 shadow-2xl rounded-2xl p-4">
+        <div className="w-full md:w-7/12 shadow-2xl rounded-2xl p-4">
           {/* Main Image */}
           <div className="w-full rounded-xl overflow-hidden">
             <img
@@ -74,7 +74,7 @@ function Details() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Quantity & Actions */}
             <div className="flex flex-col gap-4">
               {/* Quantity */}
@@ -109,14 +109,27 @@ function Details() {
 
             {/* Price Info */}
             <div className="text-sm">
-              <h2 className="my-1">Price : {price}</h2>
-              <h2 className="my-1">Quantity : {quantity}</h2>
-              <h2 className="my-1">Discount : {discount}</h2>
-              <h2 className="my-1">Delivery : 0</h2>
+              <div className="flex justify-between">
+              <h2 className="my-1">Price</h2>
+              <h2 className="my-1">{price}</h2>
+              </div>
+              <div className="flex justify-between">
+              <h2 className="my-1">Quantity</h2>
+              <h2 className="my-1">0{quantity}</h2>
+              </div>
+              <div className="flex justify-between">
+              <h2 className="my-1">Discount</h2>
+              <h2 className="my-1"> 0{discount}</h2>
+              </div>
+              <div className="flex justify-between">
+              <h2 className="my-1">Delivery</h2>
+              <h2 className="my-1">00</h2>
+              </div>
 
-              <h2 className="border-t-2 mt-2 pt-2 font-bold text-lg">
-                Total : {total}
-              </h2>
+              <div className="flex justify-between border-t-2 mt-2 pt-2 font-bold text-lg">
+                <h2 className="my-1">Total</h2>
+                <h2 className="my-1">{total}</h2>
+              </div>
             </div>
           </div>
         </div>
