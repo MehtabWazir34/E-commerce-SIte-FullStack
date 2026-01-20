@@ -41,8 +41,8 @@ function Products() {
           Browse Categories
         </h4>
 <div className="m-4 space-2 gap-2 max-w-full md:w-full flex md:flex-col flex-row justify-center">
-  <input className="max-w-1/2 rounded-md md:w-full border border-gray-100 text-gray-100 p-2" type={'number'} placeholder={'Enter min price'} onChange={(a)=> setPriceRange({...priceRange, low: a.target.value})}  />
-  <input className="max-w-1/2 rounded-md md:w-full border border-gray-100 text-gray-100 p-2" type={'number'} placeholder={'Enter max price'} onChange={(a)=> setPriceRange({...priceRange, high: a.target.value})} />
+  <input className="max-w-1/2 rounded-md md:w-full border border-gray-100 text-gray-100 p-2" type={'number'} placeholder={'Min price'} onChange={(a)=> setPriceRange({...priceRange, low: a.target.value})}  />
+  <input className="max-w-1/2 rounded-md md:w-full border border-gray-100 text-gray-100 p-2" type={'number'} placeholder={'Max price'} onChange={(a)=> setPriceRange({...priceRange, high: a.target.value})} />
 
 </div>
 
@@ -94,7 +94,7 @@ function Products() {
                   <p className="font-semibold mt-1">
                     Rs.{item.Price.originalPrice}
                   </p>
-                  <p className="text-xs mt-1">Category: {item.Category}</p>
+                  {/* <p className="text-xs mt-1">Category: {item.Category}</p> */}
                   <p className="text-xs mt-1">Reviews: ⭐⭐⭐</p>
                 </div>
               </Link>
