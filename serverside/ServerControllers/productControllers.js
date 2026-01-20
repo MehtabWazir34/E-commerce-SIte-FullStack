@@ -74,19 +74,20 @@ export const getProducts = async(req, res)=>{
 
 export const getProductsAndApplyFilter = async(req, res)=>{
     try {
-        let {cats, 
-            // sizes,
+        let {Category, 
+            sizes,
              search, lowPrice, highPrice} = req.query;
-        // sizes = sizes ? sizes.split(',').filter(Boolean) : [];
-        cats = cats ? cats.split(',').filter(Boolean) : [];     //Cats--> Categories
+        sizes = sizes ? sizes.split(',').filter(Boolean) : [];
+        Category = Category ? Category.split(',').filter(Boolean) : [];
         const itemFilter = {};
 
-        if(cats.length > 0){
-            itemFilter.Category = {$in: cats}
+        if(Category && Category.length > 0){
+            itemFilter.Category = {$in: Array.isArray(Category) ? Category: [Category]}
+        itemFilter.Category = { $in: Category.map(cat => new RegExp(`^${cat}$`, `i`))}
         }
-        // if(sizes.length > 0){
-        //     itemFilter.Size = { $in : sizes}
-        // };
+        if(sizes.length > 0){
+            itemFilter.Size = { $in : sizes}
+        };
         if(lowPrice || highPrice){
             itemFilter['Price.originalPrice'] = {};
             if(lowPrice){
@@ -108,6 +109,9 @@ export const getProductsAndApplyFilter = async(req, res)=>{
             succes: true,
             filteredItems
         })
+        console.log("Category:", req.query.Category);
+        console.log("Type:", typeof req.query.Category);
+
         
     } catch (error) {
         console.log("error❌", error);

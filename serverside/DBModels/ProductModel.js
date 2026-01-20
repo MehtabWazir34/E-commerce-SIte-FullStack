@@ -37,9 +37,9 @@ let theProductSchema = new mongoose.Schema({
         type: priceSchema, required: true
         // default:{originalPrice: 0.0, MRPrice:0.0, offPrice:0.0},
     },
-    // Size:{
-    //     type: [String], default: [], 
-    // },
+    Size:{
+        type: [String], default: [], 
+    },
     Category:{
         type: [String], default: []
     },

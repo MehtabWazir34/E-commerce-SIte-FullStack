@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import {InPut} from '../Inputs/InPuts'
+// import {InPut} from '../Inputs/InPuts'
 
 function Products() {
   // const [category, setCat] = useState([]);
@@ -13,8 +13,8 @@ function Products() {
   useEffect(()=>{
    const getFilteredItems = async()=>{
     try {
-        let params = {}
-        if(activeCategory.length) params.cats = activeCategory.join(',');
+        const params = {}
+        if(activeCategory.length) params.Category = activeCategory.join(',');
         if(priceRange.low) params.lowPrice = priceRange.low;
         if(priceRange.high) params.highPrice = priceRange.high;
 
@@ -22,7 +22,6 @@ function Products() {
         setProducts(res.data.filteredItems);
         console.log(res.data);
         
-
     } catch (error) {
       console.log("Filter err:", error);
       
@@ -34,7 +33,7 @@ function Products() {
 
 
   return (
-    <section className="max-w-7xl mx-auto h-[calc(100vh-120px)] grid grid-cols-1 md:grid-cols-[260px_1fr] gap-6 px-4 py-6">
+    <section className="max-w-7xl mx-auto min-h-[calc(100vh-120px)] grid grid-cols-1 md:grid-cols-[260px_1fr] gap-6 px-4 py-6">
 
       {/* Sidebar */}
       <aside className="bg-[#2c3639] rounded-2xl p-2 md:p-4 h-full">
@@ -46,26 +45,13 @@ function Products() {
   <input className="max-w-1/2 rounded-md md:w-full border border-gray-100 text-gray-100 p-2" type={'number'} placeholder={'Enter max price'} onChange={(a)=> setPriceRange({...priceRange, high: a.target.value})} />
 
 </div>
+
+
 <ul className="w-full space-y-2 text-lg leading-tight flex justify-center gap-2 sm:justify-around md:grid md:grid-cols-1">
-  {["Cricket", "Football", "Vollyball", "Wears"].map((cat) => (
-    <li key={cat}>
-      <label className="flex items-center gap-2 text-[#f2d39a]">
-        <input
-        className=""
-          type={"checkbox"}
-          value={activeCategory}
-          onChange={(e) =>
-            setActiveCategory((prev) =>
-              e.target.checked
-                ? [...prev, cat]
-                : prev.filter((c) => c !== cat)
-            )
-          }
-        />
-        {cat}
-      </label>
-    </li>
-  ))}
+  {["Cricket", "Football", "Vollyball", "Wears"].map((cat) => 
+    ( 
+    <li key={cat}> <label className="flex items-center gap-2 text-[#f2d39a]"> <input className="" type={"checkbox"}  onChange={(e) => setActiveCategory((prev) => e.target.checked ? [...prev, cat] : prev.filter((c) => c !== cat) ) } /> {cat} </label> </li> ))}
+
 </ul>
 
       </aside>
