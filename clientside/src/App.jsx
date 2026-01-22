@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { Route, Routes } from 'react-router'
 import './App.css'
 import SignUp from './Pages/SignUp'
 import Login from './Pages/Login'
