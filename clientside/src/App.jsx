@@ -9,6 +9,7 @@ import Footer from './Parts/Footer'
 import ScrollToHash from './Parts/ScrollToIds'
 import Products from './Pages/Products'
 import Details from './Pages/Details'
+import About from './Pages/About'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
 
           <Route path='/products' element={<Products/>}/>
           <Route path='/product/details/:id' element={<Details/>}/>
+          <Route path='/about' element={<About/>}/>
         </Routes>
      
         </main>
