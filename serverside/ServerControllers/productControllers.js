@@ -9,13 +9,9 @@ export const addProducts = async(req, res)=>{
         
         const myAllProducts = [];
         for(let newItem of myProductsData){
-            const {Title, Detail, Name, Imgs, 
-                // Size, 
-                Category, Price} = newItem;
+            const {Title, Detail, Imgs, Category, Price } = newItem;
             const newProduct = new theProduct({
-                Title, Detail, Imgs, Name,
-                // Size,
-                Price, Category
+                Title, Detail, Imgs, Price, Category
             });
 
             // const newAddedItem = await newProduct.save();

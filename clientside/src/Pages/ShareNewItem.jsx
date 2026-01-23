@@ -1,24 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts";
+import axios from "axios";
 
 function ShareNewItem() {
   const [formData, setFormData] = useState({
-    title: "",
-    detail: "",
-    category: "",
-    prices: {
-      original: "",
-      market: "",
-      off: "",
+    Title: "",
+    Detail: "",
+    Category: "",
+    Price: {
+      originalPrice: "",
+      mrp: "",
+      offPrice: "",
     },
-    images: [],
+    Imgs: [],
   });
 
   const [previewImages, setPreviewImages] = useState([]);
 
-  /* ===============================
-     IMAGE HANDLING (MAX 6)
-  ================================ */
+  useEffect(()=>{
+    const addNewItem = async()=>{
+        try {
+            let theItem = await axios.post('http://localhost:3400/products/addnew', {formData});
+
+            console.log('Item uploaded', theItem);
+        } catch (error) {
+            console.log('Error to upload item', error);
+            
+        }
+    };
+    addNewItem();
+  })
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
 
@@ -29,7 +40,7 @@ function ShareNewItem() {
 
     setFormData((prev) => ({
       ...prev,
-      images: [...prev.images, ...files],
+      Imgs: [...prev.Imgs, ...files],
     }));
 
     const previews = files.map((file) => URL.createObjectURL(file));
@@ -40,27 +51,24 @@ function ShareNewItem() {
     setPreviewImages((prev) => prev.filter((_, i) => i !== index));
     setFormData((prev) => ({
       ...prev,
-      images: prev.images.filter((_, i) => i !== index),
+      Imgs: prev.Imgs.filter((_, i) => i !== index),
     }));
   };
 
-  /* ===============================
-     SUBMIT HANDLER
-  ================================ */
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const payload = new FormData();
-    payload.append("title", formData.title);
-    payload.append("detail", formData.detail);
-    payload.append("category", formData.category);
+    payload.append("Title", formData.Title);
+    payload.append("Detail", formData.Detail);
+    payload.append("Category", formData.Category);
 
-    payload.append("originalPrice", formData.prices.original);
-    payload.append("marketPrice", formData.prices.market);
-    payload.append("offPrice", formData.prices.off);
+    payload.append("originalPrice", formData.Price.original);
+    payload.append("mrp", formData.Price.mrp);
+    payload.append("offPrice", formData.Price.offPrice);
 
-    formData.images.forEach((img) => {
-      payload.append("images", img);
+    formData.Imgs.forEach((img) => {
+      payload.append("Imgs", img);
     });
 
     console.log("Ready for backend upload");
@@ -80,13 +88,13 @@ function ShareNewItem() {
         >
           {/* ================= CATEGORY ================= */}
           <div className="flex flex-col gap-2">
-            <LaBel lblFor="category" lblName="Category" />
+            <LaBel lblFor="Category" lblName="Category" />
             <select
-              id="category"
+              id="Category"
               className="rounded-md border border-gray-500 bg-[#ffe2af] px-2 py-2 text-sm outline-none"
-              value={formData.category}
+              value={formData.Category}
               onChange={(e) =>
-                setFormData({ ...formData, category: e.target.value })
+                setFormData({ ...formData, Category: e.target.value })
               }
               required
             >
@@ -100,22 +108,21 @@ function ShareNewItem() {
 
           {/* ================= TITLE ================= */}
           <div className="flex flex-col gap-2">
-            <LaBel lblFor="title" lblName="Title" />
+            <LaBel lblFor="Title" lblName="Title" />
             <textarea
-              id="title"
+              id="Title"
               rows={2}
               resize="none"
               className="resize-none rounded-md border border-gray-500 bg-[#ffe2af] px-2 py-2 text-sm outline-none"
-              placeholder="Enter product title"
-              value={formData.title}
+              placeholder="Enter product Title"
+              value={formData.Title}
               onChange={(e) =>
-                setFormData({ ...formData, title: e.target.value })
+                setFormData({ ...formData, Title: e.target.value })
               }
               required
             />
           </div>
 
-          {/* ================= PRICES ================= */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:col-span-2">
             <div>
               <LaBel lblFor="original" lblName="Original Price" />
@@ -123,11 +130,11 @@ function ShareNewItem() {
                 type="number"
                 id="original"
                 placeholder="Original price"
-                value={formData.prices.original}
+                value={formData.Price.originalPrice}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    prices: { ...formData.prices, original: e.target.value },
+                    Price: { ...formData.Price, originalPrice: e.target.value },
                   })
                 }
                 required
@@ -140,11 +147,11 @@ function ShareNewItem() {
                 type="number"
                 id="market"
                 placeholder="Market price"
-                value={formData.prices.market}
+                value={formData.Price.mrp}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    prices: { ...formData.prices, market: e.target.value },
+                    Price: { ...formData.Price, mrp: e.target.value },
                   })
                 }
               />
@@ -156,11 +163,11 @@ function ShareNewItem() {
                 type="number"
                 id="off"
                 placeholder="Discounted price"
-                value={formData.prices.off}
+                value={formData.Price.offPrice}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    prices: { ...formData.prices, off: e.target.value },
+                    Price: { ...formData.Price, offPrice: e.target.value },
                   })
                 }
               />
@@ -169,15 +176,15 @@ function ShareNewItem() {
 
           {/* ================= DETAILS ================= */}
           <div className="flex flex-col gap-2 lg:col-span-2">
-            <LaBel lblFor="detail" lblName="Detail" />
+            <LaBel lblFor="Detail" lblName="Detail" />
             <textarea
-              id="detail"
+              id="Detail"
               rows={5}
               className="rounded-md border border-gray-500 bg-[#ffe2af] px-2 py-2 text-sm outline-none"
-              placeholder="Write detailed description of the item"
-              value={formData.detail}
+              placeholder="Write Detailed description of the item"
+              value={formData.Detail}
               onChange={(e) =>
-                setFormData({ ...formData, detail: e.target.value })
+                setFormData({ ...formData, Detail: e.target.value })
               }
               required
             />

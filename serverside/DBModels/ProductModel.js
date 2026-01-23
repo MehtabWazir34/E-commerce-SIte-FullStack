@@ -30,9 +30,9 @@ let theProductSchema = new mongoose.Schema({
     Detail:{
         type: String, required: true, 
     },
-    Name:{
-        type: String, required: true, 
-    },
+    // Name:{
+    //     type: String, required: true, 
+    // },
     Price:{
         type: priceSchema, required: true
         // default:{originalPrice: 0.0, MRPrice:0.0, offPrice:0.0},
