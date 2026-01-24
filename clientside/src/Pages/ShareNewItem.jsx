@@ -17,19 +17,19 @@ function ShareNewItem() {
 
   const [previewImages, setPreviewImages] = useState([]);
 
-  useEffect(()=>{
-    const addNewItem = async()=>{
-        try {
-            let theItem = await axios.post('http://localhost:3400/products/addnew', {formData});
+  // useEffect(()=>{
+  //   const addNewItem = async()=>{
+  //       try {
+  //           let theItem = await axios.post('http://localhost:3400/products/addnew', {formData});
 
-            console.log('Item uploaded', theItem);
-        } catch (error) {
-            console.log('Error to upload item', error);
+  //           console.log('Item uploaded', theItem);
+  //       } catch (error) {
+  //           console.log('Error to upload item', error);
             
-        }
-    };
-    addNewItem();
-  })
+  //       }
+  //   };
+  //   addNewItem();
+  // })
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
 
@@ -55,7 +55,7 @@ function ShareNewItem() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     const payload = new FormData();
@@ -73,6 +73,7 @@ function ShareNewItem() {
 
     console.log("Ready for backend upload");
     // axios.post("/api/products", payload)
+    await axios.post('http://localhost:3400/products/addnew', payload, )
   };
 
   return (
@@ -106,7 +107,6 @@ function ShareNewItem() {
             </select>
           </div>
 
-          {/* ================= TITLE ================= */}
           <div className="flex flex-col gap-2">
             <LaBel lblFor="Title" lblName="Title" />
             <textarea
@@ -174,7 +174,6 @@ function ShareNewItem() {
             </div>
           </div>
 
-          {/* ================= DETAILS ================= */}
           <div className="flex flex-col gap-2 lg:col-span-2">
             <LaBel lblFor="Detail" lblName="Detail" />
             <textarea
@@ -190,7 +189,6 @@ function ShareNewItem() {
             />
           </div>
 
-          {/* ================= IMAGE UPLOAD ================= */}
           <div className="lg:col-span-2">
             <LaBel lblFor="images" lblName="Upload Images (Max 6)" />
             <input
@@ -203,7 +201,6 @@ function ShareNewItem() {
             />
           </div>
 
-          {/* ================= IMAGE PREVIEW ================= */}
           {previewImages.length > 0 && (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 lg:col-span-2">
               {previewImages.map((img, index) => (
@@ -225,11 +222,10 @@ function ShareNewItem() {
             </div>
           )}
 
-          {/* ================= SUBMIT ================= */}
           <div className="lg:col-span-2 flex justify-center mt-6">
             <button
               type="submit"
-              className="px-8 py-3 rounded-xl bg-[#f2d39a] text-black font-semibold hover:opacity-90 transition"
+              className="px-8 py-3 rounded-xl bg-[#f2d39a] text-black font-semibold hover:opacity-90 transition-all duration-300 cursor-pointer"
             >
               Upload Item
             </button>
