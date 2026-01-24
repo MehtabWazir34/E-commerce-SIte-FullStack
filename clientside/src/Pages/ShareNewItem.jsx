@@ -92,7 +92,7 @@ function ShareNewItem() {
             <LaBel lblFor="Category" lblName="Category" />
             <select
               id="Category"
-              className="rounded-md border border-gray-500 bg-[#ffe2af] px-2 py-2 text-sm outline-none"
+              className="rounded-md border border-gray-500 bg-[#ffe2af] px-2 py-2 text-sm text-center outline-none"
               value={formData.Category}
               onChange={(e) =>
                 setFormData({ ...formData, Category: e.target.value })
