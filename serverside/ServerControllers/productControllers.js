@@ -1,37 +1,88 @@
 import theProduct from "../DBModels/ProductModel.js";
 
-export const addProducts = async(req, res)=>{
-    try {
-        let myProductsData = req.body;
-        if(!Array.isArray(myProductsData)){
-            res.status(400).json({Msg:"Invalid entery! Send an array of products."})
-        };
+// export const addProducts = async(req, res)=>{
+//     try {
+//         // let myProductsData = req.body;
+//         // if(!Array.isArray(myProductsData)){
+//         //     res.status(400).json({Msg:"Invalid entery! Send an array of products."})
+//         // };
         
-        const myAllProducts = [];
-        for(let newItem of myProductsData){
-            const {Title, Detail,  Category, Price } = newItem;
-            const imges = req.files.map(file => `uploads/products/${file.filename}`)
-            const newProduct = new theProduct({
-                Title, Detail,  Price, Category, Imgs: imges
-            });
+//         // const myAllProducts = [];
+//         // for(let newItem of myProductsData){
+//             if(!req.files || req.files.length === 0){
+//                 return res.status(400).json({Msg:"No images uploaded, atleast one image is required."});
+//             }
+//             const {Title, Detail,  Category, Price } = req.body;
+//             const imges = req.files.map(file => `uploads/products/${file.filename}`)
+//             const newProduct = await theProduct.create({
+//                 Title, Detail,  Price, Category, Imgs: imges
+//             });
 
-            // const newAddedItem = await newProduct.save();
-            myAllProducts.push(await newProduct.save());
-        }
-        return res.status(200).json({
-            succes: true,
-            Msg:"New product added ✅",
-            myAllProducts
-        })
-    } catch (error) {
-        console.log("Error to add product!", error);
-        res.status(404).json({
-            succes: false,
-            Msg:"Faild to add prodcut"
-        })
+//             // const newAddedItem = await newProduct.save();
+//             // myAllProducts.push(await newProduct.save());
         
+//         return res.status(200).json({
+//             succes: true,
+//             Msg:"New product added ✅",
+//             newProduct
+//         })
+//     } catch (error) {
+//         console.log("Error to add product!", error);
+//         res.status(404).json({
+//             succes: false,
+//             Msg:"Faild to add prodcut"
+//         })
+        
+//     }
+// }
+
+export const addProducts = async (req, res) => {
+  try {
+    // 1. Validate files
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({
+        success: false,
+        Msg: "At least one image is required"
+      });
     }
-}
+
+    // 2. Extract body
+    const { Title, Detail, Category, Price } = req.body;
+
+    // 3. Parse Price if needed
+    const parsedPrice =
+      typeof Price === "string" ? JSON.parse(Price) : Price;
+
+    // 4. Convert files to paths
+    const images = req.files.map(
+      file => `/uploads/products/${file.filename}`
+    );
+
+    // 5. Create product
+    const newProduct = await theProduct.create({
+      Title,
+      Detail,
+      Category,
+      Price: parsedPrice,
+      Imgs: images
+    });
+
+    // 6. Respond once
+    return res.status(201).json({
+      success: true,
+      Msg: "New product added ✅",
+      product: newProduct
+    });
+
+  } catch (error) {
+    console.error("Error to add product!", error);
+
+    return res.status(500).json({
+      success: false,
+      Msg: "Failed to add product"
+    });
+  }
+};
 
 export const getItemById = async(req, res)=>{
     try {
