@@ -42,7 +42,7 @@ export const addProducts = async (req, res) => {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({
         success: false,
-        Msg: "At least one image is required"
+        Msg: "At least one image is required."
       });
     }
 
