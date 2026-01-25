@@ -4,7 +4,7 @@ import { ConnectDb } from './DB/ConnectDB.js';
 import { configDotenv } from 'dotenv';
 import { userRoutes } from './Routes/userRoutes.js';
 import { productRoutes } from './Routes/productRoutes.js';
-
+import path from 'path'
 configDotenv()
 const myApp = express();
 myApp.use(express.json());
@@ -19,6 +19,7 @@ ConnectDb();
 myApp.use("/user", userRoutes);
 myApp.use('/products', productRoutes)
 
+myApp.use('/uploads', express.static(path.join("uploads")))
 myApp.listen(3400, ()=>{
     console.log(
         `Its running! localhost:3400`

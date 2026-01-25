@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import ContactForm from "../Parts/MsgForm";
 // import {InPut} from '../Inputs/InPuts'
 
 function Products() {
@@ -33,6 +34,7 @@ function Products() {
 
 
   return (
+    <>
     <section className="max-w-7xl mx-auto min-h-[calc(100vh-120px)] grid grid-cols-1 md:grid-cols-[260px_1fr] gap-6 px-4 py-6">
 
       {/* Sidebar */}
@@ -57,7 +59,7 @@ function Products() {
       </aside>
 
       {/* Products Scroll Area */}
-      <section className="bg-[#2c3639] rounded-2xl p-4 min-h-screen md:overflow-y-auto">
+      <section className="bg-[#2c3639] rounded-2xl p-4 min-h-screen md:overflow-y-auto mb-8">
         {productsList.length === 0 ? (
           <p className="text-center text-gray-300 mt-10">
             No products found.
@@ -103,6 +105,11 @@ function Products() {
         )}
       </section>
     </section>
+      <div className="max-w-7xl mx-auto mb-8 px-6">
+      <ContactForm/>
+
+      </div>
+    </>
   );
 }
 

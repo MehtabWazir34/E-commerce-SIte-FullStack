@@ -73,7 +73,11 @@ function ShareNewItem() {
 
     console.log("Ready for backend upload");
     // axios.post("/api/products", payload)
-    await axios.post('http://localhost:3400/products/addnew', payload, )
+    await axios.post('http://localhost:3400/products/addnew', payload,{
+      headers:{
+          "Content-Type": "multipart/form-data"
+      }
+    } )
   };
 
   return (

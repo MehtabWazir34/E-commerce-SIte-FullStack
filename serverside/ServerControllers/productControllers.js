@@ -9,9 +9,10 @@ export const addProducts = async(req, res)=>{
         
         const myAllProducts = [];
         for(let newItem of myProductsData){
-            const {Title, Detail, Imgs, Category, Price } = newItem;
+            const {Title, Detail,  Category, Price } = newItem;
+            const imges = req.files.map(file => `uploads/products/${file.filename}`)
             const newProduct = new theProduct({
-                Title, Detail, Imgs, Price, Category
+                Title, Detail,  Price, Category, Imgs: imges
             });
 
             // const newAddedItem = await newProduct.save();

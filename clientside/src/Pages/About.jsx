@@ -5,7 +5,7 @@ import ContactForm from "../Parts/MsgForm";
 function About() {
   return (
     <section className="max-w-7xl mx-auto min-h-screen mt-8 p-6 rounded-2xl bg-transparent">
-      <div className="bg-[#2c3639] rounded-2xl shadow-lg p-6 space-y-12">
+      <div className="bg-[#2c3639] rounded-2xl shadow-lg p-6 space-y-12 mb-8">
 
         {/* INTRO SECTION */}
         <div id="about">
@@ -125,8 +125,8 @@ function About() {
           </p>
         </div>
 
-      <ContactForm/>
       </div>
+      <ContactForm/>
     </section>
   );
 }
