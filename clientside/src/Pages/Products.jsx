@@ -94,7 +94,7 @@ function Products() {
                     {item.Title}
                   </h3>
                   <p className="font-semibold mt-1">
-                    Rs.{item.Price.originalPrice}
+                    Rs.{item.Price}
                   </p>
                   {/* <p className="text-xs mt-1">Category: {item.Category}</p> */}
                   <p className="text-xs mt-1">Reviews: ⭐⭐⭐</p>

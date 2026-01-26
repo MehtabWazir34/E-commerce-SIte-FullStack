@@ -27,14 +27,16 @@ function Details() {
 
   if (!item) return null;
 
-  const price = item?.Price?.originalPrice || 0;
+  const price = item?.Price || 0;
   const discount = 0;
-  const total = price * quantity - discount;
+  const deliveryFee = item?.deliveryFee || 0;
+  const subtotal = price * quantity - discount;
+  const total = subtotal + deliveryFee;
 
   return (
-    <section className="max-w-10/11 min-h-8/10 mt-8 rounded-2xl p-4 mx-auto bg-[#2c3639]">
+    <section className="max-w-10/11 min-h-10/11 mt-8 rounded-2xl p-4 mx-auto bg-[#2c3639]">
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+      <div className="max-w-full flex flex-col md:grid md:grid-cols-2 gap-6 mt-4">
         {/* Images Section */}
         <div className="w-full md:w-7/12 shadow-2xl rounded-2xl p-4">
           {/* Main Image */}
@@ -66,9 +68,9 @@ function Details() {
         </div>
 
         {/* Product Info */}
-        <div className="w-full rounded-2xl shadow-2xl p-4 text-left text-[#ffe2af]">
-          <div className="border-b-2 pb-4 mb-4">
-            <h2 className="text-2xl font-bold">{item.Title}</h2>
+        <div className="w-full flex flex-1 flex-col rounded-2xl shadow-2xl p-4 text-left text-[#ffe2af]">
+          <div className="border-b-2 pb-4 mb-4 wrap-break-word overflow-hidden"> 
+            <h2 className="text-2xl font-bold ">{item.Title}</h2>
             <p className="text-sm opacity-80 mt-2">
               {item.Detail}
             </p>
@@ -115,15 +117,15 @@ function Details() {
               </div>
               <div className="flex justify-between">
               <h2 className="my-1">Quantity</h2>
-              <h2 className="my-1">0{quantity}</h2>
+              <h2 className="my-1">{quantity > 9 ? quantity : `0${quantity}`}</h2>
               </div>
               <div className="flex justify-between">
               <h2 className="my-1">Discount</h2>
-              <h2 className="my-1"> 0{discount}</h2>
+              <h2 className="my-1"> {discount > 9 ? discount : `00`}</h2>
               </div>
               <div className="flex justify-between">
               <h2 className="my-1">Delivery</h2>
-              <h2 className="my-1">00</h2>
+              <h2 className="my-1">{deliveryFee > 9 ? deliveryFee : '00'}</h2>
               </div>
 
               <div className="flex justify-between border-t-2 mt-2 pt-2 font-bold text-lg">

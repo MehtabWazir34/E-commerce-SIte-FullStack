@@ -7,11 +7,12 @@ function ShareNewItem() {
     Title: "",
     Detail: "",
     Category: "",
-    Price: {
-      originalPrice: "",
-      mrp: "",
-      offPrice: "",
-    },
+    Price:"", deliveryFee, offPrice,
+    // : {
+    //   originalPrice: "",
+    //   mrp: "",
+    //   offPrice: "",
+    // },
     Imgs: [],
   });
 
@@ -62,10 +63,12 @@ function ShareNewItem() {
     payload.append("Title", formData.Title);
     payload.append("Detail", formData.Detail);
     payload.append("Category", formData.Category);
-
-    payload.append("originalPrice", formData.Price.original);
-    payload.append("mrp", formData.Price.mrp);
-    payload.append("offPrice", formData.Price.offPrice);
+    payload.append("Price", formData.Price)
+    payload.append("offPrice", formData.offPrice);
+    payload.append("deliveryFee", formData.deliveryFee)
+    // payload.append("originalPrice", formData.Price.original);
+    // payload.append("mrp", formData.Price.mrp);
+    // payload.append("offPrice", formData.Price.offPrice);
 
     formData.Imgs.forEach((img) => {
       payload.append("Imgs", img);
@@ -136,28 +139,26 @@ console.log(formData);
                 type="number"
                 id="original"
                 placeholder="Original price"
-                value={formData.Price.originalPrice}
+                value={formData.Price}
                 onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    Price: { ...formData.Price, originalPrice: e.target.value },
-                  })
+                  setFormData({ ...formData, Price: e.target.value }
+                )
                 }
                 required
               />
             </div>
 
             <div>
-              <LaBel lblFor="market" lblName="Market Price" />
+              <LaBel lblFor="market" lblName="Delivery Fee" />
               <InPut
                 type="number"
                 id="market"
-                placeholder="Market price"
-                value={formData.Price.mrp}
+                placeholder="Delivery Fee"
+                value={formData.deliveryFee}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    Price: { ...formData.Price, mrp: e.target.value },
+                    deliveryFee: e.target.value,
                   })
                 }
               />
@@ -171,10 +172,7 @@ console.log(formData);
                 placeholder="Discounted price"
                 value={formData.Price.offPrice}
                 onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    Price: { ...formData.Price, offPrice: e.target.value },
-                  })
+                  setFormData({...formData, offPrice: e.target.value})
                 }
               />
             </div>

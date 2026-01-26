@@ -47,11 +47,11 @@ export const addProducts = async (req, res) => {
     }
 
     // 2. Extract body
-    const { Title, Detail, Category, Price } = req.body;
+    const { Title, Detail, Category, Price, offPrice, deliveryFee } = req.body;
 
     // 3. Parse Price if needed
-    const parsedPrice =
-      typeof Price === "string" ? JSON.parse(Price) : Price;
+    // const parsedPrice =
+    //   typeof Price === "string" ? JSON.parse(Price) : Price;
 
     // 4. Convert files to paths
     const images = req.files.map(
@@ -63,7 +63,7 @@ export const addProducts = async (req, res) => {
       Title,
       Detail,
       Category,
-      Price: parsedPrice,
+      Price, offPrice, deliveryFee,
       Imgs: images
     });
 
