@@ -1,34 +1,54 @@
-import mongoose from "mongoose";
+const orderSchema = new mongoose.Schema(
+{
+  customer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "theUser",
+    required: true,
+  },
 
-let theOrderSchema = new mongoose.Schema(
+  orderedItems: [
     {
-    customerName:{
-        type: mongoose.Schema.Types.ObjectId, ref: 'theUser',
-    },
-    orderedItems:[{
-        type:[{
-            Product: {type:[mongoose.Schema.Types.ObjectId], ref:'Product', required: true},
-            Qty: { type: Number, default: 1},
-        }],
-        default:[]
-    }],
-    totalAmount:{
-        type:[mongoose.Schema.Types.Decimal128], default: 0.0
-    },
-    orderStatus:{
-        type: String, default:"Payment Pending!"
-    },
-}, 
-    {
-        toJSON:{
-            transform:(_, a)=>{
-                if(a.totalAmount)
-                    a.totalAmount = a.totalAmount.toString();
-                return a;
-            }
-        }
-    },
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+        required: true,
+      },
+      qty: Number,
+      price: Number, // product price snapshot
+    }
+  ],
 
-    {timestamps: true},
+  subTotal: {
+    type: Number,
+    required: true,
+  },
+
+  deliveryFee: {
+    type: Number,
+    default: 0,
+  },
+
+  discount: {
+    type: Number,
+    default: 0,
+  },
+
+  tax: {
+    type: Number,
+    default: 0,
+  },
+
+  totalAmount: {
+    type: Number,
+    required: true,
+  },
+
+  orderStatus: {
+    type: String,
+    default: "Payment Pending",
+  }
+},
+{ timestamps: true }
 );
-export default mongoose.model('Order', theOrderSchema);
+const OrderModel = mongoose.model("placed-orderItems", orderSchema);
+export default OrderModel;

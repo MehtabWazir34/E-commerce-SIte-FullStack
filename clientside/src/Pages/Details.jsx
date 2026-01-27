@@ -104,7 +104,7 @@ function Details() {
                 <button className="flex-1 cursor-pointer rounded-md p-2 border font-semibold hover:bg-blue-700 transition">
                   Add to Cart
                 </button>
-                <button onClick={() => navigateTo('/placeorder')} className="flex-1 cursor-pointer rounded-md p-2 border font-semibold bg-blue-600 hover:bg-blue-700 transition">
+                <button onClick={() => navigateTo(`/placeorder/${item._id}`)} className="flex-1 cursor-pointer rounded-md p-2 border font-semibold bg-blue-600 hover:bg-blue-700 transition">
                   Buy Now
                 </button>
               </div>
