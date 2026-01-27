@@ -50,7 +50,7 @@ function Products() {
 
 
 <ul className="w-full space-y-2 text-lg leading-tight flex justify-center gap-2 sm:justify-around md:grid md:grid-cols-1">
-  {["Cricket", "Football", "Vollyball", "Wears"].map((cat) => 
+  {["Cricket", "Football", "Volleyball", "Wears"].map((cat) => 
     ( 
     <li key={cat}> <label className="flex items-center gap-2 text-[#f2d39a]"> <input className="" type={"checkbox"}  onChange={(e) => setActiveCategory((prev) => e.target.checked ? [...prev, cat] : prev.filter((c) => c !== cat) ) } /> {cat} </label> </li> ))}
 
@@ -62,7 +62,7 @@ function Products() {
       <section className="bg-[#2c3639] rounded-2xl p-4 min-h-screen md:overflow-y-auto mb-8">
         {productsList.length === 0 ? (
           <p className="text-center text-gray-300 mt-10">
-            No products found.
+            No product found.
           </p>
         ) : (
           <div className="flex flex-col md:grid  md:grid-cols-3 lg:grid-cols-5 gap-6">

@@ -1,7 +1,7 @@
 // import api from "../api/axios";
 import { useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts.jsx"
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function SignUp() {
@@ -14,7 +14,7 @@ function SignUp() {
   });
 
   const [loading, setLoading] = useState(false);
-//   let navigateTo = useNavigate()
+  let navigateTo = useNavigate()
 
   // const (a)=> setFormData({...formData, userName: a.target.value}) = (e) => {
   //   setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -31,7 +31,7 @@ function SignUp() {
       console.error("Registration failed:", error);
     } finally {
       setLoading(false);
-    //   navigateTo('/user/profile')
+      navigateTo('/')
     }
   };
 

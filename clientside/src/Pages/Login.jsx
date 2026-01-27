@@ -2,13 +2,13 @@
 import { useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts.jsx"
 // import LoginAccount from "./LoginAccount";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
-
+  let navigateTo = useNavigate()
   const [loading, setLoading] = useState(false);
 
   const submitForm = async (e) => {
@@ -22,7 +22,7 @@ function Login() {
       console.error("Registration failed:", error);
     } finally {
       setLoading(false);
-    //   navigateTo('/user/profile')
+      navigateTo('/')
     }
   };
 

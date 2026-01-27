@@ -31,7 +31,7 @@ function Details() {
   const discount = 0;
   const deliveryFee = item?.deliveryFee || 0;
   const subtotal = price * quantity - discount;
-  const total = subtotal + deliveryFee;
+  const total = Number(subtotal) + Number(deliveryFee);
 
   return (
     <section className="max-w-10/11 min-h-10/11 mt-8 rounded-2xl p-4 mx-auto bg-[#2c3639]">
