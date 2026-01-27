@@ -28,7 +28,7 @@ function Details() {
   if (!item) return null;
 
   const price = item?.Price || 0;
-  const discount = 0;
+  const discount = item?.offPrice || 0;
   const deliveryFee = item?.deliveryFee || 0;
   const subtotal = price * quantity - discount;
   const total = Number(subtotal) + Number(deliveryFee);
@@ -42,7 +42,7 @@ function Details() {
           {/* Main Image */}
           <div className="w-full rounded-xl overflow-hidden">
             <img
-              src={mainImg}
+              src={mainImg.startsWith('http') ? mainImg : `http://localhost:3400${mainImg}`}
               alt={item.Title}
               className="w-full h-80 object-cover rounded-xl transition-all duration-300 hover:scale-[1.02]"
             />
@@ -53,7 +53,7 @@ function Details() {
             {item.Imgs?.map((img, index) => (
               <img
                 key={index}
-                src={img}
+                src={img.startsWith('http') ? img : `http://localhost:3400${img}`}
                 alt="thumbnail"
                 onClick={() => setMainImg(img)}
                 className={`w-16 h-16 object-cover rounded-lg cursor-pointer border transition-all duration-300

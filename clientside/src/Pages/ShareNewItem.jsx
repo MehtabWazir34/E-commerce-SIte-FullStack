@@ -7,7 +7,7 @@ function ShareNewItem() {
     Title: "",
     Detail: "",
     Category: "",
-    Price:"", deliveryFee, offPrice,
+    Price:"", deliveryFee:"", offPrice:"",
     // : {
     //   originalPrice: "",
     //   mrp: "",

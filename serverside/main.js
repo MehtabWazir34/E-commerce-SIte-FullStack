@@ -19,7 +19,7 @@ ConnectDb();
 myApp.use("/user", userRoutes);
 myApp.use('/products', productRoutes)
 
-myApp.use('/uploads', express.static(path.join("uploads")))
+myApp.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
 myApp.listen(3400, ()=>{
     console.log(
         `Its running! localhost:3400`
