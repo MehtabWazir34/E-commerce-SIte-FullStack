@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 function Details() {
   const { id } = useParams();
@@ -9,6 +9,7 @@ function Details() {
   const [mainImg, setMainImg] = useState("");
   const [quantity, setQuantity] = useState(1);
 
+  let navigateTo = useNavigate();
   useEffect(() => {
     const getItem = async () => {
       try {
@@ -103,7 +104,7 @@ function Details() {
                 <button className="flex-1 cursor-pointer rounded-md p-2 border font-semibold hover:bg-blue-700 transition">
                   Add to Cart
                 </button>
-                <button className="flex-1 cursor-pointer rounded-md p-2 border font-semibold bg-blue-600 hover:bg-blue-700 transition">
+                <button onClick={() => navigateTo('/placeorder')} className="flex-1 cursor-pointer rounded-md p-2 border font-semibold bg-blue-600 hover:bg-blue-700 transition">
                   Buy Now
                 </button>
               </div>

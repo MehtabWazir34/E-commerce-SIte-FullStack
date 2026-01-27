@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-let theOrderSchema = new mongoose.Schema({
+let theOrderSchema = new mongoose.Schema(
+    {
     customerName:{
         type: mongoose.Schema.Types.ObjectId, ref: 'theUser',
     },
@@ -15,7 +16,19 @@ let theOrderSchema = new mongoose.Schema({
         type:[mongoose.Schema.Types.Decimal128], default: 0.0
     },
     orderStatus:{
-        type: String, default:"Payment Done!"
-    }
-}, {timestamps: true});
+        type: String, default:"Payment Pending!"
+    },
+}, 
+    {
+        toJSON:{
+            transform:(_, a)=>{
+                if(a.totalAmount)
+                    a.totalAmount = a.totalAmount.toString();
+                return a;
+            }
+        }
+    },
+
+    {timestamps: true},
+);
 export default mongoose.model('Order', theOrderSchema);
