@@ -1,6 +1,8 @@
 import  { Link, NavLink } from 'react-router-dom'
 import { InPut } from '../Inputs/InPuts'
 import { useState } from 'react'
+import { MdCabin, MdShoppingCart, MdShoppingCartCheckout } from 'react-icons/md'
+import { BsCartCheckFill, BsCartXFill } from 'react-icons/bs'
 function Header(){
     let [search, setSearch] = useState('')
 
@@ -17,8 +19,8 @@ function Header(){
                 <InPut type={'text'} id={'search'} placeholder={'Search item'} value={search} onChange={(a)=> setSearch(a.target.value)}/>
 
                 <div className='hidden md:flex md:justify-between gap-x-4'>
-            <NavLink to={'/register'} className={'cursor-pointer px-2 text-center py-1 bg-[#ffe2af] rounded-full outline-0 hover:bg-[#F2D39A] text-[#2C3639] font-semibold'}>Register account</NavLink>
             <NavLink to={'/login'} className={'cursor-pointer px-2 text-center py-1 border border-[#ffe2af] rounded-full outline-0 hover:bg-[#F2D39A] text-[#ffe2af] hover:text-[#2c3639] font-semibold'}>Login</NavLink>
+            <NavLink to={'/mycart'} className={'cursor-pointer px-2 text-center py-1 bg-[#ffe2af] rounded-full outline-0 hover:bg-[#F2D39A] text-[#2C3639] font-semibold'}><BsCartCheckFill /> <BsCartXFill/></NavLink>
                     
                 </div>
             </div>

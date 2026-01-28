@@ -1,7 +1,7 @@
 export function InPut({type, id, placeholder, onChange, value, required}){
     return(
         <input type={type} id={id} required={required} placeholder={placeholder} onChange={onChange} value={value}
-        className="rounded-full px-2 py-1 text-[#2c3639] font-semibold border border-gray-500 outline-0 bg-[#ffe2af] focus:bg-[#F2D39A]"
+        className="rounded-sm px-2 py-1 text-[#2c3639] font-semibold border border-gray-500 outline-0 bg-[#ffe2af] focus:bg-[#F2D39A]"
         />
     )
 }

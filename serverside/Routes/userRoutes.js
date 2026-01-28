@@ -7,5 +7,5 @@ export const userRoutes = Router();
 userRoutes.post('/register', SignUp);
 userRoutes.post('/login', Login);
 userRoutes.post('/logout', authCheck ,Logout);
-userRoutes.post('/addtocart', authCheck, addToCart);
+userRoutes.post('/addtocart',  addToCart);
 userRoutes.delete('/removefromcart', authCheck, removeFromCart);

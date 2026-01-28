@@ -12,6 +12,7 @@ import Details from './Pages/Details'
 import About from './Pages/About'
 import ShareNewItem from './Pages/ShareNewItem'
 import Order from './Pages/Order'
+import MyCart from './Parts/MyCart'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path='/about' element={<About/>}/>
           <Route path='/addnewitem' element={<ShareNewItem/>}/>
           <Route path='/placeorder/:id' element={<Order/>}/>
+          <Route path='/mycart' element={<MyCart/>}/>
         </Routes>
      
         </main>
