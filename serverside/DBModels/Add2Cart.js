@@ -2,14 +2,13 @@ import mongoose from 'mongoose'
 const addToCart = new mongoose.Schema({
     userId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'theUser'
+        ref: 'theUser', required: true  
     },
     itemId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:'Product'
-    },
+        ref:'Product', required: true        },
     itemQty:{
-        type: Number, default:0
+        type: Number, default:0, required: true 
     }
 },
 {timestamps:true}

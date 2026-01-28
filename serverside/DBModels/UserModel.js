@@ -24,15 +24,15 @@ let theUserSchema = new mongoose.Schema({
     //     type:String, default: null
     // },
 
-    cartList:{
-        type:[
-            {
-            product:{type:[mongoose.Schema.Types.ObjectId], ref : 'Product'},
-            itemQty: { type: Number, default:1}
-            },
-            ],
-        default:[]
-            },
+    // cartList:{
+    //     type:[
+    //         {
+    //         product:{type:[mongoose.Schema.Types.ObjectId], ref : 'Product'},
+    //         itemQty: { type: Number, default:1}
+    //         },
+    //         ],
+    //     default:[]
+    //         },
     fvrtItems:{
         type: [mongoose.Schema.Types.ObjectId], ref:"Product"
     },
