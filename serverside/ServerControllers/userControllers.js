@@ -144,39 +144,41 @@ export const removeFromCart = async(req, res)=>{
 }
 
 export const add2Cart = async(req, res)=>{
-    let userId = req.user.id;
+    // let userId = req.user.id;
     let itemId = req.body.itemId;
     try {
-        const cartItems = await theCart.find({userId, itemId});
+        const cartItems = await theCart.find({ itemId});
         if(cartItems.length === 0){
-            // const addItem = new theCart({
-            //     "userId": userId,
-            //     "itemId": itemId,
-            //     "itemQty": 1
-            // });
+            const addItem = new theCart({
+                // "userId": userId,
+                "itemId": itemId,
+                "itemQty": 1
+            });
 
-            // let addedToCart = await addItem.save();
+            let addedToCart = await addItem.save();
             res.json({
                 success : true,
                 msg:"new item added",
-                cartItems
-                // addedToCart
+                cartItems,
+                addedToCart
             })
 
         } 
-        // else {
-        //     let item_Id = cartItems[0]._id;
-        //     let item_Qty = cartItems[0].itemQty + 1;
-        //     const updateCartItems = await theCart.findByIdAndUpdate({
-        //         item_Id, item_Qty, 
-        //     }, {new : true})
-        //     res.json({
-        //         success : true,
-        //         Msg: "Item added to the cart!",
-        //         updateCartItems
-        //     });
-
-        // }
+        else {
+            const item_Id = cartItems[0]._id;
+            const itemQty = cartItems[0].itemQty + 1;
+            const data = {itemQty}
+            const updateCartItems = await theCart.findByIdAndUpdate(
+                item_Id, data, 
+            {new : true})
+            res.json({
+                success : true,
+                Msg: "Item added to the cart!",
+                updateCartItems
+            });
+            res.json({success: true, msg:"item already in cart", cartItems
+            })
+        }
     } catch (error) {
         console.log("Error to add item:", error);
         

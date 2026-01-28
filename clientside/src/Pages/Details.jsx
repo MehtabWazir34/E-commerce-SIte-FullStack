@@ -8,7 +8,9 @@ function Details() {
   const [item, setItem] = useState(null);
   const [mainImg, setMainImg] = useState("");
   const [quantity, setQuantity] = useState(1);
-
+  // console.log(item._id);
+  // console.log(id);
+  
   let navigateTo = useNavigate();
   useEffect(() => {
     const getItem = async () => {
@@ -25,6 +27,28 @@ function Details() {
 
     getItem();
   }, [id]);
+
+  const addItem = {
+      "itemId" : id,
+      "itemQty": quantity
+  }
+  const addToCart = async()=>{
+    try {
+          let theItemToadd = await axios.post('http://localhost:3400/user/addtocart',
+            addItem,
+          {
+            headers:{
+              Authorizations:`Bearer ${localStorage.getItem('token')}`
+            }
+          }
+          );
+          console.log(theItemToadd);
+                
+    } catch (error) {
+      console.log("error to add item", error);
+      
+    }
+  }
 
   if (!item) return null;
 
@@ -101,7 +125,7 @@ function Details() {
 
               {/* Buttons */}
               <div className="flex gap-2">
-                <button className="flex-1 cursor-pointer rounded-md p-2 border font-semibold hover:bg-blue-700 transition">
+                <button onClick={()=> addToCart(id)} className="flex-1 cursor-pointer rounded-md p-2 border font-semibold hover:bg-blue-700 transition">
                   Add to Cart
                 </button>
                 <button onClick={() => navigateTo(`/placeorder/${item._id}`)} className="flex-1 cursor-pointer rounded-md p-2 border font-semibold bg-blue-600 hover:bg-blue-700 transition">
