@@ -10,6 +10,9 @@ const addToCart = new mongoose.Schema({
     },
     itemQty:{
         type: Number, required: true 
+    },
+    itemImg:{
+        type: String, required: true
     }
 },
 {timestamps:true}

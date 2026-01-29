@@ -151,7 +151,8 @@ export const add2Cart = async(req, res)=>{
             const addItem = new theCart({
                 "userId": userId,
                 "itemId": itemId,
-                "itemQty": 1
+                "itemQty": 1,
+                "itemImg": req.body.Imgs, 
             });
 
             let addedToCart = await addItem.save();
@@ -188,13 +189,20 @@ export const add2Cart = async(req, res)=>{
 
 export const getCartItems = async(req, res)=>{
     try {
-        let userId = req.user.id;
-        let theUser = await theUser.findById(userId).populate('updatedCartItems')
-        if(!theUser){
+        // let userId = req.user.id;
+        if(!req.user || !req.user.id){
             return res.json({
-                Msg:"Can't find user"
+                Msg:"Can't find user",
+                theItems
             })
-        }
+        } 
+        let theItems = await theCart.find({userId: req.user.id})
+            return res.json({
+                success: true,
+                Items: theItems.length,
+                theItems
+            });
+        
     } catch (error) {
         console.log("Error to get cartItems", error);
         
