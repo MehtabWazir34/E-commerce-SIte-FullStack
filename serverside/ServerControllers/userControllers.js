@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken'
 // import { the } from "../DBModels/UserModel.js";
 import theUser from '../DBModels/UserModel.js';
 import theCart from "../DBModels/Add2Cart.js";
-
 export const SignUp = async(req, res)=>{
     try {
     const {fullName, userName, email, phoneNo, password} = req.body;
@@ -144,13 +143,13 @@ export const removeFromCart = async(req, res)=>{
 }
 
 export const add2Cart = async(req, res)=>{
-    // let userId = req.user.id;
+    let userId = req.user.id;
     let itemId = req.body.itemId;
     try {
         const cartItems = await theCart.find({ itemId});
         if(cartItems.length === 0){
             const addItem = new theCart({
-                // "userId": userId,
+                "userId": userId,
                 "itemId": itemId,
                 "itemQty": 1
             });
@@ -168,13 +167,13 @@ export const add2Cart = async(req, res)=>{
             const item_Id = cartItems[0]._id;
             const itemQty = cartItems[0].itemQty + 1;
             const data = {itemQty}
-            const updateCartItems = await theCart.findByIdAndUpdate(
+            const updatedCartItems = await theCart.findByIdAndUpdate(
                 item_Id, data, 
             {new : true})
             res.json({
                 success : true,
                 Msg: "Item added to the cart!",
-                updateCartItems
+                updatedCartItems
             });
             res.json({success: true, msg:"item already in cart", cartItems
             })
@@ -185,4 +184,19 @@ export const add2Cart = async(req, res)=>{
         return res.json("Error to add item", error)
     }
 
+}
+
+export const getCartItems = async(req, res)=>{
+    try {
+        let userId = req.user.id;
+        let theUser = await theUser.findById(userId).populate('updatedCartItems')
+        if(!theUser){
+            return res.json({
+                Msg:"Can't find user"
+            })
+        }
+    } catch (error) {
+        console.log("Error to get cartItems", error);
+        
+    }
 }

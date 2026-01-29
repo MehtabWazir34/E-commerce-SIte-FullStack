@@ -8,4 +8,5 @@ userRoutes.post('/register', SignUp);
 userRoutes.post('/login', Login);
 userRoutes.post('/logout', authCheck ,Logout);
 userRoutes.post('/addtocart', authCheck,  add2Cart);
+userRoutes.get('/mycart', authCheck,  add2Cart);
 userRoutes.delete('/removefromcart', authCheck, removeFromCart);

@@ -38,7 +38,7 @@ function Details() {
             addItem,
           {
             headers:{
-              Authorizations:`Bearer ${localStorage.getItem('token')}`
+              Authorization:`Bearer ${localStorage.getItem('token')}`
             }
           }
           );
