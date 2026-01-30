@@ -13,8 +13,8 @@ export function LaBel({lblFor, lblName}){
     )
 }
 
-export function NaVLink({linkedTo, Name}){
+export function NaVLink({linkedTo, Name, onClick}){
     return(
-        <NavLink to={linkedTo} className={'cursor-pointer px-2 py-1 text-center bg-[#ffe2af] rounded-sm outline-0 hover:bg-[#F2D39A] text-[#2C3639] font-semibold'}>{Name}</NavLink>
+        <NavLink to={linkedTo} onClick={onClick} className={'cursor-pointer px-2 py-1 text-center bg-[#ffe2af] rounded-sm outline-0 hover:bg-[#F2D39A] text-[#2C3639] font-semibold'}>{Name}</NavLink>
     )
 }

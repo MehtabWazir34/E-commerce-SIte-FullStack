@@ -74,7 +74,7 @@ function Details() {
           </div>
 
           {/* Thumbnails */}
-          <div className="flex justify-center gap-3 mt-4">
+          <div className="grid grid-cols-3 sm:place-items-center sm:flex sm:justify-center gap-3 mt-4">
             {item.Imgs?.map((img, index) => (
               <img
                 key={index}

@@ -1,10 +1,13 @@
 import  { Link, NavLink } from 'react-router-dom'
 import { InPut, NaVLink } from '../Inputs/InPuts'
 import { useState } from 'react'
-import { MdCabin, MdShoppingCart, MdShoppingCartCheckout } from 'react-icons/md'
-import { BsCartCheckFill, BsCartXFill } from 'react-icons/bs'
-function Header(){
-    let [search, setSearch] = useState('')
+import { MdCabin, MdShoppingCart, MdShoppingCartCheckout } from 'react-icons/md';
+import { BsCartCheckFill, BsCartXFill } from 'react-icons/bs';
+
+function Header({cartOpen, cartIcon}){
+    const [search, setSearch] = useState('')
+    // const [cartOpen, setCartOpen] = useState(false);
+
 
     return(
         <header className="w-full flex justify-between p-6 bg-[#2c3639]">
@@ -20,7 +23,7 @@ function Header(){
 
                 <div className='hidden md:flex md:justify-between gap-x-4'>
             <NaVLink linkedTo={'login'} Name={'Login'}/>
-            <NaVLink linkedTo={'mycart'} Name={`+`}/>
+            <button onClick={cartOpen} className='rounded-sm text-xl bg-[#ffe2af] px-2 cursor-pointer'>{cartIcon}</button>
             {/* <NaVLink linkedTo={'mycart'} Name={`${<BsCartCheckFill /> <BsCartXFill/>}`}/> */}
                     
                 </div>
