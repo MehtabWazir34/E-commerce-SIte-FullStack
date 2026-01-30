@@ -146,39 +146,45 @@ export const add2Cart = async(req, res)=>{
     let userId = req.user.id;
     let itemId = req.body.itemId;
     try {
-        const cartItems = await theCart.find({ itemId});
-        if(cartItems.length === 0){
-            const addItem = new theCart({
-                "userId": userId,
-                "itemId": itemId,
+        const cartItems = await theCart.findOne({userId, itemId});
+        if(!cartItems){
+            const addNewItem = await theCart.create({
+                userId,
+                itemId,
                 "itemQty": 1,
-                "itemImg": req.body.Imgs, 
+                // "itemImg": req.body.Imgs, 
             });
 
-            let addedToCart = await addItem.save();
+            // let addedToCart = await addNewItem.save();
             res.json({
                 success : true,
                 msg:"new item added",
-                cartItems,
-                addedToCart
+                cartItems: addNewItem
             })
 
         } 
-        else {
-            const item_Id = cartItems[0]._id;
-            const itemQty = cartItems[0].itemQty + 1;
-            const data = {itemQty}
-            const updatedCartItems = await theCart.findByIdAndUpdate(
-                item_Id, data, 
-            {new : true})
-            res.json({
-                success : true,
-                Msg: "Item added to the cart!",
-                updatedCartItems
-            });
-            res.json({success: true, msg:"item already in cart", cartItems
-            })
-        }
+        cartItems.itemQty +=1;
+        await cartItems.save();
+        res.json({
+            success: true,
+            Msg:"Item already exsts! ItemQty updated",
+            cartItems
+        })
+        // else {
+        //     // const item_Id = cartItems[0]._id;
+        //     const itemQty = cartItems.itemQty + 1;
+        //     const data = {itemQty}
+        //     const updatedCartItems = await theCart.findByIdAndUpdate(
+        //         data, 
+        //     {new : true})
+        //     res.json({
+        //         success : true,
+        //         Msg: "Item added to the cart!",
+        //         updatedCartItems
+        //     });
+        //     res.json({success: true, msg:"item already in cart", cartItems
+        //     })
+        // }
     } catch (error) {
         console.log("Error to add item:", error);
         
@@ -193,10 +199,11 @@ export const getCartItems = async(req, res)=>{
         if(!req.user || !req.user.id){
             return res.json({
                 Msg:"Can't find user",
-                theItems
+            
             })
         } 
-        let theItems = await theCart.find({userId: req.user.id})
+        let theItems = await theCart.find({userId: req.user.id}).populate('itemId')
+        // let items = Array.isArray(theItems)
             return res.json({
                 success: true,
                 Items: theItems.length,
