@@ -24,18 +24,12 @@ function MyCart(){
             }
         }  
         fetchCartItems()      // Fetch cart items from the server 
-    })
+    },[])
     if(!cartItems) return null;
-    // console.log(cartItems);
-//     const imgSrc = item?.itemId?.Imgs?.[0]
-//   ? item.itemId.Imgs[0].startsWith('http')
-//       ? item.itemId.Imgs[0]
-//       : `http://localhost:3400${item.itemId.Imgs[0]}`
-//   : '';
 
-    const deleteCartItem = async()=>{
+    const deleteCartItem = async(itemId)=>{
         try {
-            let theItem = await axios.delete('http://localhost:3400/user/deletecartitem',
+            let theItem = await axios.delete(`http://localhost:3400/user/deletecartitem/${itemId}`,
                 {
                     headers:{
                         Authorization:`Bearer ${localStorage.getItem('token')}`
@@ -43,6 +37,7 @@ function MyCart(){
                 }
             );
             console.log(theItem);
+            setCartItems(prev => prev.filter((item)=> item.itemId._id !== itemId))
             
         } catch (error) {
             console.log("Err to delete from cart", error);
@@ -61,14 +56,14 @@ function MyCart(){
                     <div >
                         {
                             cartItems.map((item) => (
-    <NavLink to={`/product/details/${item.itemId._id}`}
+    <div 
         key={item._id}
         className="rounded-sm bg-[#2c3639] border flex-1 flex justify-left space-x-2 border-[#ffe2af] my-2  w-full shadow-lg"
     >
         <div>
             { item?.itemId?.Imgs?.length > 0 && (<img src={item?.itemId?.Imgs?.[0]?.startsWith('http') ? item.itemId.Imgs[0] : `http://localhost:3400${item?.itemId?.Imgs?.[0]}`} alt={item?.itemId?.Title} className="w-20 h-20 object-cover m-2" />)}
         </div>
-        <div>
+        <NavLink to={`/product/details/${item.itemId._id}`}>
 
         <h2 className="font-semibold">
             {item.itemId?.Title}
@@ -76,14 +71,14 @@ function MyCart(){
 
         <p>Price: {item.itemId?.Price}</p>
         <p>Quantity: {item.itemQty}</p>
-        <div className="w-full my-1 gap-x-3 flex justify-end">
-            <button onClick={async()=> axios.delete('http://localhost:3400/user/deletecartitem',{itemId: item.itemId._id}, )} className="px-1 rounded-sm cursor-pointer bg-red-700  "><BsTrash3/></button>
-            <button className="px-1 rounded-sm cursor-pointer bg-blue-700  ">Buy Now</button>
-        </div>
+        </NavLink>
+        <div className=" my-1 gap-x-3 grid grid-cols-1 ">
+            <button onClick={()=> deleteCartItem(item.itemId._id)} className="px-1 rounded-sm cursor-pointer bg-red-700 text-center  "><BsTrash3/></button>
+            <NavLink to={`/placeorder/${item.itemId._id}`} className="px-1 rounded-sm cursor-pointer bg-blue-700 text-center  ">Buy Now</NavLink>
         </div>
 
         
-    </NavLink>
+    </div>
 ))
 
                         }
@@ -99,7 +94,7 @@ function MyCart(){
             Cart Total </h2>
             <h2>
 
-                {cartItems.reduce((total, item) => Number(total) + Number(item.itemId?.Price || 0), 0)}
+                {cartItems.reduce((total, item) => Number(total) + Number(item.itemId?.Price || 0) * Number(item.itemQty), 0)}
             </h2>
             
             </div>

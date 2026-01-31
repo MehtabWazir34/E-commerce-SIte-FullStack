@@ -195,9 +195,8 @@ export const add2Cart = async(req, res)=>{
 export const deleteCartItem = async(req, res)=>{
     try {
         let userId = req.user.id;
-        let itemId = req.body.itemId;
-        let theItem = await theCart.findOneAndDelete({
-            userId:userId, itemId:itemId});
+        let itemId = req.params.itemId;
+        let theItem = await theCart.findOneAndDelete({userId, itemId});
         if(!theItem){
             return res.json({Msg: "Item not found to delete from cart."})
         };

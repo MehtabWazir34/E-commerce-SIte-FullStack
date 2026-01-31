@@ -9,4 +9,4 @@ userRoutes.post('/login', Login);
 userRoutes.post('/logout', authCheck ,Logout);
 userRoutes.post('/addtocart', authCheck,  add2Cart);
 userRoutes.get('/mycart', authCheck,  getCartItems);
-userRoutes.delete('/deletecartitem',  deleteCartItem);
+userRoutes.delete('/deletecartitem/:itemId', authCheck, deleteCartItem);
