@@ -152,7 +152,6 @@ export const add2Cart = async(req, res)=>{
                 userId,
                 itemId,
                 "itemQty": 1,
-                // "itemImg": req.body.Imgs, 
             });
 
             // let addedToCart = await addNewItem.save();
@@ -193,6 +192,25 @@ export const add2Cart = async(req, res)=>{
 
 }
 
+export const deleteCartItem = async(req, res)=>{
+    try {
+        let userId = req.user.id;
+        let itemId = req.body.itemId;
+        let theItem = await theCart.findOneAndDelete({
+            userId:userId, itemId:itemId});
+        if(!theItem){
+            return res.json({Msg: "Item not found to delete from cart."})
+        };
+        res.json({
+            success: true,
+            Msg:"Item deleted from cart",
+            theItem
+        })
+    } catch (error) {
+        console.log('Err to delete item!', error);
+        
+    }
+}
 export const getCartItems = async(req, res)=>{
     try {
         // let userId = req.user.id;
