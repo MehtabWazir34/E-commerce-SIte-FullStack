@@ -10,3 +10,9 @@ userRoutes.post('/logout', authCheck ,Logout);
 userRoutes.post('/addtocart', authCheck,  add2Cart);
 userRoutes.get('/mycart', authCheck,  getCartItems);
 userRoutes.delete('/deletecartitem/:itemId', authCheck, deleteCartItem);
+userRoutes.get('/protected', authCheck,(req, res)=>{
+    res.json({
+        LoggedIn : true,
+        user: req.user
+    })
+})

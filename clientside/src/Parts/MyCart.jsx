@@ -58,12 +58,12 @@ function MyCart(){
                             cartItems.map((item) => (
     <div 
         key={item._id}
-        className="rounded-sm bg-[#2c3639] border flex-1 flex justify-left space-x-2 border-[#ffe2af] my-2  w-full shadow-lg"
+        className="rounded-sm bg-[#2c3639] border flex-1 flex justify-between space-x-2 border-[#ffe2af] my-2  w-full shadow-lg"
     >
         <div>
             { item?.itemId?.Imgs?.length > 0 && (<img src={item?.itemId?.Imgs?.[0]?.startsWith('http') ? item.itemId.Imgs[0] : `http://localhost:3400${item?.itemId?.Imgs?.[0]}`} alt={item?.itemId?.Title} className="w-20 h-20 object-cover m-2" />)}
         </div>
-        <NavLink to={`/product/details/${item.itemId._id}`}>
+        <NavLink to={`/product/details/${item.itemId._id}`} className={'w-full mx-2'}>
 
         <h2 className="font-semibold">
             {item.itemId?.Title}

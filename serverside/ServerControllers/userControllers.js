@@ -79,69 +79,6 @@ export const Logout = async(req, res)=>{
     }
 }
 
-export const addToCart =async(req, res)=>{
-    try {
-        const {itemId, itemQty} = req.body;
-        let user = await theUser.findById(req.user.id);
-        if(!user){
-            res.status(404).json({Msg: "User not found to add item"});
-        }
-        let theItemIdx = user.cartList.findIndex((itm)=> itm.product.equals(itemId));
-        if(theItemIdx !== -1){
-            user.cartList[theItemIdx].itemQty += itemQty;
-        } else {
-            user.cartList[theItemIdx].itemQty = itemQty;
-        };
-        await user.save();
-        res.status(200).json({
-            success: true, 
-            Msg: "Item added to cart ✅",
-            theItemIdx
-        })
-        
-    } catch (error) {
-        console.log("error failed to add item", error);
-        res.status(401).json({
-            success: false,
-            
-        })
-        
-    }
-}
-
-export const removeFromCart = async(req, res)=>{
-    try {
-        const {itemId, itemQty} = req.body;
-        let user = await theUser.findById(req.user.id);
-        if(!user){
-            res.status(404).json({Msg:"User not found to remove itm"});
-        }
-        const theItemIdx = user.cartList.findIndex((itm)=> itm.product.equals(itemId));
-        if(theItemIdx !==-1){
-            if(itemQty && itemQty){
-                user.cartList[theItemIdx].itemQty -=itemQty;
-            }
-            if(user.cartList[theItemIdx].itemQty <=0){
-                user.cartList.splice(theItemIdx, 1)
-            }
-            
-        } else{
-            user.cartList.splice(theItemIdx, 1);
-        }
-        await user.save();
-        res.status(200).json({
-            success: true,
-            Msg: "Item removed from cart ✅",
-            theItemIdx
-        })
-    } catch (error) {
-        console.log("error failed to add item", error);
-        res.status(401).json({
-            success: false,
-    })
-    }
-}
-
 export const add2Cart = async(req, res)=>{
     let userId = req.user.id;
     let itemId = req.body.itemId;

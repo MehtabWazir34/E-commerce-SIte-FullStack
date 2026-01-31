@@ -16,13 +16,16 @@ import MyCart from './Parts/MyCart'
 import { useState } from 'react'
 
 import { BsCartCheckFill, BsCartXFill } from 'react-icons/bs';
+import AccountOpt from './Parts/AccountOpt'
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
+  const [accOpts, setAccOpts] = useState(false);
   return (
     <>
      <div className='w-full h-full place-items-center'>
       <Header cartOpen={()=> setCartOpen(!cartOpen)}
-      cartIcon={cartOpen ? (<BsCartXFill/>) : (<BsCartCheckFill/>)} />
+      cartIcon={cartOpen ? (<BsCartXFill/>) : (<BsCartCheckFill/>)}
+      accOpts={()=> setAccOpts(!accOpts)} />
       {/* <h2>Yes, its running.</h2> */}
         <main className='w-full rounded-md shadow-2xl'>
         <Routes>
@@ -45,6 +48,11 @@ function App() {
        cartOpen && (
          <MyCart/>
        )
+     }
+     {
+      accOpts && (
+        <AccountOpt/>
+      )
      }
         
      </div>
