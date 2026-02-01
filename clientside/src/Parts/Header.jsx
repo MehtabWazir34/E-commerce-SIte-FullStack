@@ -1,26 +1,28 @@
 import  { Link, NavLink, useNavigate } from 'react-router-dom'
 import { InPut, NaVLink } from '../Inputs/InPuts'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdCabin, MdShoppingCart, MdShoppingCartCheckout } from 'react-icons/md';
 import { IoSettings } from 'react-icons/io5';
 import { checkLogin } from '../Config/authCheck';
 
-function Header({cartOpen, cartIcon, accOpts}){
+function Header({cartOpen, cartIcon, accountOpts}){
     const [search, setSearch] = useState('')
-    // const [cartOpen, setCartOpen] = useState(false);
+    const [isVerified, setVerified] = useState(false);
     let navigateTo = useNavigate()
-    const isLoggedIn = async()=>{
-        try {
-            let verified = await checkLogin();
-            if(!verified){
-                localStorage.removeItem('token');
-                navigateTo('/login');
-            }
-        } catch (error) {
-            console.log("Error to chechAuth", error);
+    useEffect(()=>{
+        let isLoggedIn = async()=>{
             
+            const verified = await checkLogin();
+            setVerified(verified);
+            if(!verified){
+                // localStorage.removeItem('token');
+                setTimeout(()=>{
+                    navigateTo('/login')
+                }, 300);
+            }
         }
-    }
+    isLoggedIn()
+    },[])
 
     return(
         <header className="w-full flex justify-between p-6 bg-[#2c3639]">
@@ -37,10 +39,12 @@ function Header({cartOpen, cartIcon, accOpts}){
                 <div className='hidden md:flex md:justify-between gap-x-4'>
             <button onClick={cartOpen} className='rounded-sm text-xl bg-[#ffe2af] px-2 cursor-pointer'>{cartIcon}</button>
             {
-                isLoggedIn ? <button onClick={accOpts} className='text-xl bg-[#ffe2af] rounded-sm px-2 cursor-pointer'><IoSettings/> </button> : 
-            <NaVLink linkedTo={'login'} Name={'Login'}/>
+                isVerified ? (
+                <button onClick={accountOpts} className='text-xl bg-[#ffe2af] rounded-sm px-2 cursor-pointer'><IoSettings/> </button> 
+                ) : (
+                <NaVLink linkedTo={'/login'} Name={'Login'}/>
+                )
             }
-            {/* <NaVLink linkedTo={'mycart'} Name={`${<BsCartCheckFill /> <BsCartXFill/>}`}/> */}
                     
                 </div>
             </div>

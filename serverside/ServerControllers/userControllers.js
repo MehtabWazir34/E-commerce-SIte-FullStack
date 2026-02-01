@@ -67,7 +67,7 @@ export const Login = async(req, res)=>{
 export const Logout = async(req, res)=>{
     try {
         await theUser.findByIdAndUpdate(
-            req.user.id,
+            req.user.id
             // {refreshToken: null} 
         );
 
@@ -106,21 +106,6 @@ export const add2Cart = async(req, res)=>{
             Msg:"Item already exsts! ItemQty updated",
             cartItems
         })
-        // else {
-        //     // const item_Id = cartItems[0]._id;
-        //     const itemQty = cartItems.itemQty + 1;
-        //     const data = {itemQty}
-        //     const updatedCartItems = await theCart.findByIdAndUpdate(
-        //         data, 
-        //     {new : true})
-        //     res.json({
-        //         success : true,
-        //         Msg: "Item added to the cart!",
-        //         updatedCartItems
-        //     });
-        //     res.json({success: true, msg:"item already in cart", cartItems
-        //     })
-        // }
     } catch (error) {
         console.log("Error to add item:", error);
         

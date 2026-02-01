@@ -1,10 +1,17 @@
 import axios from "axios"
 export const checkLogin = async()=>{
-            await axios.get('http://localhost:3400/user/protected',{
+           try {
+            let res = await axios.get("http://localhost:3400/user/protected",{
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-            return true
+                }
+
+            });
+            return res.data.LoggedIn === true
+           } catch (error) {
+                console.log("Error",error);
+                return false
+                
+           }
     };
         

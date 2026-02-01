@@ -25,7 +25,7 @@ function App() {
      <div className='w-full h-full place-items-center'>
       <Header cartOpen={()=> setCartOpen(!cartOpen)}
       cartIcon={cartOpen ? (<BsCartXFill/>) : (<BsCartCheckFill/>)}
-      accOpts={()=> setAccOpts(!accOpts)} />
+      accountOpts={()=> setAccOpts(!accOpts)} />
       {/* <h2>Yes, its running.</h2> */}
         <main className='w-full rounded-md shadow-2xl'>
         <Routes>
