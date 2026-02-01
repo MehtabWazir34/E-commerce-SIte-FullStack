@@ -5,13 +5,12 @@ export const checkLogin = async()=>{
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }
-
             });
+            console.log(res.data);
+            
             return res.data.LoggedIn === true
            } catch (error) {
                 console.log("Error",error);
                 return false
-                
            }
     };
-        

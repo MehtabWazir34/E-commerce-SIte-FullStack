@@ -9,22 +9,23 @@ import { useAuth } from '../Config/AuthProvider';
 function Header({cartOpen, cartIcon, accountOpts}){
     const [search, setSearch] = useState('')
 
-    const {isLoggedIn, Loading} = useAuth()
-    let navigateTo = useNavigate()
-    useEffect(()=>{
-        let initCheck = async()=>{
+    const {isLoggedIn, Loading} = useAuth();
+    
+    // let navigateTo = useNavigate()
+    // useEffect(()=>{
+    //     let initCheck = async()=>{
             
-            const verified = await checkLogin();
-            // setVerified(verified);
-            if(!verified){
-                // localStorage.removeItem('token');
-                setTimeout(()=>{
-                    navigateTo('/login')
-                }, 300);
-            }
-        }
-    initCheck()
-    },[])
+    //         const verified = await checkLogin();
+    //         // setVerified(verified);
+    //         if(!verified){
+    //             // localStorage.removeItem('token');
+    //             setTimeout(()=>{
+    //                 navigateTo('/login')
+    //             }, 300);
+    //         }
+    //     }
+    // initCheck()
+    // },[])
 
     // if(Loading) return <h2 className='text-center mx-auto my-20 text-2xl'>Loading...</h2>
     return(

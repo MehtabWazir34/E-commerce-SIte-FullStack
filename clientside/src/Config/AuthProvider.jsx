@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
                 }
                 const res = await checkLogin()
                 if (isMounted) {
-                    setLoggedIn(res.data?.LoggedIn === true);
+                    setLoggedIn(res);
                 }
             } catch (err) {
                 if (isMounted) {

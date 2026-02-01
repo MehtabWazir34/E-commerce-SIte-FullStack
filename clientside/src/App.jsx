@@ -46,7 +46,7 @@ function App() {
         <Footer/>
      {
        cartOpen && (
-         <MyCart/>
+         <MyCart setCartOpen={setCartOpen}/>
        )
      }
      {

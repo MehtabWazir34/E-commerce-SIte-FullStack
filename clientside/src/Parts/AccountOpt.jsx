@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { MdLogout, MdOutlinePerson } from "react-icons/md"
+import { ImHistory } from "react-icons/im"
+import { RiAdminLine } from 'react-icons/ri'
 import { NavLink, useNavigate } from "react-router"
 import { useAuth } from "../Config/AuthProvider";
 
@@ -17,10 +19,9 @@ function AccountOpt({setAccOpts}){
                     }
                 }
             )
-            setAccOpts(false)
-            setLoggedIn(false)
             setTimeout(()=>{
-                // setOptions,
+                setAccOpts(false);
+                setLoggedIn(false);
                 navigateTo('/login');
             }, 500)
             localStorage.removeItem('token')
@@ -30,7 +31,7 @@ function AccountOpt({setAccOpts}){
         }
     }
     return(
-        <section className="w-1/6 h-1/5 flex flex-col space-y-2 rounded-2xl bg-[#364145] p-2 fixed top-16 right-2 shadow-lg text-[#ffe2af]">
+        <section className="w-1/6 h-1/3 flex flex-col space-y-2 rounded-2xl bg-[#364145] p-2 fixed top-16 right-2 shadow-lg text-[#ffe2af]">
 
     <NavLink
         to="/myaccount"
@@ -40,6 +41,24 @@ function AccountOpt({setAccOpts}){
     >
         <MdOutlinePerson />
         My Account
+    </NavLink>
+    <NavLink
+        to="/adminboard"
+        onClick={()=>setAccOpts(false)}
+        className="flex items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
+                   hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300"
+    >
+        <RiAdminLine />
+        Admin Board
+    </NavLink>
+    <NavLink
+        to="/myorders"
+        onClick={()=>setAccOpts(false)}
+        className="flex items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
+                   hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300"
+    >
+        <ImHistory />
+        My Orders
     </NavLink>
 
     <button
