@@ -51,7 +51,7 @@ function App() {
      }
      {
       accOpts && (
-        <AccountOpt/>
+        <AccountOpt setAccOpts={setAccOpts}/>
       )
      }
         

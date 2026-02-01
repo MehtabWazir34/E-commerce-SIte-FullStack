@@ -4,13 +4,14 @@ import { InPut, LaBel } from "../Inputs/InPuts.jsx"
 // import LoginAccount from "./LoginAccount";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../Config/AuthProvider.jsx";
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
   let navigateTo = useNavigate()
   const [loading, setLoading] = useState(false);
-
+  const {setLoggedIn} = useAuth()
   const submitForm = async (e) => {
     e.preventDefault();
     try {
@@ -18,6 +19,7 @@ function Login() {
       const res = await axios.post('http://localhost:3400/user/login', {email, password})
       localStorage.setItem("token", res.data.token);
       console.log(res);
+      setLoggedIn(true)
     } catch (error) {
       console.error("Registration failed:", error);
     } finally {

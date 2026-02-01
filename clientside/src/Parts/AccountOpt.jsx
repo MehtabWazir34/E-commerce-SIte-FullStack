@@ -2,10 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import { MdLogout, MdOutlinePerson } from "react-icons/md"
 import { NavLink, useNavigate } from "react-router"
+import { useAuth } from "../Config/AuthProvider";
 
-function AccountOpt({AccountOpts}){
-    const [isVerified, setVerified] = useState(false)
+function AccountOpt({setAccOpts}){
+    // const [isVerified, setVerified] = useState(false)
     let navigateTo = useNavigate();
+    const {setLoggedIn} = useAuth()
     const Logout = async()=>{
         try {
             await axios.post('http://localhost:3400/user/logout',{},
@@ -15,8 +17,8 @@ function AccountOpt({AccountOpts}){
                     }
                 }
             )
-            
-            // setOptions(false);
+            setAccOpts(false)
+            setLoggedIn(false)
             setTimeout(()=>{
                 // setOptions,
                 navigateTo('/login');
@@ -32,7 +34,7 @@ function AccountOpt({AccountOpts}){
 
     <NavLink
         to="/myaccount"
-        // onClick={setOptions}
+        onClick={()=>setAccOpts(false)}
         className="flex items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
                    hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300"
     >

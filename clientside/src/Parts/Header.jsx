@@ -4,16 +4,18 @@ import { useEffect, useState } from 'react'
 import { MdCabin, MdShoppingCart, MdShoppingCartCheckout } from 'react-icons/md';
 import { IoSettings } from 'react-icons/io5';
 import { checkLogin } from '../Config/authCheck';
+import { useAuth } from '../Config/AuthProvider';
 
 function Header({cartOpen, cartIcon, accountOpts}){
     const [search, setSearch] = useState('')
-    const [isVerified, setVerified] = useState(false);
+
+    const {isLoggedIn, Loading} = useAuth()
     let navigateTo = useNavigate()
     useEffect(()=>{
-        let isLoggedIn = async()=>{
+        let initCheck = async()=>{
             
             const verified = await checkLogin();
-            setVerified(verified);
+            // setVerified(verified);
             if(!verified){
                 // localStorage.removeItem('token');
                 setTimeout(()=>{
@@ -21,9 +23,10 @@ function Header({cartOpen, cartIcon, accountOpts}){
                 }, 300);
             }
         }
-    isLoggedIn()
+    initCheck()
     },[])
 
+    // if(Loading) return <h2 className='text-center mx-auto my-20 text-2xl'>Loading...</h2>
     return(
         <header className="w-full flex justify-between p-6 bg-[#2c3639]">
             <Link to={'/'} className='cursor-pointer text-[#FFE2AF] hover:text-[#F2D39A] font-semibold text-xl'>Jan'Sports</Link>
@@ -39,8 +42,8 @@ function Header({cartOpen, cartIcon, accountOpts}){
                 <div className='hidden md:flex md:justify-between gap-x-4'>
             <button onClick={cartOpen} className='rounded-sm text-xl bg-[#ffe2af] px-2 cursor-pointer'>{cartIcon}</button>
             {
-                isVerified ? (
-                <button onClick={accountOpts} className='text-xl bg-[#ffe2af] rounded-sm px-2 cursor-pointer'><IoSettings/> </button> 
+                isLoggedIn ? (
+                <button onClick={()=>accountOpts()} className='text-xl bg-[#ffe2af] rounded-sm px-2 cursor-pointer'><IoSettings/> </button> 
                 ) : (
                 <NaVLink linkedTo={'/login'} Name={'Login'}/>
                 )
