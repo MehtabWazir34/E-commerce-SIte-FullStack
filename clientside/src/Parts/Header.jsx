@@ -1,9 +1,9 @@
-import  { Link, NavLink, useNavigate } from 'react-router-dom'
+import  { Link } from 'react-router-dom'
 import { InPut, NaVLink } from '../Inputs/InPuts'
-import { useEffect, useState } from 'react'
-import { MdCabin, MdShoppingCart, MdShoppingCartCheckout } from 'react-icons/md';
+import {  useState } from 'react'
+// import { MdCabin, MdShoppingCart, MdShoppingCartCheckout } from 'react-icons/md';
 import { IoSettings } from 'react-icons/io5';
-import { checkLogin } from '../Config/authCheck';
+// import { checkLogin } from '../Config/authCheck';
 import { useAuth } from '../Config/AuthProvider';
 
 function Header({cartOpen, cartIcon, accountOpts}){

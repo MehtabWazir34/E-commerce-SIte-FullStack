@@ -2,6 +2,8 @@ import { Link } from "react-router";
 import football from "../Pics/football.jfif";
 import vollyball from "../Pics/vollyball.jpg";
 import wears from "../Pics/wears.jpg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const products = [
   { id: 1, Title: "Tournament Football", Detail:"Here is more details about the product.", Price: 1800, img: football },
@@ -11,14 +13,33 @@ const products = [
 ];
 
 function ProductRow() {
+  const [productList, setProductList] = useState(products);
+
+  useEffect(()=>{
+    const TopProducts = async()=>{
+      try {
+        const products = await axios.get('http://localhost:3400/products/');
+        // setProductList(products.data.products);
+        setProductList(products.data.products.slice(0,8))
+        
+      } catch (error) {
+        console.log("Err to getTOp:", error);
+        
+      }
+    };
+    TopProducts();
+  },[]);
+  if(!productList) return null;
+  console.log("list",productList);
+  
   return (
     <div id="top-products" className="mx-auto flex justify-center w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-w-max ">
-        {products.map((item) => (
+        {productList.map((item) => (
           <Link
-            key={item.id}
-            to={`/product/details/${item.id}`}
-            className="w-64 h-80 bg-[#f2d39a] rounded-2xl  hover:scale-105 transition duration-300"
+            key={item._id}
+            to={`/product/details/${item._id}`}
+            className="w-72 h-80 bg-[#f2d39a] rounded-2xl  hover:scale-105 transition duration-300"
           >
             {/* Image */}
             <div className="relative w-full h-48 ">
@@ -30,7 +51,7 @@ function ProductRow() {
               </span>
 
               <img
-                src={item.img}
+                src={item?.Imgs?.[0] || item?.Imgs?.[1] ? item.Imgs[0].startsWith('http') || item.Imgs[1].startsWith('http') ? item.Imgs[0] || item.Imgs[1] : `http://localhost:3400${item.Imgs[0] || item.Imgs[1]}` : '/placeholder.png'}
                 alt={item.Title}
                 className="w-full h-full object-cover rounded-t-2xl"
               />
@@ -60,7 +81,7 @@ function TopProducts() {
       <ProductRow />
       <div className="w-full hidden md:flex">
 
-      <ProductRow />
+      {/* <ProductRow /> */}
       </div>
 
       {/* CTA */}

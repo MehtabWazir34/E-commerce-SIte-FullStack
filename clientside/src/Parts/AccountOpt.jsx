@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { MdLogout, MdOutlinePerson } from "react-icons/md"
+import { MdAddBusiness, MdLogout, MdOutlinePerson, } from "react-icons/md"
 import { ImHistory } from "react-icons/im"
 import { RiAdminLine } from 'react-icons/ri'
 import { NavLink, useNavigate } from "react-router"
@@ -31,7 +31,7 @@ function AccountOpt({setAccOpts}){
         }
     }
     return(
-        <section className="w-1/6 h-1/3 flex flex-col space-y-2 rounded-2xl bg-[#364145] p-2 fixed top-16 right-2 shadow-lg text-[#ffe2af]">
+        <section className="w-1/6 h-1/2 flex flex-col space-y-2 rounded-2xl bg-[#364145] p-2 fixed top-16 right-2 shadow-lg text-[#ffe2af]">
 
     <NavLink
         to="/myaccount"
@@ -50,6 +50,15 @@ function AccountOpt({setAccOpts}){
     >
         <RiAdminLine />
         Admin Board
+    </NavLink>
+    <NavLink
+        to="/addnewitem"
+        onClick={()=>setAccOpts(false)}
+        className="flex items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
+                   hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300"
+    >
+        <MdAddBusiness />
+        Add New Item
     </NavLink>
     <NavLink
         to="/myorders"
