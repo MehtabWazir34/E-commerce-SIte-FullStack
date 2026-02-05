@@ -6,7 +6,7 @@ import theUser from '../DBModels/UserModel.js';
 import theCart from "../DBModels/Add2Cart.js";
 export const SignUp = async(req, res)=>{
     try {
-    const {fullName, userName, email, phoneNo, password} = req.body;
+    const {fullName, userName, role, email, phoneNo, password} = req.body;
     if(!fullName || !userName || !email || !phoneNo || !password){
         return res.status(404).json({Msg:"All fields are required to fill."})
     };
@@ -19,7 +19,7 @@ export const SignUp = async(req, res)=>{
     }
     let convertedPassword = await bcrypt.hash(password, 10);
     const user = theUser.create({
-        fullName, email, phoneNo,
+        fullName, email, phoneNo, role,
         userName: lowerUserName, password: convertedPassword
     })
     let token = jwt.sign({id:user._id}, process.env.MY_APP_JWT_SECRET_KEY,{

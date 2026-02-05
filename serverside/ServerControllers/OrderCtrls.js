@@ -1,5 +1,6 @@
 import theProduct from "../DBModels/ProductModel.js";
 import theOrder from "../DBModels/OrderModel.js";
+import { ADMIN_STATUSES, USER_STATUSES } from "../Utility/orderStatus.js";
 
 export const createOrder = async (req, res) => {
   try {
@@ -95,5 +96,49 @@ export const myOrders = async (req, res) => {
       orders});
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch user orders" });
+  }
+};
+
+export const updateOrderStatus = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { orderStatus } = req.body;
+
+    const order = await theOrder.findById(orderId);
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    // USER RULES
+    if (req.user.role === "user") {
+      if (!USER_STATUSES.includes(orderStatus)) {
+        return res.status(403).json({
+          message: "You are not allowed to set this status"
+        });
+      }
+
+      // user can only update their own order
+      if (order.customerName.toString() !== req.user.id) {
+        return res.status(403).json({ message: "Unauthorized order access" });
+      }
+    }
+
+    // ADMIN RULES
+    if (req.user.role === "admin") {
+      if (!ADMIN_STATUSES.includes(orderStatus)) {
+        return res.status(400).json({ message: "Invalid order status" });
+      }
+    }
+
+    order.orderStatus = orderStatus;
+    await order.save();
+
+    res.status(200).json({
+      message: "Order status updated",
+      order
+    });
+
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update order" });
   }
 };

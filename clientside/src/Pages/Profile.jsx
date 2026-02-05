@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import api from "../Utility/api.js";
 import axios from "axios";
+import OrderStatusDropdown from "../Parts/dropMenu.jsx";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -15,7 +16,7 @@ export default function Profile() {
         const user = await axios.get("http://localhost:3400/user/me",{headers:{
             Authorization:`Bearer ${localStorage.getItem("token")}`
         }});
-        const orders = await axios.get("http://localhost:3400/user/myorders",{headers:{
+        const orders = await axios.get("http://localhost:3400/user/orders",{headers:{
             Authorization:`Bearer ${localStorage.getItem("token")}`
         }});
         setOrders(orders.data.orders);
@@ -42,11 +43,11 @@ export default function Profile() {
             <div className="space-y-2">
               <p><b>Name:</b> {user.fullName}</p>
               <p><b>Email:</b> {user.email}</p>
-              {/* <p><b>Role:</b> {user.role}</p> */}
+              <select><b>Role:</b> {user.role}</select>
             </div>
           )}
         </div>
-
+          <OrderStatusDropdown/>
         {/* Orders */}
         <div className="bg-[#1f2a27] rounded-2xl p-6">
           <h2 className="text-xl font-semibold mb-4">My Orders</h2>
@@ -58,7 +59,7 @@ export default function Profile() {
               <div key={order._id} className="border border-[#ffe2af]/20 rounded-xl p-4">
                 <p><b>Order ID:</b> {order._id}</p>
                 <p><b>Total:</b> Rs {order.totalAmount}</p>
-                <p><b>Status:</b> {order.status}</p>
+                <p><b>Status:</b> {order.orderStatus}</p>
               </div>
             ))}
           </div>
