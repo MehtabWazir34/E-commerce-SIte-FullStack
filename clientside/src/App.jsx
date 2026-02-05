@@ -17,6 +17,7 @@ import { useState } from 'react'
 
 import { BsCartCheckFill, BsCartXFill } from 'react-icons/bs';
 import AccountOpt from './Parts/AccountOpt'
+import Profile from './Pages/Profile'
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [accOpts, setAccOpts] = useState(false);
@@ -38,7 +39,7 @@ function App() {
           <Route path='/about' element={<About/>}/>
           <Route path='/addnewitem' element={<ShareNewItem/>}/>
           <Route path='/placeorder/:id' element={<Order/>}/>
-          {/* <Route path='/mycart' element={<MyCart/>}/> */}
+          <Route path='/myaccount' element={<Profile/>}/>
         </Routes>
      
         </main>
