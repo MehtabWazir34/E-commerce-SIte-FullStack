@@ -78,7 +78,18 @@ export const Logout = async(req, res)=>{
         
     }
 }
-
+export const getMe = async(req, res)=>{
+    try {
+        const user = await theUser.findById(req.user.id).select('-password');
+        res.json({
+            success: true,
+            user
+        })
+    } catch (error) {
+        console.log("Error to get user details:", error);
+        res.status(500).json({Msg:"Error to get user details", success: false})
+    }
+}
 export const add2Cart = async(req, res)=>{
     let userId = req.user.id;
     let itemId = req.body.itemId;
