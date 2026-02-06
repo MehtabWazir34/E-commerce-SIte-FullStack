@@ -12,3 +12,4 @@ export const ORDER_STATUS_RULES = {
     "Cancelled"
   ]
 };
+export const ROLE_OPTIONS = ["user", "admin"];

@@ -5,6 +5,8 @@ import { ORDER_STATUS_RULES } from "../Utility/changeStatus.js";
 import axios from "axios";
 
 export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
+    // if (!role || !orderId) return null;
+
   const [status, setStatus] = useState(currentStatus);
   const [loading, setLoading] = useState(false);
 
@@ -18,6 +20,8 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
       }, {headers:{
         Authorization:`Bearer ${localStorage.getItem("token")}`
       }});
+      alert("Status changed successfully!");
+      window.location.reload();
     } catch (err) {
       alert("Not allowed to change status",err);
       setStatus(currentStatus);
@@ -28,25 +32,29 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
 
   return (
     <div className="flex gap-3 items-center">
-      <select
-        value={status}
-        disabled={loading}
-        onChange={(e) => setStatus(e.target.value)}
-        className="
-          bg-[#2c3936]
-          text-[#ffe2af]
-          border border-[#ffe2af]/30
-          rounded-xl
-          px-3 py-2
-          focus:outline-none
-        "
-      >
-        {allowedStatuses.map((s) => (
-          <option key={s} value={s} className="bg-[#2c3936]">
-            {s}
-          </option>
-        ))}
-      </select>
+     <select
+  value={status}
+  onChange={(e) => setStatus(e.target.value)}
+  className="
+    bg-[#2c3936]
+    text-[#ffe2af]
+    border border-[#ffe2af]/30
+    rounded-xl
+    px-3 py-2
+    focus:outline-none
+  "
+>
+  {allowedStatuses.map((s) => (
+    <option
+      key={s}
+      value={s}
+      className="bg-[#2c3936] text-[#ffe2af]"
+    >
+      {s}
+    </option>
+  ))}
+</select>
+
 
       <button
         onClick={updateStatus}

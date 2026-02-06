@@ -105,40 +105,38 @@ export const updateOrderStatus = async (req, res) => {
     const { orderStatus } = req.body;
 
     const order = await theOrder.findById(orderId);
-    if (!order) {
-      return res.status(404).json({ message: "Order not found" });
-    }
+    if (!order) return res.status(404).json({ message: "Order not found" });
 
     // USER RULES
     if (req.user.role === "user") {
       if (!USER_STATUSES.includes(orderStatus)) {
-        return res.status(403).json({
-          message: "You are not allowed to set this status"
-        });
+        return res.status(403).json({ message: "Not allowed" });
       }
 
-      // user can only update their own order
-      if (order.customerName.toString() !== req.user.id) {
-        return res.status(403).json({ message: "Unauthorized order access" });
+      const orderUserId = order.customerName?._id?.toString() || order.customerName?.toString();
+      if (orderUserId !== req.user.id) {
+        return res.status(403).json({ message: "Unauthorized" });
       }
     }
 
     // ADMIN RULES
     if (req.user.role === "admin") {
       if (!ADMIN_STATUSES.includes(orderStatus)) {
-        return res.status(400).json({ message: "Invalid order status" });
+        return res.status(400).json({ message: "Invalid status" });
       }
     }
 
-    order.orderStatus = orderStatus;
-    await order.save();
+    // ✅ Use findByIdAndUpdate to avoid full validation errors
+    const updatedOrder = await theOrder.findByIdAndUpdate(
+      orderId,
+      { orderStatus },
+      { new: true } // return updated doc
+    );
 
-    res.status(200).json({
-      message: "Order status updated",
-      order
-    });
+    res.status(200).json({ message: "Order status updated", order: updatedOrder });
 
   } catch (err) {
-    res.status(500).json({ message: "Failed to update order" });
+    console.error("UPDATE ORDER ERROR:", err);
+    res.status(500).json({ message: err.message });
   }
 };

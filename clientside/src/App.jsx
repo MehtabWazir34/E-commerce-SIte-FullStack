@@ -43,7 +43,7 @@ function App() {
           <Route path='/myaccount' element={<Profile/>}/>
           {/* <Route element={<dropme}/> */}
         </Routes>
-     <OrderStatusDropdown/>
+     {/* <OrderStatusDropdown/> */}
         </main>
         <ScrollToHash/>
         <Footer/>

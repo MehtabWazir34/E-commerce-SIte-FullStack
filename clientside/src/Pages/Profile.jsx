@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import api from "../Utility/api.js";
 import axios from "axios";
 import OrderStatusDropdown from "../Parts/dropMenu.jsx";
+import UserRoleDropdown from "../Utility/userRole.jsx";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -33,7 +34,7 @@ export default function Profile() {
   console.log("orders", orders);
   
   return (
-    <div className="min-h-screen bg-[#2c3936] text-[#ffe2af] p-6">
+    <div className="min-h-screen mt-8 rounded-2xl bg-[#2c3936] text-[#ffe2af] p-6">
       <div className="max-w-5xl mx-auto space-y-6">
 
         {/* Profile Card */}
@@ -43,12 +44,17 @@ export default function Profile() {
             <div className="space-y-2">
               <p><b>Name:</b> {user.fullName}</p>
               <p><b>Email:</b> {user.email}</p>
-              <select><b>Role:</b> {user.role}</select>
+              <div className="flex gap-x-4 items-center"><b>Role:</b> 
+              <UserRoleDropdown
+                    userId={user._id}
+                    currentRole={user.role}
+                    />
+                    </div>
+
             </div>
           )}
         </div>
-          <OrderStatusDropdown/>
-        {/* Orders */}
+        
         <div className="bg-[#1f2a27] rounded-2xl p-6">
           <h2 className="text-xl font-semibold mb-4">My Orders</h2>
 
@@ -60,7 +66,13 @@ export default function Profile() {
                 <p><b>Order ID:</b> {order._id}</p>
                 <p><b>Total:</b> Rs {order.totalAmount}</p>
                 <p><b>Status:</b> {order.orderStatus}</p>
+                <OrderStatusDropdown
+                  orderId={order._id}
+                  currentStatus={order.orderStatus}
+                  role={user?.role}
+                />
               </div>
+              
             ))}
           </div>
         </div>

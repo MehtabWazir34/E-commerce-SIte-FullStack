@@ -35,21 +35,27 @@ function Products() {
 
   return (
     <>
-    <section className="max-w-7xl mx-auto min-h-[calc(100vh-120px)] grid grid-cols-1 md:grid-cols-[260px_1fr] gap-6 px-4 py-6">
+    <section className="max-w-7xl mx-auto min-h-[calc(100vh-120px)] grid grid-cols-1 
+    
+    gap-6 px-4 py-6">
+    {/* md:grid-cols-[260px_1fr] */}
+
 
       {/* Sidebar */}
       <aside className="bg-[#2c3639] rounded-2xl p-2 md:p-4 h-full">
         <h4 className="text-[#ffe2af] font-semibold border-b-2 border-amber-600 pb-2 mb-4">
           Browse Categories
         </h4>
-<div className="m-4 space-2 gap-2 max-w-full md:w-full flex md:flex-col flex-row justify-center">
+<div className="m-4 space-2 gap-2 max-w-full md:w-1/2 mx-auto flex  flex-row justify-center">
+  {/* md:flex-col */}
   <input className="max-w-1/2 rounded-md md:w-full border border-gray-100 text-gray-100 p-2" type={'number'} placeholder={'Min price'} onChange={(a)=> setPriceRange({...priceRange, low: a.target.value})}  />
   <input className="max-w-1/2 rounded-md md:w-full border border-gray-100 text-gray-100 p-2" type={'number'} placeholder={'Max price'} onChange={(a)=> setPriceRange({...priceRange, high: a.target.value})} />
 
 </div>
 
 
-<ul className="w-full space-y-2 text-lg leading-tight flex justify-center gap-2 sm:justify-around md:grid md:grid-cols-1">
+<ul className="w-full space-y-2 text-lg leading-tight flex justify-center gap-2 md:gap-4 ">
+  {/* sm:justify-around md:grid md:grid-cols-1 */}
   {["Cricket", "Football", "Volleyball", "Wears"].map((cat) => 
     ( 
     <li key={cat}> <label className="flex items-center gap-2 text-[#f2d39a]"> <input className="" type={"checkbox"}  onChange={(e) => setActiveCategory((prev) => e.target.checked ? [...prev, cat] : prev.filter((c) => c !== cat) ) } /> {cat} </label> </li> ))}
