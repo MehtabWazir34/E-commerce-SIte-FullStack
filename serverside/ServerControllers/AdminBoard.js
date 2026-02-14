@@ -1,5 +1,5 @@
 import theOrder from '../DBModels/OrderModel.js'
-const allAdminOrders = async (req, res)=>{
+export const allAdminOrders = async (req, res)=>{
     try {
         const allOrders = await theOrder.find();
         if(!allOrders){
@@ -16,4 +16,3 @@ const allAdminOrders = async (req, res)=>{
         })
     }  
 }
-export default allAdminOrders 

@@ -5,6 +5,7 @@ import { configDotenv } from 'dotenv';
 import { userRoutes } from './Routes/userRoutes.js';
 import { productRoutes } from './Routes/productRoutes.js';
 import path from 'path'
+import { adminRoutes } from './Routes/AdminRoutes.js';
 // import { orderRoutes } from './Routes/orderRoutes.js';
 configDotenv()
 const myApp = express();
@@ -19,7 +20,7 @@ ConnectDb();
 
 myApp.use("/user", userRoutes);
 myApp.use('/products', productRoutes);
-// myApp.use('/order', orderRoutes);
+myApp.use('/admin', adminRoutes);
 
 myApp.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
 myApp.listen(3400, ()=>{
