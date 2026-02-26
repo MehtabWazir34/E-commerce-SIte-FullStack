@@ -94,6 +94,7 @@ function Order() {
 
     loadUser();
   }, []);
+// console.log('TheItem', theItem);
 
   if (!theItem) return null;
 
@@ -106,12 +107,15 @@ function Order() {
     e.preventDefault();
 
     const payload = {
-      orderedItems: [
+      orderedItem: 
         {
           product: theItem._id,
-          qty
+          productName: theItem.Title,
+          productInfo: theItem.Detail,
+          qty,
+          price: theItem.Price
         }
-      ],
+      ,
       deliveryFee,
       discount,
       shipAdd: formData.cusAdd,
@@ -130,6 +134,7 @@ function Order() {
     );
 
     console.log("Order placed:", res.data);
+    alert("Order placed successfully!");
   };
 
   return (

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 function AdminBoard() {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
+
+  let navigateTo = useNavigate()
 
   useEffect(() => {
     const getAllOrders = async () => {
@@ -16,7 +19,8 @@ function AdminBoard() {
             },
           }
         );
-        setOrders(res.data.allOrders);
+
+        setOrders(res?.data?.allOrders || []);
       } catch (error) {
         console.log("Error fetching orders:", error);
       }
@@ -37,11 +41,9 @@ function AdminBoard() {
     (o) => o.orderStatus === "Cancelled"
   ).length;
 
-  console.log(orders);
-  
   return (
     <section className="min-h-screen bg-[#2c3936] rounded-2xl mt-8 mx-3 md:mx-8 p-4">
-      
+
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-[#ffe2af] gap-3">
         <h2 className="text-2xl font-bold">Admin Dashboard</h2>
@@ -72,33 +74,45 @@ function AdminBoard() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order._id} className="border-b hover:bg-gray-50">
-                <td className="p-3">{order.customer}</td>
-                <td className="p-3">{order.phoneNo}</td>
-                <td className="p-3">{order.orderedItems.qty}</td>
-                <td className="p-3">{order.totalAmount}</td>
-                <td className="p-3">{order.orderStatus}</td>
-                <td className="p-3">
-                  <button
-                    onClick={() => setSelectedOrder(order)}
-                    className="bg-[#2c3936] text-white px-3 py-1 rounded-md"
-                  >
-                    See Detail
-                  </button>
+            {orders.length > 0 ? (
+              orders.map((order) => (
+                <tr key={order._id} className="border-b hover:bg-gray-50">
+                  <td className="p-3">{order.customerId}</td>
+                  <td className="p-3">{order.phoneNo}</td>
+                  <td className="p-3">{order?.orderedItems?.qty}</td>
+                  <td className="p-3">{order.totalAmount}</td>
+                  <td className="p-3">{order.orderStatus}</td>
+                  <td className="p-3">{order._id}</td>
+                  <td className="p-3">
+                    <button
+                      // onClick={() => setSelectedOrder(order)}
+                      onClick={()=> navigateTo(`/orderdetails/${order._id}`)}
+                      className="bg-[#2c3936] text-white px-3 py-1 rounded-md"
+                    >
+                      See Detail
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="p-4 text-center text-gray-500">
+                  No Orders Found
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
 
       {/* Detail Modal */}
       {selectedOrder && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center p-4">
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center p-4 z-50">
           <div className="bg-white rounded-xl p-6 w-full max-w-md relative">
+
             <button
-              onClick={() => setSelectedOrder(null)}
+              // onClick={() => setSelectedOrder(null)}
+              // onClick={()=> navigateTo(`/orderdetails/${}`)}
               className="absolute top-3 right-3 text-gray-600"
             >
               ✕
@@ -106,17 +120,24 @@ function AdminBoard() {
 
             <h2 className="text-xl font-bold mb-4">Order Summary</h2>
 
-            <img
-              src={selectedOrder.Imgs}
-              alt="product"
-              className="w-full h-40 object-cover rounded-lg mb-4"
-            />
+            {selectedOrder.Imgs?.[0] && (
+              <img
+                src={
+                  selectedOrder.Imgs[0].startsWith("http")
+                    ? selectedOrder.Imgs[0]
+                    : `http://localhost:3400${selectedOrder.Imgs[0]}`
+                }
+                alt="product"
+                className="w-full h-40 object-cover rounded-lg mb-4"
+              />
+            )}
 
             <p><strong>Product:</strong> {selectedOrder.productName}</p>
             <p><strong>Customer:</strong> {selectedOrder.customerName}</p>
             <p><strong>Quantity:</strong> {selectedOrder.qty}</p>
             <p><strong>Status:</strong> {selectedOrder.orderStatus}</p>
             <p><strong>Contact:</strong> {selectedOrder.phoneNo}</p>
+
           </div>
         </div>
       )}

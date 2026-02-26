@@ -11,12 +11,14 @@ const orderSchema = new mongoose.Schema({
   phoneNo: { type: Number, required: true },
   shipAdd: { type: String, required: true },
 
-  orderedItems: [{
+  orderedItem: {
     product: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "theProduct",
       required: true,
     },
+    productName: { type: String, required: true },
+    productInfo: { type: String },
     qty: {
       type: Number,
       required: true,
@@ -26,7 +28,7 @@ const orderSchema = new mongoose.Schema({
       type: Number,
       required: true
     }
-  }],
+  },
 
   subTotal: { type: Number, required: true },
   deliveryFee: { type: Number, default: 0 },

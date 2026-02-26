@@ -16,3 +16,27 @@ export const allAdminOrders = async (req, res)=>{
         })
     }  
 }
+
+export const getOrder = async(req, res)=>{
+    console.log(req.params.id);
+    try {
+        
+        // const {id} = req.params.id
+        let tOrder = await theOrder.findById(req.params.id);
+        if(!tOrder){
+            return res.json({
+                Msg:"Order not found!"
+            })
+        };
+        return res.json({
+            success: true,
+            tOrder
+        })
+    } catch (error) {
+        console.log("Err: ", error);
+        
+        res.json({
+            Msg: error.message
+        })
+    }
+}

@@ -4,41 +4,24 @@ import { ADMIN_STATUSES, USER_STATUSES } from "../Utility/orderStatus.js";
 
 export const createOrder = async (req, res) => {
   try {
-    const {
-      orderedItems,
-      deliveryFee,
-      discount,
-      shipAdd,
-      email,
-      phoneNo
-    } = req.body;
+    const {orderedItem, productName, productInfo, deliveryFee, discount, shipAdd, email, phoneNo } = req.body;
 
-    if (!orderedItems || orderedItems.length === 0) {
-      return res.status(400).json({ message: "No items in order" });
+    if (!orderedItem ) {
+      return res.status(400).json({ message: "No item in order" });
     }
 
-    // Calculate subtotal using DB prices
     let subTotal = 0;
-    const itemsWithPrice = [];
 
-    for (const item of orderedItems) {
-      const product = await theProduct.findById(item.product);
+      const product = await theProduct.findById(orderedItem.product);
       if (!product) {
         return res.status(404).json({ message: "Product not found" });
       }
 
-      const itemTotal = product.Price * item.qty;
+      const itemTotal = (product.Price * orderedItem.qty);
       subTotal += itemTotal;
 
-      itemsWithPrice.push({
-        product: product._id,
-        qty: item.qty,
-        price: product.Price // snapshot
-      });
-    }
 
-    const totalAmount =
-      subTotal + (deliveryFee || 0) - (discount || 0);
+    const totalAmount = Number(subTotal) + Number(deliveryFee || 0) - Number(discount || 0);
 
     const order = await theOrder.create({
       customerId: req.user._id, // from auth middleware
@@ -46,7 +29,13 @@ export const createOrder = async (req, res) => {
       email,
       phoneNo,
       shipAdd,
-      orderedItems: itemsWithPrice,
+      orderedItem: {
+        product: product._id,
+        productName: productName || product.Title,
+        productInfo: productInfo || product.Detail,
+        qty: orderedItem.qty,
+        price: product.Price
+      },
       subTotal,
       deliveryFee,
       discount,

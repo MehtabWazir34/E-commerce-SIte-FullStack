@@ -20,6 +20,7 @@ import AccountOpt from './Parts/AccountOpt'
 import Profile from './Pages/Profile'
 import OrderStatusDropdown from './Parts/dropMenu'
 import AdminBoard from './Pages/AdminBoard'
+import OrderDetails from './Pages/orderDetails.jsx'
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [accOpts, setAccOpts] = useState(false);
@@ -43,7 +44,7 @@ function App() {
           <Route path='/placeorder/:id' element={<Order/>}/>
           <Route path='/myaccount' element={<Profile/>}/>
           <Route path='/adminboard' element={<AdminBoard/>}/>
-          {/* <Route element={<dropme}/> */}
+          <Route path='/orderdetails/:id' element={ <OrderDetails/>} />
         </Routes>
      {/* <OrderStatusDropdown/> */}
         </main>
