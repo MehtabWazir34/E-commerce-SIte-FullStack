@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdAddBusiness, MdLogout, MdOutlinePerson, } from "react-icons/md"
 import { ImHistory } from "react-icons/im"
 import { RiAdminLine } from 'react-icons/ri'
@@ -7,8 +7,25 @@ import { NavLink, useNavigate } from "react-router"
 import { useAuth } from "../Config/AuthProvider";
 
 function AccountOpt({setAccOpts}){
-    // const [isVerified, setVerified] = useState(false)
+    const [user, setUser] = useState(null)
     let navigateTo = useNavigate();
+    useEffect(()=>{
+        const takeUser = async()=>{
+            try {
+                let it = await axios.get('http://localhost:3400/user/me',{
+                    headers:{
+                        Authorization :`Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                setUser(it.data.user)
+            } catch (error) {
+                console.log("errL;", error);
+                
+            }
+        }
+        takeUser();
+    }, [user]);
+    // console.log("User in AccOpt", user);
     const {setLoggedIn} = useAuth()
     const Logout = async()=>{
         try {
@@ -45,8 +62,8 @@ function AccountOpt({setAccOpts}){
     <NavLink
         to="/adminboard"
         onClick={()=>setAccOpts(false)}
-        className="flex items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
-                   hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300"
+        className={`${user?.role !== 'admin' ? 'hidden' : 'flex'}  items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
+                   hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300`}
     >
         <RiAdminLine />
         Admin Board

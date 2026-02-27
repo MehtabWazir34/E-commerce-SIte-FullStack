@@ -65,12 +65,14 @@ export default function Profile() {
               <div key={order._id} className="border border-[#ffe2af]/20 rounded-xl p-4">
                 <p><b>Order ID:</b> {order._id}</p>
                 <p><b>Total:</b> Rs {order.totalAmount}</p>
-                <p><b>Status:</b> {order.orderStatus}</p>
+                <div className="mt-1 flex gap-x-2 items-center">
+                <p><b>Status:</b></p>
                 <OrderStatusDropdown
                   orderId={order._id}
                   currentStatus={order.orderStatus}
                   role={user?.role}
-                />
+                  />
+                  </div>
               </div>
               
             ))}

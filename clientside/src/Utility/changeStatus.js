@@ -1,15 +1,13 @@
 export const ORDER_STATUS_RULES = {
   admin: [
-    "Payment Pending",
-    "Paid",
+    "Pending",
     "Processing",
-    "Shipped",
     "Delivered",
     "Cancelled"
   ],
   user: [
-    "Paid",
-    "Cancelled"
+    "Pending",
+    "Cancel Order"
   ]
 };
 export const ROLE_OPTIONS = ["user", "admin"];

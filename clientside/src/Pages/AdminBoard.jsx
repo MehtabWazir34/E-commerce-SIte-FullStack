@@ -30,7 +30,7 @@ function AdminBoard() {
   }, []);
 
   const activeOrders = orders.filter(
-    (o) => o.orderStatus === "Payment Pending"
+    (o) => o.orderStatus === "Pending"
   ).length;
 
   const completedOrders = orders.filter(
@@ -79,10 +79,11 @@ function AdminBoard() {
                 <tr key={order._id} className="border-b hover:bg-gray-50">
                   <td className="p-3">{order.customerId}</td>
                   <td className="p-3">{order.phoneNo}</td>
-                  <td className="p-3">{order?.orderedItems?.qty}</td>
+                  <td className="p-3">{order?.orderedItem?.qty > 9 ? `${order?.orderedItem?.qty}` : 
+                  `0${order?.orderedItem?.qty}`}</td>
                   <td className="p-3">{order.totalAmount}</td>
                   <td className="p-3">{order.orderStatus}</td>
-                  <td className="p-3">{order._id}</td>
+                  {/* <td className="p-3">{order._id}</td> */}
                   <td className="p-3">
                     <button
                       // onClick={() => setSelectedOrder(order)}

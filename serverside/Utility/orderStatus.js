@@ -1,13 +1,11 @@
 export const ADMIN_STATUSES = [
-  "Payment Pending",
-  "Paid",
+  "Pending",
   "Processing",
-  "Shipped",
   "Delivered",
   "Cancelled"
 ];
 
 export const USER_STATUSES = [
-  "Paid",
-  "Cancelled"
+  "Pending",
+  "Cancel Order"
 ];

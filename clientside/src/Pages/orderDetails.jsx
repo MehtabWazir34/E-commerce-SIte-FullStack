@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import OrderStatusDropdown from "../Parts/dropMenu";
 
 function OrderDetails() {
   const { id } = useParams();
@@ -8,8 +9,9 @@ function OrderDetails() {
 
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [updating, setUpdating] = useState(false);
-console.log(id);
+  // const [updating, setUpdating] = useState(false);
+// console.log(id);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -19,7 +21,12 @@ console.log(id);
                 Authorization:`Bearer ${localStorage.getItem('token')}`
             }
         });
-
+        const userRes = await axios.get("http://localhost:3400/user/me",{
+          headers:{
+              Authorization:`Bearer ${localStorage.getItem('token')}`}})
+        setUser(userRes.data.user);
+        console.log('User',userRes.data.user);
+        (userRes.data.user);
         // if(res.data.success){
         //     setOrder(res.data.tOrder);
         // }
@@ -36,31 +43,31 @@ console.log(id);
     fetchOrder();
   }, [id]);
 
-  console.log(order);
+  // console.log("user", user);
   
-  const updateStatus = async (newStatus) => {
-    if (!order) return;
-    setUpdating(true);
+  // const updateStatus = async (newStatus) => {
+  //   if (!order) return;
+  //   setUpdating(true);
 
-    try {
-      const res = await axios.put(
-        `http://localhost:3400/admin/order/info/${id}`,
-        { orderStatus: newStatus },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+  //   try {
+  //     const res = await axios.put(
+  //       `http://localhost:3400/admin/order/info/${id}`,
+  //       { orderStatus: newStatus },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     );
 
-      // IMPORTANT: Replace full order with updated order returned from backend
-      setOrder(res.data.updatedOrder);
-    } catch (error) {
-      console.log("Error updating status:", error);
-    } finally {
-      setUpdating(false);
-    }
-  };
+  //     // IMPORTANT: Replace full order with updated order returned from backend
+  //     setOrder(res.data.updatedOrder);
+  //   } catch (error) {
+  //     console.log("Error updating status:", error);
+  //   } finally {
+  //     setUpdating(false);
+  //   }
+  // };
 
   let qty = order?.orderedItem?.qty || 0  ;
   
@@ -100,7 +107,7 @@ console.log(id);
           >
             Back
           </button>
-
+{/* 
           <button
             disabled={updating}
             onClick={() =>
@@ -123,7 +130,8 @@ console.log(id);
             className="px-4 py-2 bg-red-600 rounded-md"
           >
             Cancel Order
-          </button>
+          </button> */}
+          <OrderStatusDropdown orderId={order._id} currentStatus={order.orderStatus} role={user?.role}/>
         </div>
       </div>
 
