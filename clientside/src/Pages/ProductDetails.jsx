@@ -50,6 +50,42 @@ function Details() {
     }
   }
 
+  const [theUser, setTheUser ] = useState();
+  const [msgBox, setMsgBox] = useState(false);
+
+  useEffect(()=>{
+    const getUser = async()=>{
+      try {
+          const theUser = await axios.get('http://localhost:3400/user/me', {
+            headers:{
+              Authorization:`Bearer ${localStorage.getItem('token')}`
+            }
+          });
+          setTheUser(theUser.data.user)
+      } catch (error) {
+        console.log("UserErr:", error);
+        
+      }
+    }
+    getUser();
+  }, [theUser])
+  // console.log(item);
+  let isAdmin = theUser?.role === 'admin'; 
+  
+  const deleteProduct = async()=>{
+    try {
+        const delPro = await axios.delete(`http://localhost:3400/admin/delpro/${id}`, {
+          headers:{
+            Authorization:`Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        console.log("Deleted product:", delPro);
+        navigateTo('/products');
+    } catch (error) {
+      console.log("Error:", error);
+      
+    }
+  }
   if (!item) return null;
 
   const price = item?.Price || 0;
@@ -93,6 +129,33 @@ function Details() {
 
         {/* Product Info */}
         <div className="w-full flex flex-1 flex-col rounded-2xl shadow-2xl p-4 text-left text-[#ffe2af]">
+          <div className={"flex gap-2 " + (isAdmin ? "" : "hidden")}>
+                <button 
+                onClick={()=> setMsgBox(true)} 
+                className="flex-1 cursor-pointer rounded-md p-2 border font-semibold bg-red-500 hover:bg-red-600 transition">
+                  {/* Admin Only */}
+                  Delete Product
+                </button>
+                <button 
+                // onClick={() => navigateTo(`/placeorder/${item._id}`)} 
+                className="flex-1 cursor-pointer rounded-md p-2 border font-semibold hover:bg-green-600 transition">
+                  {/* Admin Only */}
+                  Edit Product
+                </button>
+              </div>
+              {
+                msgBox &&(
+                  <div className="fixed inset-0 bg-black/60 z-10 flex justify-center items-center">
+                  <div className="rounded-2xl p-4 bg-[#2c3936] shadow-lg w-120">
+                    <h2 className="text-xl font-semibold">The action can't be return. Delete Product?</h2>
+                    <div className="flex justify-end gap-x-4">
+                      <button onClick={()=> setMsgBox(false)} className="bg-gray-500 hover:bg-gray-600 cursor-pointer rounded-2xl p-2">Cancel</button>
+                      <button onClick={()=> deleteProduct(item._id)} className="bg-red-500 hover:bg-red-600 cursor-pointer rounded-2xl p-2">Delete</button>
+                    </div>
+                  </div>
+                  </div>
+                )
+              }
           <div className="border-b-2 pb-4 mb-4 wrap-break-word overflow-hidden"> 
             <h2 className="text-2xl font-bold ">{item.Title}</h2>
             <p className="text-sm opacity-80 mt-2">

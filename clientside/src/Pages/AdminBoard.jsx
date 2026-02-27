@@ -68,7 +68,7 @@ function AdminBoard() {
               <th className="p-3">Customer</th>
               <th className="p-3">Contact</th>
               <th className="p-3">Quantity</th>
-              <th className="p-3">Price</th>
+              <th className="p-3">Total Price </th>
               <th className="p-3">Status</th>
               <th className="p-3">Action</th>
             </tr>
@@ -147,12 +147,15 @@ function AdminBoard() {
 }
 
 function StatCard({ title, value, color }) {
+  let dHrs = new Date().getHours();
+  let dMns = new Date().getMinutes();
+  let AmPm = dHrs >= 12 ? "PM" : "AM";
   return (
     <div className={`${color} rounded-xl p-4`}>
       <h2 className="font-semibold">{title}</h2>
       <p className="text-2xl font-bold mt-2">{value}</p>
       <span className="text-xs">
-        Updated at {new Date().toLocaleTimeString()}
+        Updated today at {title === "Total Orders"? new Date().toLocaleString() : dHrs > 9 ? `${dHrs}:${dMns} ${AmPm}` : `0${dHrs}:${dMns} ${AmPm}`}
       </span>
     </div>
   );

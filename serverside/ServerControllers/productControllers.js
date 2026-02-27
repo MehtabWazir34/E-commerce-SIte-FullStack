@@ -170,3 +170,23 @@ export const getProductsAndApplyFilter = async(req, res)=>{
         
     }
 }
+export const deleteProduct = async(req, res) =>{
+    try {
+        const delProd = await theProduct.findByIdAndDelete(req.params.id);
+        if(!delProd){
+            res.status(404).json({
+                Msg:"Not found!"
+            })
+        };
+        res.status(200).json({
+            succes: true,
+            Msg: "Product deleted ✅",
+            delProd
+        })
+    } catch (error) {
+        res.status(401).json({
+            succes: false,
+            Msg: error.message
+        })
+    }
+}

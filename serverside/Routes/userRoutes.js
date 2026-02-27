@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { add2Cart, deleteCartItem, getCartItems, getMe, Login, Logout,  SignUp, updateUserRole } from "../ServerControllers/userControllers.js";
 import authCheck from "../MiddleCheck/protectedAcces.js";
-import { createOrder, getAllOrders, myOrders, updateOrderStatus } from "../ServerControllers/OrderCtrls.js";
+import { createOrder, deleteOrder, getAllOrders, myOrders, updateOrderStatus } from "../ServerControllers/OrderCtrls.js";
 
 export const userRoutes = Router();
 
@@ -12,6 +12,7 @@ userRoutes.post('/logout', authCheck ,Logout);
 userRoutes.post('/addtocart', authCheck,  add2Cart);
 userRoutes.get('/mycart', authCheck,  getCartItems);
 userRoutes.delete('/deletecartitem/:itemId', authCheck, deleteCartItem);
+userRoutes.delete('/deleteorder/:id', authCheck, deleteOrder)
 userRoutes.get('/protected', authCheck,(req, res)=>{
     res.json({
         LoggedIn : true,

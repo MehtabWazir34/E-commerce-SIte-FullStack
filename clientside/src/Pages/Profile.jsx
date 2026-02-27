@@ -34,8 +34,8 @@ export default function Profile() {
   console.log("orders", orders);
   
   return (
-    <div className="min-h-screen mt-8 rounded-2xl bg-[#2c3936] text-[#ffe2af] p-6">
-      <div className="max-w-5xl mx-auto space-y-6">
+    <div className="min-h-screen max-w-7xl mx-auto mt-8 rounded-2xl bg-[#2c3936] text-[#ffe2af] p-6">
+      <div className="max-w-6xl mx-auto space-y-6">
 
         {/* Profile Card */}
         <div className="bg-[#1f2a27] rounded-2xl p-6">
