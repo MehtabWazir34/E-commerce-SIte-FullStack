@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { InPut, LaBel } from "../Inputs/InPuts";
 
 function Details() {
   const { id } = useParams();
@@ -8,9 +9,19 @@ function Details() {
   const [item, setItem] = useState(null);
   const [mainImg, setMainImg] = useState("");
   const [quantity, setQuantity] = useState(1);
-  // console.log(item._id);
-  // console.log(id);
-  
+  const [theUser, setTheUser ] = useState();
+  const [msgBox, setMsgBox] = useState(false);
+  let isAdmin = theUser?.role === 'admin'; 
+  const [editMode, setEditMode] = useState(false);
+  const [editData, seteditData] = useState({
+    Title: '',
+    Detail:'',
+    category:'',
+    price:'',
+    deliveryFee: '',
+    discountFee: ''
+  });
+
   let navigateTo = useNavigate();
   useEffect(() => {
     const getItem = async () => {
@@ -50,8 +61,6 @@ function Details() {
     }
   }
 
-  const [theUser, setTheUser ] = useState();
-  const [msgBox, setMsgBox] = useState(false);
 
   useEffect(()=>{
     const getUser = async()=>{
@@ -70,7 +79,7 @@ function Details() {
     getUser();
   }, [theUser])
   // console.log(item);
-  let isAdmin = theUser?.role === 'admin'; 
+
   
   const deleteProduct = async()=>{
     try {
@@ -83,6 +92,37 @@ function Details() {
         navigateTo('/products');
     } catch (error) {
       console.log("Error:", error);
+      
+    }
+  }
+
+  const handleEdit = ()=>{
+    setEditMode(true)
+    try {
+      seteditData({
+        Title: item.Title,
+        Detail: item.Detail,
+        category: item.Category,
+        price: item.Price,
+        discountFee: item.offPrice,
+        deliveryFee: item.deliveryFee
+      })
+    } catch (error) {
+      console.log("Err;", error);
+      
+    }
+  }
+// console.log("ITem:", item);
+
+  const updateProduct = async()=>{
+    try {
+        await axios.put(`http://localhost:3400/admin/editpro/${id}`, editData,{
+          headers:{
+            Authorization:`Bearer ${localStorage.getItem('token')}`
+          }
+        })
+    } catch (error) {
+      console.log("Err:", error);
       
     }
   }
@@ -137,7 +177,7 @@ function Details() {
                   Delete Product
                 </button>
                 <button 
-                // onClick={() => navigateTo(`/placeorder/${item._id}`)} 
+                onClick={() => handleEdit()} 
                 className="flex-1 cursor-pointer rounded-md p-2 border font-semibold hover:bg-green-600 transition">
                   {/* Admin Only */}
                   Edit Product
@@ -154,6 +194,127 @@ function Details() {
                     </div>
                   </div>
                   </div>
+                )
+              }
+              {
+                editMode && (
+                  <section className="w-full min-h-screen inset-0 fixed z-30 bg-[#2c3936] px-4 py-8">
+        <div className="max-w-6xl mx-auto bg-[#364145] rounded-2xl shadow-xl p-6">
+          <h2 className="text-3xl text-[#f2d39a] text-center mb-6 font-semibold">
+            Update Product
+          </h2>
+  
+          <form
+            onSubmit={updateProduct}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+            >
+            <div className="flex flex-col gap-2">
+              <LaBel lblFor="Category" lblName="Category" />
+              <select
+                id="Category"
+                className="rounded-md border border-gray-500 text-black px-2 py-2 text-sm text-center outline-none"
+                value={editData.category}
+                onChange={(e) =>
+                  seteditData({ ...editData, category: e.target.value })
+                }
+                required
+              >
+                <option value="">-- Select Category --</option>
+                <option value="Cricket">Cricket</option>
+                <option value="Football">Football</option>
+                <option value="Volleyball">Volleyball</option>
+                <option value="Wears">Wears</option>
+              </select>
+            </div>
+  
+            <div className="flex flex-col gap-2">
+              <LaBel lblFor="Title" lblName="Title" />
+              <textarea
+                id="Title"
+                rows={2}
+                resize="none"
+                className="resize-none rounded-md border border-gray-500  px-2 py-2 text-sm outline-none"
+                placeholder="Enter product Title"
+                value={editData.Title}
+                onChange={(e) =>
+                  seteditData({ ...editData, Title: e.target.value })
+                }
+                required
+              />
+            </div>
+  
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:col-span-2">
+              <div>
+                <LaBel lblFor="original" lblName="Original Price" />
+                <InPut
+                  type="number"
+                  id="original"
+                  placeholder="Original price"
+                  value={editData.price}
+                  onChange={(e) =>
+                    seteditData({ ...editData, price: e.target.value }
+                  )
+                  }
+                  required
+                />
+              </div>
+  
+              <div>
+                <LaBel lblFor="market" lblName="Delivery Fee" />
+                <InPut
+                  type="number"
+                  id="market"
+                  placeholder="Delivery Fee"
+                  value={editData.deliveryFee}
+                  onChange={(e) =>
+                    seteditData({
+                      ...editData,
+                      deliveryFee: e.target.value,
+                    })
+                  }
+                />
+              </div>
+  
+              <div>
+                <LaBel lblFor="off" lblName="Discount" />
+                <InPut
+                  type="number"
+                  id="off"
+                  placeholder="Discounted price"
+                  value={editData.discountFee}
+                  onChange={(e) =>
+                    seteditData({...editData, discountFee: e.target.value})
+                  }
+                />
+              </div>
+            </div>
+  
+            <div className="flex flex-col gap-2 lg:col-span-2">
+              <LaBel lblFor="Detail" lblName="Detail" />
+              <textarea
+                id="Detail"
+                rows={5}
+                className="rounded-md border border-gray-500  px-2 py-2 text-sm outline-none"
+                placeholder="Write Detailed description of the item"
+                value={editData.Detail}
+                onChange={(e) =>
+                  seteditData({ ...editData, Detail: e.target.value })
+                }
+                required
+              />
+            </div>
+  
+            <div className="lg:col-span-2 flex justify-center mt-6">
+              <button
+                type="submit"
+                className="px-8 py-3 rounded-xl bg-[#f2d39a] text-black font-semibold hover:opacity-90 transition-all duration-300 cursor-pointer"
+              >
+                Update Product
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
                 )
               }
           <div className="border-b-2 pb-4 mb-4 wrap-break-word overflow-hidden"> 
@@ -226,5 +387,8 @@ function Details() {
     </section>
   );
 }
+
+
+      
 
 export default Details;

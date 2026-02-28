@@ -190,3 +190,24 @@ export const deleteProduct = async(req, res) =>{
         })
     }
 }
+export const editProduct = async(req, res)=>{
+    try {
+        const updatedProduct = await theProduct.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        if(!updatedProduct){
+            return res.status(404).json({
+                succes: false,
+                Msg: "Product not found"
+            })
+        }
+        res.status(200).json({
+            succes: true,
+            Msg: "Product updated ✅",
+            updatedProduct
+        })
+    } catch (error) {
+        res.json({
+            Succes: false,
+            Msg: error.message
+        })
+    }
+}

@@ -96,7 +96,6 @@ console.log(formData);
           onSubmit={handleSubmit}
           className="grid grid-cols-1 lg:grid-cols-2 gap-6"
         >
-          {/* ================= CATEGORY ================= */}
           <div className="flex flex-col gap-2">
             <LaBel lblFor="Category" lblName="Category" />
             <select
