@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { MdEmail, MdFacebook, MdWhatsapp } from "react-icons/md";
 
 function Footer() {
@@ -68,15 +68,17 @@ function Footer() {
         <div>
           <h3 className="mb-3 font-semibold text-sm">Contact & Support</h3>
           <ul className="space-y-3 text-sm">
-            <li className="flex items-center gap-3 hover:text-white transition">
+            <a href={'https://web.facebook.com/profile.php?id=61581245577311'} className="flex items-center gap-3 hover:text-white transition">
               <MdFacebook /> Jan Sports
-            </li>
-            <li className="flex items-center gap-3 hover:text-white transition">
+            </a>
+            <a href={'http://wa.me/+923159878075'} className="flex items-center gap-3 hover:text-white transition">
               <MdWhatsapp /> +92 315 9878075
-            </li>
-            <li className="flex items-center gap-3 hover:text-white transition">
+            </a>
+            <button type="button" onClick={()=>{
+              window.location.href = 'mailto:34methab@gmail.com'
+            }} className="flex items-center gap-3 hover:text-white transition">
               <MdEmail /> jansports@email.com
-            </li>
+            </button>
           </ul>
         </div>
       </div>

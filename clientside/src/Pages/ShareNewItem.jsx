@@ -8,29 +8,11 @@ function ShareNewItem() {
     Detail: "",
     Category: "",
     Price:"", deliveryFee:"", offPrice:"",
-    // : {
-    //   originalPrice: "",
-    //   mrp: "",
-    //   offPrice: "",
-    // },
     Imgs: [],
   });
 
   const [previewImages, setPreviewImages] = useState([]);
 
-  // useEffect(()=>{
-  //   const addNewItem = async()=>{
-  //       try {
-  //           let theItem = await axios.post('http://localhost:3400/products/addnew', {formData});
-
-  //           console.log('Item uploaded', theItem);
-  //       } catch (error) {
-  //           console.log('Error to upload item', error);
-            
-  //       }
-  //   };
-  //   addNewItem();
-  // })
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
 
@@ -89,7 +71,7 @@ console.log(formData);
     <section className="w-full min-h-screen bg-[#2c3936] px-4 py-8">
       <div className="max-w-6xl mx-auto bg-[#364145] rounded-2xl shadow-xl p-6">
         <h2 className="text-3xl text-[#f2d39a] text-center mb-6 font-semibold">
-          Share New Item
+          Upload New Product
         </h2>
 
         <form

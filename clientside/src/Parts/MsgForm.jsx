@@ -26,12 +26,12 @@ function ContactForm() {
           </p>
 
             <ul className="space-y-3 text-lg ">
-                      <li className="flex items-center gap-3 hover:text-white transition">
+                      <a href="https://web.facebook.com/profile.php?id=61581245577311" className="flex items-center gap-3 hover:text-white transition">
                         <MdFacebook /> Jan Sports
-                      </li>
-                      <li className="flex items-center gap-3 hover:text-white transition">
+                      </a>
+                      <a href="http://wa.me/+923159878075" className="flex items-center gap-3 hover:text-white transition">
                         <MdWhatsapp /> +92 315 9878075
-                      </li>
+                      </a>
                       <li className="flex items-center gap-3 hover:text-white transition">
                         <MdEmail /> jansports@email.com
                       </li>

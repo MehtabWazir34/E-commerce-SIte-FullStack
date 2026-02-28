@@ -13,13 +13,14 @@ function Details() {
   const [msgBox, setMsgBox] = useState(false);
   let isAdmin = theUser?.role === 'admin'; 
   const [editMode, setEditMode] = useState(false);
+  // const [previewImages, setPreviewImages] = useState([]);
   const [editData, seteditData] = useState({
     Title: '',
     Detail:'',
-    category:'',
-    price:'',
+    Category:'',
+    Price:'',
     deliveryFee: '',
-    discountFee: ''
+    offPrice: ''
   });
 
   let navigateTo = useNavigate();
@@ -61,7 +62,6 @@ function Details() {
     }
   }
 
-
   useEffect(()=>{
     const getUser = async()=>{
       try {
@@ -96,42 +96,113 @@ function Details() {
     }
   }
 
-  const handleEdit = ()=>{
-    setEditMode(true)
-    try {
-      seteditData({
-        Title: item.Title,
-        Detail: item.Detail,
-        category: item.Category,
-        price: item.Price,
-        discountFee: item.offPrice,
-        deliveryFee: item.deliveryFee
-      })
-    } catch (error) {
-      console.log("Err;", error);
-      
-    }
-  }
-// console.log("ITem:", item);
+  const updateProduct = async (a)=>{
+    a.preventDefault();
+    // setEditMode(true)
+    // const formData = new FormData()
+    // try {
+      // seteditData({
+        // formData.append("Title", editData.Title);
+        // formData.append("Detail", editData.Detail);
+        // formData.append("Category", editData.Category);
+        // formData.append("Price", editData.Price);
+        // formData.append("offPrice", editData.offPrice);
+        // formData.append("deliveryFee", editData.deliveryFee);
 
-  const updateProduct = async()=>{
-    try {
+        // editData.Imgs?.forEach((img)=>{
+        //   formData.append("Img", img);
+        // });
+        // editData.newImgs?.forEach((newImg)=>{
+        //   formData.append('newImg', newImg);
+        // })
+
         await axios.put(`http://localhost:3400/admin/editpro/${id}`, editData,{
           headers:{
             Authorization:`Bearer ${localStorage.getItem('token')}`
+            // ,
+            // "Content-Type": "multipart/form-data"
           }
         })
-    } catch (error) {
-      console.log("Err:", error);
+        window.location.reload()
+        setEditMode(false)
+        
+    // } catch (error) {
+    //   console.log("Err;", error);
       
-    }
+    // }
   }
+// console.log("ITem:", item);
+
+
+  // const handleImageChange = (e) => {
+  //   const files = Array.from(e.target.files);
+
+  //   if (files.length + previewImages.length > 6) {
+  //     alert("You can upload only up to 6 images.");
+  //     return;
+  //   }
+
+  //   seteditData((prev) => ({
+  //     ...prev,
+  //     newImgs: [...prev.newImgs, ...files],
+  //   }));
+
+  //   const previews = files.map((file) => URL.createObjectURL(file));
+  //   setPreviewImages((prev) => [...prev, ...previews]);
+  // };
+
+  // const removeImage = (idx) =>{
+  //   const updatedImgsPreView = previewImages.filter((_, i)=> i !== idx);
+  //   setPreviewImages(updatedImgsPreView);
+
+  //   seteditData((pre)=>{
+  //     const oldImgs = pre.Imgs || [];
+  //     const newImgs = pre.newImgs || [];
+  //     if(oldImgs.length > idx){
+  //       return {
+  //         ...pre, Imgs: oldImgs.filter((_, i)=> i !== idx)
+  //       }
+  //     } else {
+  //       let newIdx = idx - oldImgs.length;
+  //       return {
+  //         ...pre, newImgs : newImgs.filter((_, i) => i !== newIdx)
+  //       }
+  //     }
+  //   })
+  // }
+
+  const handleEdit = ()=>{
+    setEditMode(true)
+    seteditData({
+        Title: item.Title,
+        Detail: item.Detail,
+        Category: Array.isArray(item?.Category) ? item.Category[0] : item.Category ,
+        Price: item?.Price,
+        offPrice: item?.offPrice,
+        deliveryFee: item.deliveryFee,
+        // Imgs: item?.Imgs?.slice(0,6) // limit to 6 images
+        
+      
+      })
+      // setPreviewImages(item.Imgs || [])
+    }
+    // try {
+    //     await axios.put(`http://localhost:3400/admin/editpro/${id}`, editData,{
+    //       headers:{
+    //         Authorization:`Bearer ${localStorage.getItem('token')}`,
+    //         "Content-Type": "multipart/form-data"
+    //       }
+    //     })
+    // } catch (error) {
+    //   console.log("Err:", error);
+      
+    // }
   if (!item) return null;
 
-  const price = item?.Price || 0;
-  const discount = item?.offPrice || 0;
+  const Price = item?.Price || 0;
+  const offPrice = item?.offPrice || 0;
   const deliveryFee = item?.deliveryFee || 0;
-  const subtotal = price * quantity - discount;
+  const subtotal = Price * quantity - quantity * offPrice;
   const total = Number(subtotal) + Number(deliveryFee);
 
   return (
@@ -198,12 +269,14 @@ function Details() {
               }
               {
                 editMode && (
-                  <section className="w-full min-h-screen inset-0 fixed z-30 bg-[#2c3936] px-4 py-8">
-        <div className="max-w-6xl mx-auto bg-[#364145] rounded-2xl shadow-xl p-6">
+                  <section className="w-full min-h-screen bg-black/60 inset-0 fixed z-30 px-4 py-8">
+        <div className="max-w-6xl mx-auto bg-[#364145] mt-10 rounded-2xl shadow-xl p-6">
           <h2 className="text-3xl text-[#f2d39a] text-center mb-6 font-semibold">
             Update Product
           </h2>
-  
+                  <span className="absolute top-22 right-28 font-semibold text-[#2c3936] bg-[#f2d39a] p-2 rounded-full transition-all duration-200  cursor-pointer" 
+                  onClick={() => setEditMode(false)}
+                  > Close</span>
           <form
             onSubmit={updateProduct}
             className="grid grid-cols-1 lg:grid-cols-2 gap-6"
@@ -212,10 +285,10 @@ function Details() {
               <LaBel lblFor="Category" lblName="Category" />
               <select
                 id="Category"
-                className="rounded-md border border-gray-500 text-black px-2 py-2 text-sm text-center outline-none"
-                value={editData.category}
+                className="rounded-md border border-gray-500 px-2 py-2 text-sm text-center outline-none"
+                value={editData.Category}
                 onChange={(e) =>
-                  seteditData({ ...editData, category: e.target.value })
+                  seteditData({ ...editData, Category: e.target.value })
                 }
                 required
               >
@@ -249,10 +322,10 @@ function Details() {
                 <InPut
                   type="number"
                   id="original"
-                  placeholder="Original price"
-                  value={editData.price}
+                  placeholder="Original Price"
+                  value={editData.Price}
                   onChange={(e) =>
-                    seteditData({ ...editData, price: e.target.value }
+                    seteditData({ ...editData, Price: e.target.value }
                   )
                   }
                   required
@@ -260,10 +333,10 @@ function Details() {
               </div>
   
               <div>
-                <LaBel lblFor="market" lblName="Delivery Fee" />
+                <LaBel lblFor="deliveryFee" lblName="Delivery Fee" />
                 <InPut
                   type="number"
-                  id="market"
+                  id="deliveryFee"
                   placeholder="Delivery Fee"
                   value={editData.deliveryFee}
                   onChange={(e) =>
@@ -276,14 +349,14 @@ function Details() {
               </div>
   
               <div>
-                <LaBel lblFor="off" lblName="Discount" />
+                <LaBel lblFor="Discount" lblName="Discount" />
                 <InPut
                   type="number"
-                  id="off"
-                  placeholder="Discounted price"
-                  value={editData.discountFee}
+                  id="Discount"
+                  placeholder="Discount"
+                  value={editData.offPrice}
                   onChange={(e) =>
-                    seteditData({...editData, discountFee: e.target.value})
+                    seteditData({...editData, offPrice: e.target.value})
                   }
                 />
               </div>
@@ -303,6 +376,40 @@ function Details() {
                 required
               />
             </div>
+            
+          {/* <div className="lg:col-span-2">
+            <LaBel lblFor="images" lblName="Upload Images (Max 6)" />
+            <input
+              type="file"
+              id="images"
+              accept="image/*"
+              multiple
+              onChange={handleImageChange}
+              className="block w-full text-sm text-gray-300 file:mr-4 file:rounded-md file:border-0 file:bg-[#f2d39a] file:px-4 file:py-2 file:text-black"
+            />
+          </div>
+
+          {previewImages.length > 0 && (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 lg:col-span-2">
+              {previewImages.map((img, index) => (
+                <div key={index} className="relative">
+                  <img
+                    src={img}
+                    alt="preview"
+                    className="h-24 w-full object-cover rounded-md"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    className="absolute top-1 right-1 bg-red-600 text-white text-xs px-2 py-1 rounded"
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
+          )} */}
+
   
             <div className="lg:col-span-2 flex justify-center mt-6">
               <button
@@ -328,7 +435,7 @@ function Details() {
             {/* Quantity & Actions */}
             <div className="flex flex-col gap-4">
               {/* Quantity */}
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <button
                   onClick={() => setQuantity(q => Math.max(1, q - 1))}
                   className="flex-1 cursor-pointer rounded-md p-2 font-bold bg-red-600 hover:bg-red-700 transition"
@@ -344,7 +451,7 @@ function Details() {
                 >
                   +
                 </button>
-              </div>
+              </div> */}
 
               {/* Buttons */}
               <div className="flex gap-2">
@@ -361,7 +468,7 @@ function Details() {
             <div className="text-sm">
               <div className="flex justify-between">
               <h2 className="my-1">Price</h2>
-              <h2 className="my-1">{price}</h2>
+              <h2 className="my-1">{Price}</h2>
               </div>
               <div className="flex justify-between">
               <h2 className="my-1">Quantity</h2>
@@ -369,7 +476,7 @@ function Details() {
               </div>
               <div className="flex justify-between">
               <h2 className="my-1">Discount</h2>
-              <h2 className="my-1"> {discount > 9 ? discount : `00`}</h2>
+              <h2 className="my-1"> {offPrice > 9 ? offPrice : `0${offPrice}`}</h2>
               </div>
               <div className="flex justify-between">
               <h2 className="my-1">Delivery</h2>
