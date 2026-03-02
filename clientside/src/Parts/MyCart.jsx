@@ -45,7 +45,7 @@ function MyCart({setCartOpen}){
         }
     }
     return(
-        <section className="rounded-xl z-70 p-4 w-2/5 h-8/9 flex flex-col fixed top-14  right-2 bg-[#364145] shadow-lg text-[#ffe2af]">
+        <section className="rounded-xl z-70 p-4 max-w-full md:w-2/5 h-8/9 flex flex-col fixed top-14  right-0 bg-[#364145] shadow-lg text-[#ffe2af]">
         <h2 className="text-xl font-semibold mb-1">My Cart</h2>
         <div className="overflow-y-auto flex-1">
             {

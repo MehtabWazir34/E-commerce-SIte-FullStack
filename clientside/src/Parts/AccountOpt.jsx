@@ -48,7 +48,7 @@ function AccountOpt({setAccOpts}){
         }
     }
     return(
-        <section className="w-1/6 h-1/2 flex flex-col space-y-2 rounded-2xl bg-[#364145] p-2 fixed top-16 right-2 shadow-lg text-[#ffe2af]">
+        <section className="w-1/2 md:w-1/3 lg:w-1/6 flex flex-col space-y-2 rounded-2xl bg-[#364145] p-2 fixed top-16 right-2 shadow-lg text-[#ffe2af]">
 
     <NavLink
         to="/myaccount"

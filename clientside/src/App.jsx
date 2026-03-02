@@ -13,7 +13,7 @@ import About from './Pages/About'
 import ShareNewItem from './Pages/ShareNewItem'
 import Order from './Pages/Order'
 import MyCart from './Parts/MyCart'
-import { useEffect, useState } from 'react'
+import {useState, useRef } from 'react'
 
 import { BsCartCheckFill, BsCartXFill } from 'react-icons/bs';
 import AccountOpt from './Parts/AccountOpt'
@@ -21,34 +21,14 @@ import Profile from './Pages/Profile'
 // import OrderStatusDropdown from './Parts/dropMenu'
 import AdminBoard from './Pages/AdminBoard'
 import OrderDetails from './Pages/orderDetails.jsx'
-import axios from 'axios'
+// import axios from 'axios'
+import Draggable from 'react-draggable'
+import FloatingMenu from './Parts/MobileMenuOpt.jsx'
 
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [accOpts, setAccOpts] = useState(false);
-  const [searchResult, setSearchResult] = useState('');
-  // const [products, setProducts] = useState({});
-  // useEffect(()=>{
-  //   const getSearch = async()=>{
-  //   try {
-  //         const allProducts = await axios.get('http://localhost:3400/prudcuts/');
-  //         setProducts(allProducts.data);
-  //         if(searchResult.trim() !==''){
-  //           products.filter((each)=>{
-  //             each.Title.toLocaleLowerCase().inlcudes(searchResult.toLocaleLowerCase());
-  //           })
-  //         }
-  //         // console.log("PP",allProducts.data);
-          
-  //   } catch (error) {
-  //     console.log("Err:", error);
-      
-  //   }
-  //   }
-  //  getSearch(); 
-  // })
-  // console.log("PP", products);
-  
+
   return (
     <>
      <section className='w-full h-full overflow-hidden place-items-center'>
@@ -76,6 +56,7 @@ function App() {
         </Routes>
      {/* <OrderStatusDropdown/> */}
         </main>
+      <FloatingMenu/>
         <ScrollToHash/>
         <Footer/>
         

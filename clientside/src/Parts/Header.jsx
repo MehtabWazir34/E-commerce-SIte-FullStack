@@ -143,7 +143,7 @@ function Header({cartOpen, cartIcon, accountOpts}){
     </div>
   </section>
 )}
-                <div className='hidden md:flex md:justify-between gap-x-4'>
+          <div className='hidden md:flex md:justify-between gap-x-4'>
             <button onClick={cartOpen} className='rounded-sm text-xl bg-[#ffe2af] px-2 cursor-pointer'>{cartIcon}</button>
             {
                 isLoggedIn ? (
