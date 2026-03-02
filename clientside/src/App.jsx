@@ -51,7 +51,7 @@ function App() {
   
   return (
     <>
-     <div className='w-full h-full place-items-center'>
+     <section className='w-full h-full overflow-hidden place-items-center'>
       <Header 
       cartOpen={()=> setCartOpen(!cartOpen)}
       cartIcon={cartOpen ? (<BsCartXFill/>) : (<BsCartCheckFill/>)}
@@ -90,7 +90,7 @@ function App() {
       )
      }
         
-     </div>
+     </section>
     </>
   )
 }
