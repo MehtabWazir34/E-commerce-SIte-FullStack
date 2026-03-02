@@ -1,7 +1,7 @@
 import { MdOutlineFacebook } from "react-icons/md";
 import khush from "../Pics/pic3.png";
 import ContactForm from "../Parts/MsgForm";
-
+import jan from '../Pics/jan.jpg'
 function About() {
   return (
     <section className="max-w-7xl mx-auto min-h-screen mt-8 p-6 rounded-2xl bg-transparent">
@@ -65,7 +65,7 @@ function About() {
 
           <div className="w-full items-end flex justify-center ">
             <img
-              src="https://scontent.fisb5-2.fna.fbcdn.net/v/t39.30808-6/475375893_1165862658292674_8364090840625912929_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeHhGduz5U0pVExgNkh04s0RoMhYtQq_zkmgyFi1Cr_OSdwX_pCsvabJ1xedi9sZtVpJj8d8Qu3Ut8tA-384UAUw&_nc_ohc=krR8N6TNXY8Q7kNvwGn7uPb&_nc_oc=AdmnUBDM__ob2t7s9EAzjdQvW5t9U87gTAvU6NN9unfKV2SB4Rcq914-DMMvJ495slU&_nc_zt=23&_nc_ht=scontent.fisb5-2.fna&_nc_gid=_-uO8G7DKEnC0LZn7_B1Sg&oh=00_Afoooz2o8AFtB6VRElvtfqm7m9I7_XOqOP2apwOyrEJqqA&oe=69785223"
+              src={jan}
               alt="Jangin Nawaz"
               className="rounded-2xl w-full max-w-md object-contain shadow-lg hover:scale-105 transition-all duration-300"
             />

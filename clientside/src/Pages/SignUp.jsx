@@ -1,5 +1,5 @@
 // import api from "../api/axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts.jsx"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,7 +15,9 @@ function SignUp() {
 
   const [loading, setLoading] = useState(false);
   let navigateTo = useNavigate()
-
+  useEffect(()=>{
+    setFormData({})
+  }, [])
   // const (a)=> setFormData({...formData, userName: a.target.value}) = (e) => {
   //   setFormData({ ...formData, [e.target.id]: e.target.value });
   // };

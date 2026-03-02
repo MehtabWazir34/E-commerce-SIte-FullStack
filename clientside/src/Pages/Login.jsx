@@ -1,5 +1,5 @@
 // import api from "../api/axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts.jsx"
 // import LoginAccount from "./LoginAccount";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,10 @@ function Login() {
   let navigateTo = useNavigate()
   const [loading, setLoading] = useState(false);
   const {setLoggedIn} = useAuth()
+  useEffect(()=>{
+    setEmail('')
+    setPass('')
+  },[])
   const submitForm = async (e) => {
     e.preventDefault();
     try {
@@ -20,6 +24,7 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       console.log(res);
       setLoggedIn(true)
+      
     } catch (error) {
       console.error("Registration failed:", error);
     } finally {
@@ -43,7 +48,7 @@ function Login() {
         </div>
 
         {/* Form */}
-        <form onSubmit={submitForm} className="space-y-4 flex flex-col justify-center w-full">
+        <form onSubmit={submitForm} autoComplete="off" className="space-y-4 flex flex-col justify-center w-full">
           
           <div className="grid grid-cols-1">
             <LaBel lblFor="email" 
