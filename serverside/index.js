@@ -24,9 +24,11 @@ myApp.use('/admin', adminRoutes);
 
 myApp.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
 
-myApp.listen(3400, ()=>{
-    console.log(
-        `Its running! localhost:3400`
-    );
+// myApp.listen(3400, ()=>{
+//     console.log(
+//         `Its running! localhost:3400`
+//     );
     
-})
+// })
+
+export default myApp
