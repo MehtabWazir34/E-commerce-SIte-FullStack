@@ -1,6 +1,6 @@
 // pages/MyAccount.jsx
 import { useEffect, useState } from "react";
-import api from "../Utility/api.js";
+// import api from "../Utility/api.js";
 import axios from "axios";
 import OrderStatusDropdown from "../Parts/dropMenu.jsx";
 import UserRoleDropdown from "../Utility/userRole.jsx";
