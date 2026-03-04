@@ -1,4 +1,4 @@
-import Draggable from "react-draggable";
+// import Draggable from "react-draggable";
 import { useRef, useState } from "react";
 import { IoMenu, IoSettings } from "react-icons/io5";
 import { NaVLink } from "../Inputs/InPuts";
@@ -6,7 +6,7 @@ import { BsCartCheckFill, BsCartXFill } from "react-icons/bs";
 import { useAuth } from "../Config/AuthProvider";
 import AccountOpt from "./AccountOpt";
 import MyCart from "./MyCart";
-
+import Draggable from 'react-draggable'
 function FloatingMenu() {
   const nodeRef = useRef(null);
     const [menuOpen, setMenuOpen] = useState(false);  
