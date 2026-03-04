@@ -1,11 +1,11 @@
 import express from 'express'
 import cors from 'cors'
-import { ConnectDb } from './DB/ConnectDB.js';
+import { ConnectDb } from '../DB/ConnectDB.js';
 import { configDotenv } from 'dotenv';
-import { userRoutes } from './Routes/userRoutes.js';
-import { productRoutes } from './Routes/productRoutes.js';
+import { userRoutes } from '../Routes/userRoutes.js';
+import { productRoutes } from '../Routes/productRoutes.js';
 import path from 'path'
-import { adminRoutes } from './Routes/AdminRoutes.js';
+import { adminRoutes } from '../Routes/AdminRoutes.js';
 // import { orderRoutes } from './Routes/orderRoutes.js';
 configDotenv()
 const myApp = express();
