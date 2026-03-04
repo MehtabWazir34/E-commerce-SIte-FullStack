@@ -24,6 +24,8 @@ import OrderDetails from './Pages/orderDetails.jsx'
 // import axios from 'axios'
 import FloatingMenu from './Parts/MobileMenuOpt.jsx'
 
+
+// 
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [accOpts, setAccOpts] = useState(false);
