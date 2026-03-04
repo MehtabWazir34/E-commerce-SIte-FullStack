@@ -47,16 +47,16 @@ function FloatingMenu() {
                     
                 </div>
             )}
-    {/* <Draggable nodeRef={nodeRef} onStop={(a, data)=>{ if(data.deltaX === 0 && data.deltaY === 0) {setMenuOpen(pre => !pre)}}} > */}
+    <Draggable nodeRef={nodeRef} onStop={(a, data)=>{ if(data.deltaX === 0 && data.deltaY === 0) {setMenuOpen(pre => !pre)}}} >
       <div
         // ref={nodeRef}
         // 
         onClick={()=>setMenuOpen(!menuOpen)}
-        className="fixed bottom-10 right-10 w-12 h-12 flex items-center justify-center border-4 border-[#2c3936] rounded-full bg-[#f2d39a] shadow-2xl cursor-grab z-9999"
+        className="fixed md:hidden bottom-10 right-10 w-12 h-12 flex items-center justify-center border-4 border-[#2c3936] rounded-full bg-[#f2d39a] shadow-2xl cursor-grab z-9999"
       >
         <IoMenu className="text-xl animate-bounce font-bold"/>
       </div>
-    {/* </Draggable> */}
+    </Draggable>
     </>
   );
 }
