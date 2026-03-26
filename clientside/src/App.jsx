@@ -13,7 +13,7 @@ import About from './Pages/About'
 import ShareNewItem from './Pages/ShareNewItem'
 import Order from './Pages/Order'
 import MyCart from './Parts/MyCart'
-import {useState } from 'react'
+import {useEffect, useState } from 'react'
 
 import { BsCartCheckFill, BsCartXFill } from 'react-icons/bs';
 import AccountOpt from './Parts/AccountOpt'
@@ -23,13 +23,21 @@ import AdminBoard from './Pages/AdminBoard'
 import OrderDetails from './Pages/orderDetails.jsx'
 // import axios from 'axios'
 import FloatingMenu from './Parts/MobileMenuOpt.jsx'
-
+import AOS from 'aos'
+import 'aos/dist/aos.css';
 
 // 
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [accOpts, setAccOpts] = useState(false);
 
+  useEffect(()=>{
+    AOS.init({
+      duration: 500,
+      easing: 'ease-in-out',
+      // once: true,
+    })
+  },[])
   return (
     <>
      <section className='w-full h-full overflow-hidden place-items-center'>

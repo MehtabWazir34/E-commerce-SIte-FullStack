@@ -43,7 +43,7 @@ function ContactForm() {
       <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
         {/* Left Content */}
-        <div className="space-y-6">
+        <div data-aos="fade-right" className="space-y-6">
           <h2 className="text-3xl font-semibold text-[#FFE2AF]">
             Get in Touch
           </h2>
@@ -67,7 +67,7 @@ function ContactForm() {
         </div>
 
         {/*MSg Form */}
-        <form onSubmit={sendMsg} ref={refForm} className="bg-[#3a464a] p-8 rounded-xl shadow-lg space-y-5">
+        <form data-aos="fade-left" onSubmit={sendMsg} ref={refForm} className="bg-[#3a464a] p-8 rounded-xl shadow-lg space-y-5">
 
           
           <div className="grid grid-cols-1">

@@ -36,7 +36,7 @@ function ProductRow() {
     <div id="top-products" className="mx-auto flex justify-center w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-w-max ">
         {productList.map((item) => (
-          <Link
+          <Link data-aos="fade-up"
             key={item._id}
             to={`/product/details/${item._id}`}
             className="w-72 h-80 bg-[#f2d39a] rounded-2xl  hover:scale-105 transition duration-300"

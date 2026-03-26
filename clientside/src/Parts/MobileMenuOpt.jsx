@@ -17,26 +17,26 @@ function FloatingMenu() {
   return (
       <>
             { menuOpen && (
-                <div className="fixed top-0 right-0 place-items-center py-6 w-full bg-[#2c3936] flex justify-around rounded-md p-4"> 
+                <div className={`transition-all duration-300 fixed top-0 right-0 place-items-center py-6 w-full bg-[#2c3936] flex justify-around rounded-md p-4 ${menuOpen ? 'opacity-100 " ': "opacity-0 hidden" } `}> 
                     <ul className="flex justify-around gap-x-3">
-                        <li>
+                        <li data-aos="fade-right" data-aos-duration="300">
                             <NaVLink onClick={()=> setMenuOpen(false)} linkedTo={'/'} Name={'Home'}/>
                             </li>
-                        <li>
+                        <li data-aos="fade-right" data-aos-duration="400">
                         <NaVLink onClick={()=> setMenuOpen(false)} linkedTo={'/products'} Name={'Products'} />
                             </li>
-                        <li>
+                        <li data-aos="fade-right" data-aos-duration="500">
                         <NaVLink onClick={()=> setMenuOpen(false)} linkedTo={'/about'} Name={'About'} />
                             </li>
                     </ul>
-                        <div className="flex justify-between gap-x-4">
-                        <button className="bg-[#f2d39a] py-1 px-2 text-xl rounded-sm text-center"
+                        <div  className="flex justify-between ml-2 gap-x-4">
+                        <button data-aos="fade-right" data-aos-duration="600" className="bg-[#f2d39a] py-1 px-2 text-xl rounded-sm text-center"
                          onClick={()=> setCartOpn(!cartOpn)} >{cartOpn ? <BsCartXFill/> : <BsCartCheckFill/> }
                         </button>
                         { cartOpn && (
                             <MyCart/>
                         )}
-                        <button className="bg-[#f2d39a] py-1 px-2 text-xl rounded-sm text-center"
+                        <button data-aos="fade-right" data-aos-duration="700" className="bg-[#f2d39a] py-1 px-2 text-xl rounded-sm text-center"
                          onClick={()=> setSettingOpn(!settingOpn)} >
                             {isLoggedIn ? <IoSettings/> : <NaVLink linkedTo={'/login'} Name={'Login'}/>}
                         </button>

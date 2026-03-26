@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import ContactForm from "../Parts/MsgForm";
 // import {InPut} from '../Inputs/InPuts'
-
+// import AOS from 'aos'
+import Aos from "aos";
+import 'aos/dist/aos.css'
+// AOS.init();
 function Products() {
   // const [category, setCat] = useState([]);
   // const [filteredProducts, setFilteredProducts] = useState([]);
@@ -11,8 +14,10 @@ function Products() {
   const [priceRange, setPriceRange] = useState({'low':'', 'high':''})
   const [productsList, setProducts] = useState([]);
 
+  
   useEffect(()=>{
    const getFilteredItems = async()=>{
+    
     try {
         const params = {}
         if(activeCategory.length) params.Category = activeCategory.join(',');
@@ -32,6 +37,11 @@ function Products() {
    getFilteredItems();
   }, [activeCategory, priceRange])
 
+  // useEffect(()=>{
+  //   Aos.init({
+  //     duration: 300
+  //   })
+  // },[])
 
   return (
     <>
@@ -65,7 +75,7 @@ function Products() {
       </aside>
 
       {/* Products Scroll Area */}
-      <section className="bg-[#2c3639] rounded-2xl p-4 min-h-screen md:overflow-y-auto mb-8">
+      <section className="bg-[#2c3639] rounded-2xl p-4 min-h-screen mb-8">
         {productsList.length === 0 ? (
           <p className="text-center text-gray-300 mt-10">
             No product found.
@@ -74,6 +84,8 @@ function Products() {
           <div className="flex flex-col md:grid  md:grid-cols-3 lg:grid-cols-5 gap-6">
             {productsList.map((item) => (
               <Link
+              data-aos="fade-up" data-aos-duration= {150*productsList.indexOf(item)}
+              data-aos-once="true"
                 key={item._id}
                 to={`/product/details/${item._id}`}
                 className="w-full bg-[#f2d39a] rounded-2xl hover:scale-105 transition duration-300"
@@ -111,7 +123,7 @@ function Products() {
         )}
       </section>
     </section>
-      <div className="max-w-7xl mx-auto mb-8 px-6">
+      <div  className="max-w-7xl mx-auto mb-8 px-6">
       <ContactForm/>
 
       </div>

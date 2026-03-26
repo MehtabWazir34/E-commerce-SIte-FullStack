@@ -43,35 +43,17 @@ function Header({cartOpen, cartIcon, accountOpts}){
         setSearch('');
         setSearchMode(false);
     }
-    // console.log("PP", FilteredItems);
-    
-    // let navigateTo = useNavigate()
-    // useEffect(()=>{
-    //     let initCheck = async()=>{
-            
-    //         const verified = await checkLogin();
-    //         // setVerified(verified);
-    //         if(!verified){
-    //             // localStorage.removeItem('token');
-    //             setTimeout(()=>{
-    //                 navigateTo('/login')
-    //             }, 300);
-    //         }
-    //     }
-    // initCheck()
-    // },[])
 
-    // if(Loading) return <h2 className='text-center mx-auto my-20 text-2xl'>Loading...</h2>
     return(
-        <header className="w-full flex justify-between p-6 bg-[#2c3639]">
-            <Link to={'/'} className='cursor-pointer text-[#FFE2AF] hover:text-[#F2D39A] font-semibold text-xl'>Jan'Sports</Link>
-            <nav className="md:flex md:justify-between gap-x-4 hidden place-items-center">
+        <header data-aos="fade-down" data-aos-duration="300" className="w-full flex justify-between p-6 bg-[#2c3639]">
+            <Link data-aos="fade-down" data-aos-duration="400" to={'/'} className='cursor-pointer text-[#FFE2AF] hover:text-[#F2D39A] font-semibold text-xl'>Jan'Sports</Link>
+            <nav data-aos="fade-down" data-aos-duration="500" className="md:flex md:justify-between gap-x-4 hidden place-items-center">
             <NaVLink linkedTo={'/'} Name={'Home'}/>
             <NaVLink linkedTo={'/products'} Name={'Products'}/>
             <NaVLink linkedTo={'/about'} Name={'About'}/>
             </nav>
 
-            <div className='flex justify-around gap-x-4'>
+            <div data-aos="fade-down" data-aos-duration="500" className='flex justify-around gap-x-4'>
                 <InPut type={'text'} id={'search'} placeholder={'Search item'} value={search} onChange={(a)=> setSearch(a.target.value)}/>
             
            {searchMode && (
@@ -144,10 +126,10 @@ function Header({cartOpen, cartIcon, accountOpts}){
   </section>
 )}
           <div className='hidden md:flex md:justify-between gap-x-4'>
-            <button onClick={cartOpen} className='rounded-sm text-xl bg-[#ffe2af] px-2 cursor-pointer'>{cartIcon}</button>
+            <button data-aos="fade-down" data-aos-duration="600" onClick={cartOpen} className='rounded-sm text-xl bg-[#ffe2af] px-2 cursor-pointer'>{cartIcon}</button>
             {
                 isLoggedIn ? (
-                <button onClick={()=>accountOpts()} className='text-xl bg-[#ffe2af] rounded-sm px-2 cursor-pointer'><IoSettings/> </button> 
+                <button data-aos="fade-down" data-aos-duration="600" onClick={()=>accountOpts()} className='text-xl bg-[#ffe2af] rounded-sm px-2 cursor-pointer'><IoSettings/> </button> 
                 ) : (
                 <NaVLink linkedTo={'/login'} Name={'Login'}/>
                 )

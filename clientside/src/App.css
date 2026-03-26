@@ -2,3 +2,21 @@
 html{
     scroll-behavior: smooth;
 }
+
+@keyframes itemAOS{
+    from{
+        opacity: 0;
+        /* scale: 0.5; */
+        transform: translateX(-175px);
+    }
+    to {
+        opacity: 1;
+        /* scale: 1; */
+        transform: translateX(0);
+    }
+}
+#animateItem{
+    animation: itemAOS 1s linear;
+    /* animation-timeline: view();
+    animation-range: entry 0; */
+}

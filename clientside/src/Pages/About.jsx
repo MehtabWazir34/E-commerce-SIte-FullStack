@@ -8,7 +8,7 @@ function About() {
       <div className="bg-[#2c3639] rounded-2xl shadow-lg p-6 space-y-12 mb-8">
 
         {/* INTRO SECTION */}
-        <div id="about">
+        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="300" id="about">
           <h1 className="text-3xl font-bold text-[#f2d39a] mb-4">About Jan’Sports</h1>
           <p className="text-lg text-[#ffe2af] leading-relaxed max-w-4xl">
             Jan’Sports is more than an online sports shop. It is a vision born in Bannu,
@@ -19,7 +19,7 @@ function About() {
         </div>
 
         {/* MISSION SECTION */}
-        <div id="mission" className="bg-[#364145] rounded-2xl p-6 shadow-md my-5">
+        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="350" id="mission" className="bg-[#364145] rounded-2xl p-6 shadow-md my-5">
           <h2 className="text-2xl font-semibold text-[#f2d39a] mb-4">Our Mission</h2>
           <p className="text-[#ffe2af] leading-relaxed">
             Bannu is known for its strong, hardworking, and resilient people. However,
@@ -36,8 +36,8 @@ function About() {
         </div>
 
         {/* FOUNDER SECTION */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center ">
-          <div className="space-y-4 text-center md:text-left">
+        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="300" className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center ">
+          <div data-aos="fade-right" data-aos-once="true" data-aos-duration="400" className="space-y-4 text-center md:text-left">
             <h2 className="text-xl font-semibold text-[#f2d39a]">Jangin Nawaz</h2>
             <h3 className="text-lg text-[#ffe2af]">Founder & Owner</h3>
             <p className="text-[#ffe2af] leading-relaxed">
@@ -51,7 +51,7 @@ function About() {
               a new generation of entrepreneurs who build not only businesses, but
               meaningful change.
             </p>
-            <div className="flex justify-center gap-4">
+            <div  className="flex justify-center gap-4">
               <a
                 href="https://www.facebook.com/jan.waxir.79"
                 target="_blank"
@@ -63,7 +63,7 @@ function About() {
             </div>
           </div>
 
-          <div className="w-full items-end flex justify-center ">
+          <div data-aos="fade-left" data-aos-once="true" data-aos-duration="400" className="w-full items-end flex justify-center ">
             <img
               src={jan}
               alt="Jangin Nawaz"
@@ -73,8 +73,8 @@ function About() {
         </div>
 
         {/* BRAND AMBASSADOR SECTION */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="flex justify-center">
+        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="300" className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div data-aos="fade-right" data-aos-once="true" data-aos-duration="400" className="flex justify-center">
             <img
               src={khush}
               alt="Khushdil Shah"
@@ -82,7 +82,7 @@ function About() {
             />
           </div>
 
-          <div className="space-y-4 text-center md:text-left">
+          <div data-aos="fade-left" data-aos-once="true" data-aos-duration="400" className="space-y-4 text-center md:text-left">
             <h2 className="text-xl font-semibold text-[#f2d39a]">Khushdil Shah</h2>
             <h3 className="text-lg text-[#ffe2af]">Brand Ambassador</h3>
             <p className="text-[#ffe2af] leading-relaxed">
@@ -106,7 +106,7 @@ function About() {
         </div>
 
         {/* CORE VALUES */}
-        <div className="bg-[#364145] rounded-2xl p-6 shadow-md">
+        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="300" className="bg-[#364145] rounded-2xl p-6 shadow-md">
           <h2 className="text-2xl font-semibold text-[#f2d39a] mb-4">Our Core Values</h2>
           <ul className="list-disc list-inside text-[#ffe2af] space-y-2">
             <li>Community empowerment through sports</li>
@@ -118,7 +118,7 @@ function About() {
         </div>
 
         {/* CLOSING */}
-        <div className="text-center">
+        <div data-aos="fade-up" data-aos-once="true" data-aos-duration="300" className="text-center">
           <p className="text-[#ffe2af] text-lg">
             Jan’Sports is not just about selling products — it is about building hope,
             strength, and opportunity through sports.

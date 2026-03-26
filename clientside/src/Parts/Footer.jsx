@@ -3,11 +3,11 @@ import { MdEmail, MdFacebook, MdWhatsapp } from "react-icons/md";
 
 function Footer() {
   return (
-    <footer className="w-full bg-[#2c3639] text-[#f2d39a] mt-12">
+    <footer data-aos="fade-up" data-aos-once="true" className="w-full bg-[#2c3639] text-[#f2d39a] mt-12">
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
 
         {/* Brand */}
-        <div className="space-y-4">
+        <div data-aos="fade-right" data-aos-duration="200" className="space-y-4">
           <Link
             to="/"
             className="text-2xl font-semibold text-[#FFE2AF] hover:text-white transition"
@@ -21,7 +21,7 @@ function Footer() {
         </div>
 
         {/* Explore */}
-        <div>
+        <div data-aos="fade-right" data-aos-duration="300">
           <h3 className="mb-3 font-semibold text-sm">Explore</h3>
           <ul className="space-y-2 text-sm">
             <li>
@@ -43,7 +43,7 @@ function Footer() {
         </div>
 
         {/* Company */}
-        <div>
+        <div data-aos="fade-right" data-aos-duration="400">
           <h3 className="mb-3 font-semibold text-sm">Company</h3>
           <ul className="space-y-2 text-sm">
             <li>
@@ -65,7 +65,7 @@ function Footer() {
         </div>
 
         {/* Contact */}
-        <div>
+        <div data-aos="fade-right" data-aos-duration="500">
           <h3 className="mb-3 font-semibold text-sm">Contact & Support</h3>
           <ul className="space-y-3 text-sm">
             <a href={'https://web.facebook.com/profile.php?id=61581245577311'} className="flex items-center gap-3 hover:text-white transition">

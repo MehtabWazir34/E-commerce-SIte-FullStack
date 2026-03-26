@@ -51,6 +51,7 @@ function AccountOpt({setAccOpts}){
         <section className="w-1/2 md:w-1/3 lg:w-1/6 flex flex-col space-y-2 rounded-2xl bg-[#364145] p-2 fixed top-16 right-2 shadow-lg text-[#ffe2af]">
 
     <NavLink
+        data-aos="fade-down" data-aos-duration="300"
         to="/myaccount"
         onClick={()=>setAccOpts(false)}
         className="flex items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
@@ -60,6 +61,7 @@ function AccountOpt({setAccOpts}){
         My Account
     </NavLink>
     <NavLink
+        data-aos="fade-down" data-aos-duration="300"
         to="/adminboard"
         onClick={()=>setAccOpts(false)}
         className={`${user?.role !== 'admin' ? 'hidden' : 'flex'}  items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
@@ -69,6 +71,7 @@ function AccountOpt({setAccOpts}){
         Admin Board
     </NavLink>
     <NavLink
+        data-aos="fade-down" data-aos-duration="500"
         to="/addnewitem"
         onClick={()=>setAccOpts(false)}
         className="flex items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
@@ -78,6 +81,7 @@ function AccountOpt({setAccOpts}){
         Add New Item
     </NavLink>
     <NavLink
+        data-aos="fade-down" data-aos-duration="600"
         to="/myorders"
         onClick={()=>setAccOpts(false)}
         className="flex items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
@@ -88,6 +92,7 @@ function AccountOpt({setAccOpts}){
     </NavLink>
 
     <button
+        data-aos="fade-down" data-aos-duration="700"
         onClick={Logout}
         className="flex items-center cursor-pointer gap-2 text-xl font-semibold p-2 rounded-2xl 
                    hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300 

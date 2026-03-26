@@ -13,7 +13,7 @@ function Home() {
       <section className="max-w-7xl mx-auto bg-[#2c3639] rounded-2xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
         {/* Left Content */}
-        <div className="flex flex-col gap-6 ml-8 order-5 md:order-1 pb-10">
+        <div data-aos="fade-up" className="flex flex-col gap-6 ml-8 order-5 md:order-1 pb-10">
           <h1 className="text-4xl md:text-5xl font-bold text-[#FFE2AF] leading-tight">
             Elevate Your Game with Jan’Sports
           </h1>
@@ -34,7 +34,7 @@ function Home() {
           </div>
         </div>
 {/* Right side */}
-        <div className="flex justify-center items-end w-full order-1 md:order-5 shadow-2xl">
+        <div data-aos="fade-up" className="flex justify-center items-end w-full order-1 md:order-5 shadow-2xl">
           <img
             src={pic1}
             alt="brand ambassador"
@@ -55,7 +55,7 @@ function Home() {
   <div id='categories' className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
     {/* Cricket */}
-    <div className="rounded-xl flex flex-col-reverse bg-blue-500/90 p-6 md:grid md:grid-cols-2 md:text-left text-center items-center gap-6">
+    <div data-aos="fade-right" className="rounded-xl flex flex-col-reverse bg-blue-500/90 p-6 md:grid md:grid-cols-2 md:text-left text-center items-center gap-6">
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-semibold text-white">
           Cricket Gear
@@ -79,7 +79,7 @@ function Home() {
     </div>
 
     {/* Football */}
-    <div className="rounded-xl bg-red-500/90 p-6 grid grid-cols-1 md:grid-cols-2 items-center gap-6">
+    <div data-aos="fade-left" className="rounded-xl bg-red-500/90 p-6 grid grid-cols-1 md:grid-cols-2 items-center gap-6">
       <div className="h-40 w-full flex items-center justify-center">
         <img
           src={football}
@@ -103,7 +103,7 @@ function Home() {
     </div>
 
     {/* Sports Wear */}
-    <div className="rounded-xl bg-yellow-500/90 p-6 grid grid-cols-1 md:grid-cols-2  items-center gap-6">
+    <div data-aos="fade-right" className="rounded-xl bg-yellow-500/90 p-6 grid grid-cols-1 md:grid-cols-2  items-center gap-6">
       <div className="flex flex-col gap-4 md:order-1 order-3 justify-center text-center md:text-left ">
         <h3 className="text-2xl font-semibold text-black">
           Sportswear
@@ -127,7 +127,7 @@ function Home() {
     </div>
 
     {/* Volleyball */}
-    <div className="rounded-xl bg-green-500/90 p-6 grid grid-cols-1 md:grid-cols-2 items-center gap-6">
+    <div data-aos="fade-left" className="rounded-xl bg-green-500/90 p-6 grid grid-cols-1 md:grid-cols-2 items-center gap-6">
       <div className="h-40 w-full flex items-center justify-center">
         <img
           src={vollyball}
@@ -153,7 +153,7 @@ function Home() {
   </div>
 </section>
 
-    <section id='why-choose-us' className='w-full flex flex-col justify-center gap-4 bg-[#2c3639] rounded-2xl p-12 mx-auto'>
+    <section data-aos="fade-up" id='why-choose-us' className='w-full flex flex-col justify-center gap-4 bg-[#2c3639] rounded-2xl p-12 mx-auto'>
         <h2 className='text-center sm:text-lg md:text-2xl text-[#FFE2AF] pb-1 leading-tight font-bold border-b-2 border-[#FFE2AF] md:max-w-1/2 mx-auto '>Why choose Jan'Sports?</h2>
         <div className='sm:grid sm:grid-cols-1 md:flex md:justify-center sm:gap-y-12 md:gap-x-10'>
             <div className='grid grid-cols-1 hover:scale-105 transition-all duration-300 md:flex md:justify-between gap-x-2 shadow-md shadow-white/50 rounded-md p-2 text-[#F2D39A]'>
