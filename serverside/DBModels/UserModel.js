@@ -23,19 +23,12 @@ let theUserSchema = new mongoose.Schema({
     role:{
         type: String, enum: ["user", "admin"], default: "user"
     },
-    // refreshToken:{
-    //     type:String, default: null
-    // },
-
-    // cartList:{
-    //     type:[
-    //         {
-    //         product:{type:[mongoose.Schema.Types.ObjectId], ref : 'Product'},
-    //         itemQty: { type: Number, default:1}
-    //         },
-    //         ],
-    //     default:[]
-    //         },
+    password:{
+        type:String, default: null
+    },
+    googleId:{
+        type: String
+    },
     fvrtItems:{
         type: [mongoose.Schema.Types.ObjectId], ref:"Product"
     },

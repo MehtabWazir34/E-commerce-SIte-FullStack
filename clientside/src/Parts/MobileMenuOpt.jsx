@@ -47,7 +47,7 @@ function FloatingMenu() {
                     
                 </div>
             )}
-    <Draggable nodeRef={nodeRef} onStop={(a, data)=>{ if(data.deltaX === 0 && data.deltaY === 0) {setMenuOpen(pre => !pre)}}} >
+    {/* <Draggable nodeRef={nodeRef} onStop={(a, data)=>{ if(data.deltaX === 0 && data.deltaY === 0) {setMenuOpen(pre => !pre)}}} > */}
       <div
         // ref={nodeRef}
         // 
@@ -56,7 +56,7 @@ function FloatingMenu() {
       >
         <IoMenu className="text-xl animate-bounce font-bold"/>
       </div>
-    </Draggable>
+    {/* </Draggable> */}
     </>
   );
 }

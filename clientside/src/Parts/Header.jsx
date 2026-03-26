@@ -27,11 +27,11 @@ function Header({cartOpen, cartIcon, accountOpts}){
       getRes()  
     },[])
     useEffect(() => {
-    const filtered = products.filter((item) =>
+    const searchRes = products.filter((item) =>
         item.Title.toLowerCase().includes(search.toLowerCase())
     );
 
-    setFilteredItems(filtered);
+    setFilteredItems(searchRes);
     if(search.trim() !==''){
     setSearchMode(true)
     } else {

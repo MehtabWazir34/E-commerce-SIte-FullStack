@@ -1,3 +1,2 @@
-import myApp from ".."
-
+import myApp from '../index.js';
 export default myApp

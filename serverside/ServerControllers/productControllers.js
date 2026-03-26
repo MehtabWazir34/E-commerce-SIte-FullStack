@@ -130,8 +130,8 @@ export const getProductsAndApplyFilter = async(req, res)=>{
         const itemFilter = {};
 
         if(Category && Category.length > 0){
-            itemFilter.Category = {$in: Array.isArray(Category) ? Category: [Category]}
-        itemFilter.Category = { $in: Category.map(cat => new RegExp(`^${cat}$`, `i`))}
+            itemFilter.Category = {$in: Array.isArray(Category) ? Category : [Category]}
+            itemFilter.Category = { $in: Category.map(cat => new RegExp(`^${cat}$`, `i`))}
         }
         if(sizes.length > 0){
             itemFilter.Size = { $in : sizes}

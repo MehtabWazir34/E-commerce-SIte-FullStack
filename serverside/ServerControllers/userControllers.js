@@ -4,6 +4,9 @@ import jwt from 'jsonwebtoken'
 // import { the } from "../DBModels/UserModel.js";
 import theUser from '../DBModels/UserModel.js';
 import theCart from "../DBModels/Add2Cart.js";
+import { OAuth2Client } from 'google-auth-library'
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
 export const SignUp = async(req, res)=>{
     try {
     const {fullName, userName, role, email, phoneNo, password} = req.body;
@@ -63,6 +66,47 @@ export const Login = async(req, res)=>{
 
     })
 
+}
+export const googleAuth = async(req, res)=>{
+    try {
+        const {credential} = req.body;
+        if(!credential){
+            return res.json({Msg:"No credential provided!"})
+            // console.log("No credential!");
+        }
+        const tkt = await client.verifyIdToken({
+            idToken: credential,
+            audience: process.env.GOOGLE_CLIENT_ID
+        });
+        const payLoad = tkt.getPayload();
+
+        const { name, email, pic, sub} = payLoad;
+        // Check if user already exsts
+        let user = await theUser.findOne({email});
+        if(!user){
+            user = await theUser.create({
+                fullName: name,
+                email,
+                userName: email.split('@')[0] + Math.floor(Math.random()*100),
+                profileImg: pic,
+                phoneNo: "03123456789",
+                googleId: sub,
+                password: null
+            });
+        };
+
+        const token = jwt.sign({id: user._id}, process.env.MY_APP_JWT_SECRET_KEY, {expiresIn: '7d'});
+        user.password = undefined;
+
+        res.status(200).json({
+            success: true,
+            Msg: 'Logged in with Google',
+            token: token
+        })
+    } catch (error) {
+        console.log("Failed to login with Google.", error);
+        res.status(500).json({Msg: "Google Auth failed!"})
+    }
 }
 export const Logout = async(req, res)=>{
     try {

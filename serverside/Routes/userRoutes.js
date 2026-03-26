@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { add2Cart, deleteCartItem, getCartItems, getMe, Login, Logout,  SignUp, updateUserRole } from "../ServerControllers/userControllers.js";
+import { add2Cart, deleteCartItem, getCartItems, getMe, googleAuth, Login, Logout,  SignUp, updateUserRole } from "../ServerControllers/userControllers.js";
 import authCheck from "../MiddleCheck/protectedAcces.js";
 import { createOrder, deleteOrder, getAllOrders, myOrders, updateOrderStatus } from "../ServerControllers/OrderCtrls.js";
 
@@ -7,6 +7,7 @@ export const userRoutes = Router();
 
 userRoutes.post('/register', SignUp);
 userRoutes.post('/login', Login);
+userRoutes.post('/google-auth', googleAuth)
 userRoutes.get('/me', authCheck, getMe )
 userRoutes.post('/logout', authCheck ,Logout);
 userRoutes.post('/addtocart', authCheck,  add2Cart);

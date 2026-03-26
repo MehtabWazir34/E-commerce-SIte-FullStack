@@ -5,6 +5,7 @@ import { InPut, LaBel } from "../Inputs/InPuts.jsx"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../Config/AuthProvider.jsx";
+import { GoogleLogin } from "@react-oauth/google";
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -33,6 +34,19 @@ function Login() {
     }
   };
 
+  const handleGoogleLogin = async (credentialRes) =>{
+    try {
+        const res = await axios.post('http://localhost:3400/user/google-auth',{
+          credential : credentialRes.credential
+        });
+
+        localStorage.setItem('token', res.data.token )
+        navigateTo('/');
+    } catch (error) {
+      console.log("Google Auth fialed!", error);
+      
+    }
+  }
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md bg-[#2C3639] px-16 py-6 rounded-xl shadow-lg">
@@ -48,7 +62,7 @@ function Login() {
         </div>
 
         {/* Form */}
-        <form onSubmit={submitForm} autoComplete="off" className="space-y-4 flex flex-col justify-center w-full">
+        <form onSubmit={submitForm} autoComplete="off" className="space-y-4 flex flex-col justify-center w-full ">
           
           <div className="grid grid-cols-1">
             <LaBel lblFor="email" 
@@ -81,10 +95,27 @@ function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="mx-auto w-1/2 cursor-pointer mt-4 p-2 bg-[#FFE2AF] text-[#2c3639] font-semibold rounded-full hover:bg-[#F2D39A] transition-colors disabled:opacity-60"
+            className="mx-auto w-1/2 cursor-pointer p-2 bg-[#FFE2AF] text-[#2c3639] font-semibold rounded-md hover:bg-[#F2D39A] transition-colors disabled:opacity-60"
           >
             {loading ? "Logging In..." : "Login"}
           </button>
+          {/* Divdider */}
+          <div className="flex items-center my-2">
+          <div className="flex-1 h-1 bg-[#F2D39A]"></div>
+          <p className="px-3 text-[#FFE2AF] text-sm">OR</p>
+          <div className="flex-1 h-1 bg-[#F2D39A]"></div>
+        </div>
+
+        {/* Google Sign Up */}
+
+        <div className="flex justify-center">
+
+          <GoogleLogin
+            onSuccess={handleGoogleLogin}
+            onError={() => console.log("Google Login Failed")}
+          />
+
+        </div>
         </form>
         <p className="text-center text-amber-500 my-4">Don't have an account? <a href="/register" className="underline text-[#FFE2AF]">Create Now</a></p>
       </div>
