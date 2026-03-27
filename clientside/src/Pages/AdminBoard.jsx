@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useUser } from "../Utility/THEUser";
 
 function AdminBoard() {
   const [orders, setOrders] = useState([]);
@@ -8,6 +9,7 @@ function AdminBoard() {
 
   let navigateTo = useNavigate()
 
+  const {theUser} = useUser()
   useEffect(() => {
     const getAllOrders = async () => {
       try {
@@ -48,7 +50,7 @@ function AdminBoard() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-[#ffe2af] gap-3">
         <h2 className="text-2xl font-bold">Admin Dashboard</h2>
         <h2 className="text-sm md:text-lg">
-          Welcome <span className="font-bold">Wazir</span>
+          Welcome <span className="font-bold">{theUser?.fullName}</span>
         </h2>
       </div>
 
@@ -151,7 +153,7 @@ function StatCard({ title, value, color }) {
   let dMns = new Date().getMinutes();
   let AmPm = dHrs >= 12 ? "PM" : "AM";
   return (
-    <div className={`${color} rounded-xl p-4`}>
+    <div data-aos="fade-right" data-aos-duration="400" className={`${color} rounded-xl p-4`}>
       <h2 className="font-semibold">{title}</h2>
       <p className="text-2xl font-bold mt-2">{value}</p>
       <span className="text-xs">
