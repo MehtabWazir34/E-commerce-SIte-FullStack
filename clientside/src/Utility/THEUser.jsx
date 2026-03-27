@@ -1,0 +1,40 @@
+import { createContext, useState, useEffect, useContext } from 'react';
+import axios from 'axios'
+const userContext = createContext()
+
+export function THEUser({children}){
+
+    let [theUser, setUser] = useState(null);
+    let [loading, setLoading] = useState(true);
+
+    const getUser = async()=>{
+        try {
+            let token = localStorage.getItem('token');
+            if(!token){
+                setUser(null);
+                setLoading(false)
+                return
+            };
+            let theRes = await axios.get(`${import.meta.env.VITE_API_URL}/user/me`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setUser(theRes.data.user);
+
+        } catch (error) {
+            console.log("Failed to getUser!", error);
+       } finally{
+        setLoading(false)
+       }
+    }
+    useEffect(()=>{
+        getUser()
+    }, []);
+    return(
+        <userContext.Provider value={{theUser, setUser, loading, getUser}}>
+            {children}
+        </userContext.Provider>
+    )
+}
+export const useUser = () => useContext(userContext);

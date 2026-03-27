@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import OrderStatusDropdown from "../Parts/dropMenu.jsx";
 import UserRoleDropdown from "../Utility/userRole.jsx";
+import { useUser } from "../Utility/THEUser.jsx";
 
 export default function Profile() {
-  const [user, setUser] = useState(null);
+  const {theUser} = useUser();
+  // const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
 
   useEffect( () => {
@@ -14,14 +16,14 @@ export default function Profile() {
     // api.get("/user/orders").then(res => setOrders(res.data));
     const getData = async () => {
     try {
-        const user = await axios.get("http://localhost:3400/user/me",{headers:{
-            Authorization:`Bearer ${localStorage.getItem("token")}`
-        }});
+        // const user = await axios.get("http://localhost:3400/user/me",{headers:{
+        //     Authorization:`Bearer ${localStorage.getItem("token")}`
+        // }});
         const orders = await axios.get("http://localhost:3400/user/orders",{headers:{
             Authorization:`Bearer ${localStorage.getItem("token")}`
         }});
         setOrders(orders.data.orders);
-        setUser(user.data.user);
+        // setUser(user.data.user);
     } catch (error) {
         console.log("Erro", error);
         
@@ -30,7 +32,7 @@ export default function Profile() {
     getData()
   }, []);
 
-  console.log("Usr", user);
+  console.log("theUsr", theUser);
   console.log("orders", orders);
   
   return (
@@ -40,14 +42,14 @@ export default function Profile() {
         {/* Profile Card */}
         <div className="bg-[#1f2a27] rounded-2xl p-6">
           <h2 className="text-2xl font-semibold mb-4">My Profile</h2>
-          {user && (
+          {theUser && (
             <div className="space-y-2">
-              <p><b>Name:</b> {user.fullName}</p>
-              <p><b>Email:</b> {user.email}</p>
+              <p><b>Name:</b> {theUser.fullName}</p>
+              <p><b>Email:</b> {theUser.email}</p>
               <div className="flex gap-x-4 items-center"><b>Role:</b> 
               <UserRoleDropdown
-                    userId={user._id}
-                    currentRole={user.role}
+                    userId={theUser._id}
+                    currentRole={theUser.role}
                     />
                     </div>
 
@@ -55,7 +57,7 @@ export default function Profile() {
           )}
         </div>
         
-        <div className="bg-[#1f2a27] rounded-2xl p-6">
+        <div className={`${theUser?.role !== 'admin' ? '' : 'hidden'} bg-[#1f2a27] rounded-2xl p-6`}>
           <h2 className="text-xl font-semibold mb-4">My Orders</h2>
 
           {orders.length === 0 && <p>No orders yet.</p>}
@@ -70,7 +72,7 @@ export default function Profile() {
                 <OrderStatusDropdown
                   orderId={order._id}
                   currentStatus={order.orderStatus}
-                  role={user?.role}
+                  role={theUser?.role}
                   />
                   </div>
               </div>

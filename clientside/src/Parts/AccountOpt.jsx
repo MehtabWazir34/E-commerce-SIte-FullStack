@@ -5,31 +5,33 @@ import { ImHistory } from "react-icons/im"
 import { RiAdminLine } from 'react-icons/ri'
 import { NavLink, useNavigate } from "react-router"
 import { useAuth } from "../Config/AuthProvider";
+import { useUser } from "../Utility/THEUser";
 
 function AccountOpt({setAccOpts}){
-    const [user, setUser] = useState(null)
+    const {theUser} = useUser()
+    const [user,] = useState(null)
     let navigateTo = useNavigate();
-    useEffect(()=>{
-        const takeUser = async()=>{
-            try {
-                let it = await axios.get('http://localhost:3400/user/me',{
-                    headers:{
-                        Authorization :`Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-                setUser(it.data.user)
-            } catch (error) {
-                console.log("errL;", error);
+    // useEffect(()=>{
+    //     const takeUser = async()=>{
+    //         try {
+    //             let res = await axios.get('http://localhost:3400/user/me',{
+    //                 headers:{
+    //                     Authorization :`Bearer ${localStorage.getItem('token')}`
+    //                 }
+    //             });
+    //             setUser(res.data.user)
+    //         } catch (error) {
+    //             console.log("err;", error);
                 
-            }
-        }
-        takeUser();
-    }, [user]);
-    // console.log("User in AccOpt", user);
+    //         }
+    //     }
+    //     takeUser();
+    // }, [user]);
+    console.log("User in AccOpt", user);
     const {setLoggedIn} = useAuth()
     const Logout = async()=>{
         try {
-            await axios.post('http://localhost:3400/user/logout',{},
+            await axios.post(`${import.meta.env.VITE_API_URL}/user/logout`,{},
                 {
                     headers:{
                         Authorization:`Bearer ${localStorage.getItem('token')}`
@@ -47,6 +49,7 @@ function AccountOpt({setAccOpts}){
             
         }
     }
+    
     return(
         <section className="w-1/2 md:w-1/3 lg:w-1/6 flex flex-col space-y-2 rounded-2xl bg-[#364145] p-2 fixed top-16 right-2 shadow-lg text-[#ffe2af]">
 
@@ -61,38 +64,38 @@ function AccountOpt({setAccOpts}){
         My Account
     </NavLink>
     <NavLink
-        data-aos="fade-down" data-aos-duration="300"
+        // data-aos="fade-down" data-aos-duration='400'
         to="/adminboard"
         onClick={()=>setAccOpts(false)}
-        className={`${user?.role !== 'admin' ? 'hidden' : 'flex'}  items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
+        className={`${theUser?.role !== 'admin' ? 'hidden' : 'flex'}  items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
                    hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300`}
     >
         <RiAdminLine />
         Admin Board
     </NavLink>
     <NavLink
-        data-aos="fade-down" data-aos-duration="500"
+        data-aos="fade-down" data-aos-duration="400"
         to="/addnewitem"
         onClick={()=>setAccOpts(false)}
-        className="flex items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
-                   hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300"
+        className={`${theUser?.role !== 'admin' ? 'hidden' : 'flex'}  items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
+                   hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300`}
     >
         <MdAddBusiness />
         Add New Item
     </NavLink>
     <NavLink
-        data-aos="fade-down" data-aos-duration="600"
+        data-aos="fade-down" data-aos-duration="500"
         to="/myorders"
         onClick={()=>setAccOpts(false)}
-        className="flex items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
-                   hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300"
+        className={`${theUser?.role !== 'admin' ? 'hidden' : 'flex'}  items-center gap-2 text-xl font-semibold p-2 rounded-2xl 
+                   hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300`}
     >
         <ImHistory />
         My Orders
     </NavLink>
 
     <button
-        data-aos="fade-down" data-aos-duration="700"
+        data-aos="fade-down" data-aos-duration="600"
         onClick={Logout}
         className="flex items-center cursor-pointer gap-2 text-xl font-semibold p-2 rounded-2xl 
                    hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300 
