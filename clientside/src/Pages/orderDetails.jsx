@@ -16,12 +16,12 @@ function OrderDetails() {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const res = await axios.get(`http://localhost:3400/admin/order/info/${id}`,{
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin/order/info/${id}`,{
             headers:{
                 Authorization:`Bearer ${localStorage.getItem('token')}`
             }
         });
-        const userRes = await axios.get("http://localhost:3400/user/me",{
+        const userRes = await axios.get("`${import.meta.env.VITE_API_URL}/user/me",{
           headers:{
               Authorization:`Bearer ${localStorage.getItem('token')}`}})
         setUser(userRes.data.user);
@@ -47,7 +47,7 @@ function OrderDetails() {
 
   const deleteOrder = async()=>{
     try {
-          const theOrd = await axios.delete(`http://localhost:3400/user/deleteorder/${id}`, {
+          const theOrd = await axios.delete(`${import.meta.env.VITE_API_URL}/user/deleteorder/${id}`, {
             headers:{
               Authorization: `Bearer ${localStorage.getItem('token')}`
             }
@@ -76,7 +76,7 @@ function OrderDetails() {
 
   //   try {
   //     const res = await axios.put(
-  //       `http://localhost:3400/admin/order/info/${id}`,
+  //       ``${import.meta.env.VITE_API_URL}/admin/order/info/${id}`,
   //       { orderStatus: newStatus },
   //       {
   //         headers: {
@@ -196,7 +196,7 @@ function OrderDetails() {
                   src={
                     order.Imgs[0].startsWith("http")
                       ? order.Imgs[0]
-                      : `http://localhost:3400${order.Imgs[0]}`
+                      : `${import.meta.env.VITE_API_URL}${order.Imgs[0]}`
                   }
                   alt="product"
                   className="w-32 h-32 object-cover rounded-lg"

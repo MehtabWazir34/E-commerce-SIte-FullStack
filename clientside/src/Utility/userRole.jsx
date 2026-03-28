@@ -11,7 +11,7 @@ export default function UserRoleDropdown({ userId, currentRole }) {
     try {
       setLoading(true);
       await axios.patch(
-        `http://localhost:3400/user/${userId}/role`,
+        `${import.meta.env.VITE_API_URL}/user/${userId}/role`,
         { role },
         {
           headers: {

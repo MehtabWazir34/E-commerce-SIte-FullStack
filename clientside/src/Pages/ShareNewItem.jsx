@@ -59,7 +59,7 @@ console.log(formData);
 
     console.log("Ready for backend upload");
     // axios.post("/api/products", payload)
-    await axios.post('http://localhost:3400/products/addnew', payload,{
+    await axios.post('`${import.meta.env.VITE_API_URL}/products/addnew', payload,{
       headers:{
         Authorization: `Bearer ${localStorage.getItem('token')}`,
           "Content-Type": "multipart/form-data"

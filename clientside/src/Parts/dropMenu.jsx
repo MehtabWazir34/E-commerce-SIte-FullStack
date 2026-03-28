@@ -20,7 +20,7 @@ const STATUS_STYLES = {
   const updateStatus = async () => {
     try {
       setLoading(true);
-      await axios.patch(`http://localhost:3400/user/${orderId}/status`, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/user/${orderId}/status`, {
         orderStatus: status
       }, {headers:{
         Authorization:`Bearer ${localStorage.getItem("token")}`

@@ -27,7 +27,7 @@ function Details() {
   useEffect(() => {
     const getItem = async () => {
       try {
-        const res = await axios.get(`http://localhost:3400/products/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/products/${id}`);
         const product = res.data.product;
 
         setItem(product);
@@ -46,7 +46,7 @@ function Details() {
   }
   const addToCart = async()=>{
     try {
-          let theItemToadd = await axios.post('http://localhost:3400/user/addtocart',
+          let theItemToadd = await axios.post(`${import.meta.env.VITE_API_URL}/user/addtocart`,
             addItem,
           {
             headers:{
@@ -65,7 +65,7 @@ function Details() {
   useEffect(()=>{
     const getUser = async()=>{
       try {
-          const theUser = await axios.get('http://localhost:3400/user/me', {
+          const theUser = await axios.get(`${import.meta.env.VITE_API_URL}/user/me`, {
             headers:{
               Authorization:`Bearer ${localStorage.getItem('token')}`
             }
@@ -80,10 +80,9 @@ function Details() {
   }, [theUser])
   // console.log(item);
 
-  
   const deleteProduct = async()=>{
     try {
-        const delPro = await axios.delete(`http://localhost:3400/admin/delpro/${id}`, {
+        const delPro = await axios.delete(`${import.meta.env.VITE_API_URL}/admin/delpro/${id}`, {
           headers:{
             Authorization:`Bearer ${localStorage.getItem('token')}`
           }
@@ -98,25 +97,8 @@ function Details() {
 
   const updateProduct = async (a)=>{
     a.preventDefault();
-    // setEditMode(true)
-    // const formData = new FormData()
-    // try {
-      // seteditData({
-        // formData.append("Title", editData.Title);
-        // formData.append("Detail", editData.Detail);
-        // formData.append("Category", editData.Category);
-        // formData.append("Price", editData.Price);
-        // formData.append("offPrice", editData.offPrice);
-        // formData.append("deliveryFee", editData.deliveryFee);
 
-        // editData.Imgs?.forEach((img)=>{
-        //   formData.append("Img", img);
-        // });
-        // editData.newImgs?.forEach((newImg)=>{
-        //   formData.append('newImg', newImg);
-        // })
-
-        await axios.put(`http://localhost:3400/admin/editpro/${id}`, editData,{
+        await axios.put(`${import.meta.env.VITE_API_URL}/admin/editpro/${id}`, editData,{
           headers:{
             Authorization:`Bearer ${localStorage.getItem('token')}`
             // ,
@@ -126,50 +108,7 @@ function Details() {
         window.location.reload()
         setEditMode(false)
         
-    // } catch (error) {
-    //   console.log("Err;", error);
-      
-    // }
   }
-// console.log("ITem:", item);
-
-
-  // const handleImageChange = (e) => {
-  //   const files = Array.from(e.target.files);
-
-  //   if (files.length + previewImages.length > 6) {
-  //     alert("You can upload only up to 6 images.");
-  //     return;
-  //   }
-
-  //   seteditData((prev) => ({
-  //     ...prev,
-  //     newImgs: [...prev.newImgs, ...files],
-  //   }));
-
-  //   const previews = files.map((file) => URL.createObjectURL(file));
-  //   setPreviewImages((prev) => [...prev, ...previews]);
-  // };
-
-  // const removeImage = (idx) =>{
-  //   const updatedImgsPreView = previewImages.filter((_, i)=> i !== idx);
-  //   setPreviewImages(updatedImgsPreView);
-
-  //   seteditData((pre)=>{
-  //     const oldImgs = pre.Imgs || [];
-  //     const newImgs = pre.newImgs || [];
-  //     if(oldImgs.length > idx){
-  //       return {
-  //         ...pre, Imgs: oldImgs.filter((_, i)=> i !== idx)
-  //       }
-  //     } else {
-  //       let newIdx = idx - oldImgs.length;
-  //       return {
-  //         ...pre, newImgs : newImgs.filter((_, i) => i !== newIdx)
-  //       }
-  //     }
-  //   })
-  // }
 
   const handleEdit = ()=>{
     setEditMode(true)
@@ -186,17 +125,7 @@ function Details() {
       })
       // setPreviewImages(item.Imgs || [])
     }
-    // try {
-    //     await axios.put(`http://localhost:3400/admin/editpro/${id}`, editData,{
-    //       headers:{
-    //         Authorization:`Bearer ${localStorage.getItem('token')}`,
-    //         "Content-Type": "multipart/form-data"
-    //       }
-    //     })
-    // } catch (error) {
-    //   console.log("Err:", error);
-      
-    // }
+   
   if (!item) return null;
 
   const Price = item?.Price || 0;
@@ -214,7 +143,7 @@ function Details() {
           {/* Main Image */}
           <div className="w-full rounded-xl overflow-hidden">
             <img
-              src={mainImg.startsWith('http') ? mainImg : `http://localhost:3400${mainImg}`}
+              src={mainImg.startsWith('http') ? mainImg : `${import.meta.env.VITE_API_URL}${mainImg}`}
               alt={item.Title}
               className="w-full h-80 object-cover rounded-xl transition-all duration-300 hover:scale-[1.02]"
             />
@@ -224,7 +153,7 @@ function Details() {
             {item.Imgs?.map((img, index) => (
               <img
                 key={index}
-                src={img.startsWith('http') ? img : `http://localhost:3400${img}`}
+                src={img.startsWith('http') ? img : `${import.meta.env.VITE_API_URL}${img}`}
                 alt="thumbnail"
                 onClick={() => setMainImg(img)}
                 className={`w-16 h-16 object-cover rounded-lg cursor-pointer border transition-all duration-300
@@ -376,40 +305,6 @@ function Details() {
                 required
               />
             </div>
-            
-          {/* <div className="lg:col-span-2">
-            <LaBel lblFor="images" lblName="Upload Images (Max 6)" />
-            <input
-              type="file"
-              id="images"
-              accept="image/*"
-              multiple
-              onChange={handleImageChange}
-              className="block w-full text-sm text-gray-300 file:mr-4 file:rounded-md file:border-0 file:bg-[#f2d39a] file:px-4 file:py-2 file:text-black"
-            />
-          </div>
-
-          {previewImages.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 lg:col-span-2">
-              {previewImages.map((img, index) => (
-                <div key={index} className="relative">
-                  <img
-                    src={img}
-                    alt="preview"
-                    className="h-24 w-full object-cover rounded-md"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeImage(index)}
-                    className="absolute top-1 right-1 bg-red-600 text-white text-xs px-2 py-1 rounded"
-                  >
-                    X
-                  </button>
-                </div>
-              ))}
-            </div>
-          )} */}
-
   
             <div className="lg:col-span-2 flex justify-center mt-6">
               <button
@@ -434,24 +329,7 @@ function Details() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Quantity & Actions */}
             <div className="flex flex-col gap-4">
-              {/* Quantity */}
-              {/* <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                  className="flex-1 cursor-pointer rounded-md p-2 font-bold bg-red-600 hover:bg-red-700 transition"
-                >
-                  −
-                </button>
-
-                <span className="px-4 font-bold text-lg">{quantity < 10 ? `0${quantity}` : quantity}</span>
-
-                <button
-                  onClick={() => setQuantity(q => q + 1)}
-                  className="flex-1 cursor-pointer rounded-md p-2 font-bold bg-green-600 hover:bg-green-700 transition"
-                >
-                  +
-                </button>
-              </div> */}
+             
 
               {/* Buttons */}
               <div className="flex gap-2">
@@ -494,8 +372,5 @@ function Details() {
     </section>
   );
 }
-
-
-      
 
 export default Details;

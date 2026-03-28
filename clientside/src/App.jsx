@@ -25,12 +25,16 @@ import OrderDetails from './Pages/orderDetails.jsx'
 import FloatingMenu from './Parts/MobileMenuOpt.jsx'
 import AOS from 'aos'
 import 'aos/dist/aos.css';
+import SearchResult from './Parts/SearchResult.jsx'
 
 // 
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [accOpts, setAccOpts] = useState(false);
 
+  const [searchMode, setSearchMode] = useState(false);
+  const [FilteredItems, setFilter] = useState([]);
+  const [searchVal, setSearchVal] = useState('');
   useEffect(()=>{
     AOS.init({
       duration: 500,
@@ -42,6 +46,9 @@ function App() {
     <>
      <section className='w-full h-full overflow-hidden place-items-center'>
       <Header 
+      setSearchMode={setSearchMode}
+      setFilteredItems={setFilter}
+      searchVal={searchVal} setSearchVal={setSearchVal}
       cartOpen={()=> setCartOpen(!cartOpen)}
       cartIcon={cartOpen ? (<BsCartXFill/>) : (<BsCartCheckFill/>)}
       accountOpts={()=> setAccOpts(!accOpts)}
@@ -68,7 +75,11 @@ function App() {
       <FloatingMenu/>
         <ScrollToHash/>
         <Footer/>
-        
+      {
+        searchMode && (
+          <SearchResult setSearchMode={setSearchMode} setSearchVal={setSearchVal} FilteredItems={FilteredItems}/>
+        )
+      }        
      {
        cartOpen && (
          <MyCart setCartOpen={setCartOpen}/>

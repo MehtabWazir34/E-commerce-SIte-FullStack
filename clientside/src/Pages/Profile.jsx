@@ -15,7 +15,7 @@ export default function Profile() {
   useEffect( () => {
     const getData = async () => {
     try {
-        const orders = await axios.get("http://localhost:3400/user/orders",{headers:{
+        const orders = await axios.get(`${import.meta.env.VITE_API_URL}/user/orders`,{headers:{
             Authorization:`Bearer ${localStorage.getItem("token")}`
         }});
         setOrders(orders.data.orders);

@@ -21,7 +21,7 @@ function Login() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post('http://localhost:3400/user/login', {email, password})
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/login`, {email, password});
       localStorage.setItem("token", res.data.token);
       console.log(res);
       setLoggedIn(true)
@@ -36,7 +36,7 @@ function Login() {
 
   const handleGoogleLogin = async (credentialRes) =>{
     try {
-        const res = await axios.post('http://localhost:3400/user/google-auth',{
+        const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/google-auth`,{
           credential : credentialRes.credential
         });
 

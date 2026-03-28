@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdAddBusiness, MdLogout, MdOutlinePerson, } from "react-icons/md"
 import { ImHistory } from "react-icons/im"
 import { RiAdminLine } from 'react-icons/ri'
@@ -9,25 +9,7 @@ import { useUser } from "../Utility/THEUser";
 
 function AccountOpt({setAccOpts}){
     const {theUser} = useUser()
-    const [user,] = useState(null)
     let navigateTo = useNavigate();
-    // useEffect(()=>{
-    //     const takeUser = async()=>{
-    //         try {
-    //             let res = await axios.get('http://localhost:3400/user/me',{
-    //                 headers:{
-    //                     Authorization :`Bearer ${localStorage.getItem('token')}`
-    //                 }
-    //             });
-    //             setUser(res.data.user)
-    //         } catch (error) {
-    //             console.log("err;", error);
-                
-    //         }
-    //     }
-    //     takeUser();
-    // }, [user]);
-    console.log("User in AccOpt", user);
     const {setLoggedIn} = useAuth()
     const Logout = async()=>{
         try {

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BsTrash, BsTrash2, BsTrash2Fill, BsTrash3 } from "react-icons/bs";
+import { BsTrash3 } from "react-icons/bs";
 import { NavLink } from "react-router";
 
 function MyCart({setCartOpen}){
@@ -10,7 +10,7 @@ function MyCart({setCartOpen}){
     useEffect(()=>{
         const fetchCartItems = async()=>{
             try {
-                let theItems = await axios.get("http://localhost:3400/user/mycart",{
+                let theItems = await axios.get(`${import.meta.env.VITE_API_URL}/user/mycart`,{
                     headers:{
                         Authorization:`Bearer ${localStorage.getItem('token')}`
                     }
@@ -29,7 +29,7 @@ function MyCart({setCartOpen}){
 
     const deleteCartItem = async(itemId)=>{
         try {
-            let theItem = await axios.delete(`http://localhost:3400/user/deletecartitem/${itemId}`,
+            let theItem = await axios.delete(`${import.meta.env.VITE_API_URL}/user/deletecartitem/${itemId}`,
                 {
                     headers:{
                         Authorization:`Bearer ${localStorage.getItem('token')}`
@@ -61,7 +61,7 @@ function MyCart({setCartOpen}){
     >
         <NavLink data-aos="fade-down" to={`/product/details/${item.itemId._id}`} onClick={()=> setCartOpen(false)} className="rounded-sm bg-[#2c3639] border flex-1 flex justify-between space-x-2 border-[#ffe2af] my-2  w-full shadow-lg " >
         <div>
-            { item?.itemId?.Imgs?.length > 0 && (<img src={item?.itemId?.Imgs?.[0]?.startsWith('http') ? item.itemId.Imgs[0] : `http://localhost:3400${item?.itemId?.Imgs?.[0]}`} alt={item?.itemId?.Title} className="w-20 h-20 object-cover m-2" />)}
+            { item?.itemId?.Imgs?.length > 0 && (<img src={item?.itemId?.Imgs?.[0]?.startsWith('http') ? item.itemId.Imgs[0] : `${import.meta.env.VITE_API_URL}${item?.itemId?.Imgs?.[0]}`} alt={item?.itemId?.Title} className="w-20 h-20 object-cover m-2" />)}
         </div>
         <div className={'w-full mx-2'}>
 

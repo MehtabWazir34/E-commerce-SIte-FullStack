@@ -1,56 +1,3 @@
-// import { useState } from "react"
-// import {InPut, LaBel} from '../Inputs/InPuts';
-// import { useEffect } from "react";
-// import axios from "axios";
-// import { useParams } from "react-router";
-// function Order(){
-
-//     const [formData, setFormData] = useState({
-//         cusName:"", cusAdd:"", contactNo:"", email:""
-//     });
-//     let {id} = useParams();
-//     let [theItem, setTheItem] = useState(null);
-//     useEffect(()=>{
-//         const getItem = async()=>{
-//             try {
-//                 let theItem = await axios.get(`http://localhost:3400/products/${id}`);
-//                 setTheItem(theItem.data.product);
-//                 // console.log("order item details:", theItem.data.product);
-//             } catch (error) {
-//                 console.log("error to get order details:", error);
-                
-//             }
-//         }
-//         getItem()
-//     },[id])
-
-//     const placeOrder = async()=>{
-//         try {
-//             const theOrder = await axios.post('http://localhost:3400/user/order/create',{},
-//                 {headers:{
-//                     Authorization:`Bearer ${localStorage.getItem('token')}`
-//                 }}
-//             );
-//             console.log(theOrder);
-            
-//         } catch (error) {
-//             console.log("error to place order:", error);
-//         }
-//     }
-
-//     if(!theItem) return null;
-//     return(
-        
-
-            
-
-            
-
-            //  </form>
-//         </section>
-//     )
-// }
-// export default Order
 import { useState, useEffect } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts";
 import axios from "axios";
@@ -71,7 +18,7 @@ function Order() {
 
   useEffect(() => {
     const getItem = async () => {
-      const res = await axios.get(`http://localhost:3400/products/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/products/${id}`);
       setTheItem(res.data.product);
     };
     getItem();
@@ -79,7 +26,7 @@ function Order() {
 
   useEffect(() => {
     const loadUser = async () => {
-      const res = await axios.get("http://localhost:3400/user/me", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/user/me`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -94,7 +41,6 @@ function Order() {
 
     loadUser();
   }, []);
-// console.log('TheItem', theItem);
 
   if (!theItem) return null;
 
@@ -124,7 +70,7 @@ function Order() {
     };
 
     const res = await axios.post(
-      "http://localhost:3400/user/order/create",
+      "`${import.meta.env.VITE_API_URL}/user/order/create",
       payload,
       {
         headers: {

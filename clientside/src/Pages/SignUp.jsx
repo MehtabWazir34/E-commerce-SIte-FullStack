@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -32,7 +32,7 @@ function SignUp() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:3400/user/register",
+        "`${import.meta.env.VITE_API_URL}/user/register",
         formData
       );
 
@@ -51,7 +51,7 @@ function SignUp() {
     try {
 
       const res = await axios.post(
-        "http://localhost:3400/user/google-auth",
+        `${import.meta.env.VITE_API_URL}/user/google-auth`,
         {
           credential: credentialResponse.credential
         }
@@ -66,6 +66,9 @@ function SignUp() {
     }
   };
 
+  useEffect(()=>{
+    handleGoogleSignup();
+  },[])
   return (
     <div className="min-h-screen flex items-center justify-center">
 

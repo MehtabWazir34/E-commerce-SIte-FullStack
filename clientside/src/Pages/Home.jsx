@@ -153,10 +153,10 @@ function Home() {
   </div>
 </section>
 
-    <section data-aos="fade-up" id='why-choose-us' className='w-full flex flex-col justify-center gap-4 bg-[#2c3639] rounded-2xl p-12 mx-auto'>
+    <section id='why-choose-us' className='w-full flex flex-col justify-center gap-4 bg-[#2c3639] rounded-2xl p-12 mx-auto'>
         <h2 className='text-center sm:text-lg md:text-2xl text-[#FFE2AF] pb-1 leading-tight font-bold border-b-2 border-[#FFE2AF] md:max-w-1/2 mx-auto '>Why choose Jan'Sports?</h2>
         <div className='sm:grid sm:grid-cols-1 md:flex md:justify-center sm:gap-y-12 md:gap-x-10'>
-            <div className='grid grid-cols-1 hover:scale-105 transition-all duration-300 md:flex md:justify-between gap-x-2 shadow-md shadow-white/50 rounded-md p-2 text-[#F2D39A]'>
+            <div data-aos="fade-right" data-aos-duration="450" className='grid grid-cols-1 hover:scale-105 transition-all duration-300 md:flex md:justify-between gap-x-2 shadow-md shadow-white/50 rounded-md p-2 text-[#F2D39A]'>
               <span className='rounded-full w-auto mx-auto p-3 text-center bg-blue-500'>
               <TbTruckDelivery className='text-4xl mx-auto '/>
               </span>
@@ -165,7 +165,7 @@ function Home() {
                 <p className='text-sm'>up to 3KM with 1500+ order.</p>
               </div>
             </div>
-            <div className='grid grid-cols-1 hover:scale-105 transition-all duration-300 md:flex md:justify-between gap-x-2 shadow-md shadow-white/50 rounded-md p-2 text-[#F2D39A]'>
+            <div data-aos="fade-up" data-aos-duration="350" className='grid grid-cols-1 hover:scale-105 transition-all duration-300 md:flex md:justify-between gap-x-2 shadow-md shadow-white/50 rounded-md p-2 text-[#F2D39A]'>
               <span className='rounded-full w-auto mx-auto p-3 bg-blue-500'>
               <TbCreditCardRefund className='text-4xl '/>
               </span>
@@ -174,7 +174,7 @@ function Home() {
                 <p className='text-sm'>Acceptable within a day after delivery.</p>
               </div>
             </div>
-            <div className='grid grid-cols-1 hover:scale-105 transition-all duration-300 md:flex md:justify-between gap-x-2 shadow-md shadow-white/50 rounded-md p-2 text-[#F2D39A]'>
+            <div data-aos="fade-left" data-aos-duration="250" className='grid grid-cols-1 hover:scale-105 transition-all duration-300 md:flex md:justify-between gap-x-2 shadow-md shadow-white/50 rounded-md p-2 text-[#F2D39A]'>
               <span className='rounded-full w-auto mx-auto p-3 bg-blue-500'>
               <MdOutlineRecommend className='text-4xl '/>
               </span>

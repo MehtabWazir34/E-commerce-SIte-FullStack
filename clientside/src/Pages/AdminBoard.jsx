@@ -14,7 +14,7 @@ function AdminBoard() {
     const getAllOrders = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3400/admin/orders",
+          `${import.meta.env.VITE_API_URL}/admin/orders`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -128,7 +128,7 @@ function AdminBoard() {
                 src={
                   selectedOrder.Imgs[0].startsWith("http")
                     ? selectedOrder.Imgs[0]
-                    : `http://localhost:3400${selectedOrder.Imgs[0]}`
+                    : `${import.meta.env.VITE_API_URL}${selectedOrder.Imgs[0]}`
                 }
                 alt="product"
                 className="w-full h-40 object-cover rounded-lg mb-4"

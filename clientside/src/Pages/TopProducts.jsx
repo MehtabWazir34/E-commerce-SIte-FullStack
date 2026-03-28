@@ -5,25 +5,17 @@ import wears from "../Pics/wears.jpg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const products = [
-  { id: 1, Title: "Tournament Football", Detail:"Here is more details about the product.", Price: 1800, img: football },
-  { id: 2, Title: "Professional Volleyball", Detail:"Here is more details about the product.", Price: 1600, img: vollyball },
-  { id: 3, Title: "Sports Wear Kit", Detail:"Here is more details about the product.", Price: 2200, img: wears },
-  { id: 4, Title: "Match Football Pro", Detail:"Here is more details about the product.", Price: 2000, img: football },
-];
-
 function ProductRow() {
-  const [productList, setProductList] = useState(products);
+  const [productList, setProductList] = useState([]);
 
   useEffect(()=>{
     const TopProducts = async()=>{
       try {
-        const products = await axios.get('http://localhost:3400/products/');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/products/`);
         // setProductList(products.data.products);
-        setProductList(products.data.products.slice(0,8))
-        
+        setProductList(res.data.products.slice(0, 8)); 
       } catch (error) {
-        console.log("Err to getTOp:", error);
+        console.log("Err to getTTopProducts:", error);
         
       }
     };
@@ -51,7 +43,7 @@ function ProductRow() {
               </span>
 
               <img
-                src={item?.Imgs?.[0] || item?.Imgs?.[1] ? item.Imgs[0].startsWith('http') || item.Imgs[1].startsWith('http') ? item.Imgs[0] || item.Imgs[1] : `http://localhost:3400${item.Imgs[0] || item.Imgs[1]}` : '/placeholder.png'}
+                src={item?.Imgs?.[0] || item?.Imgs?.[1] ? item.Imgs[0].startsWith('http') || item.Imgs[1].startsWith('http') ? item.Imgs[0] || item.Imgs[1] : `${import.meta.env.VITE_API_URL}${item.Imgs[0] || item.Imgs[1]}` : '/placeholder.png'}
                 alt={item.Title}
                 className="w-full h-full object-cover rounded-t-2xl"
               />
@@ -79,10 +71,10 @@ function TopProducts() {
 
       {/* Product Rows */}
       <ProductRow />
-      <div className="w-full hidden md:flex">
+      {/* <div className="w-full hidden md:flex">
 
-      {/* <ProductRow /> */}
-      </div>
+      <ProductRow />
+      </div> */}
 
       {/* CTA */}
       <div className="flex justify-center py-6">

@@ -2,10 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import ContactForm from "../Parts/MsgForm";
-// import {InPut} from '../Inputs/InPuts'
-// import AOS from 'aos'
-import Aos from "aos";
-import 'aos/dist/aos.css'
 // AOS.init();
 function Products() {
   // const [category, setCat] = useState([]);
@@ -13,20 +9,18 @@ function Products() {
   const [activeCategory, setActiveCategory] = useState([]);
   const [priceRange, setPriceRange] = useState({'low':'', 'high':''})
   const [productsList, setProducts] = useState([]);
-
   
   useEffect(()=>{
    const getFilteredItems = async()=>{
-    
     try {
         const params = {}
         if(activeCategory.length) params.Category = activeCategory.join(',');
         if(priceRange.low) params.lowPrice = priceRange.low;
         if(priceRange.high) params.highPrice = priceRange.high;
 
-        let res = await axios.get('http://localhost:3400/products/filtereditems', {params});
+        let res = await axios.get(`${import.meta.env.VITE_API_URL}/products/filtereditems`, {params});
         setProducts(res.data.filteredItems);
-        console.log(res.data);
+        console.log("Data", res.data, res.data.filteredItems);
         
     } catch (error) {
       console.log("Filter err:", error);
@@ -37,12 +31,9 @@ function Products() {
    getFilteredItems();
   }, [activeCategory, priceRange])
 
-  // useEffect(()=>{
-  //   Aos.init({
-  //     duration: 300
-  //   })
-  // },[])
-
+  console.log("productsList", productsList);
+  console.log("Length", productsList.length);
+  
   return (
     <>
     <section className="max-w-7xl mx-auto min-h-[calc(100vh-120px)] grid grid-cols-1 
@@ -76,7 +67,7 @@ function Products() {
 
       {/* Products Scroll Area */}
       <section className="bg-[#2c3639] rounded-2xl p-4 min-h-screen mb-8">
-        {productsList.length === 0 ? (
+        { productsList.length === 0 ? (
           <p className="text-center text-gray-300 mt-10">
             No product found.
           </p>
@@ -100,7 +91,7 @@ function Products() {
                   </span>
 
                   <img
-                    src={item.Imgs[0].startsWith('http') || item.Imgs[1].startsWith('http') ? item.Imgs[0] : `http://localhost:3400${item.Imgs[0] || item.Imgs[1]}`}
+                    src={item.Imgs[0].startsWith('http') || item.Imgs[1].startsWith('http') ? item.Imgs[0] : `${import.meta.env.VITE_API_URL}${item.Imgs[0] || item.Imgs[1]}`}
                     alt={item.Title}
                     className="w-full h-full object-cover rounded-t-2xl"
                   />
