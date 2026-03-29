@@ -25,7 +25,7 @@ function Header({cartOpen, cartIcon, accountOpts, setSearchMode, setFilteredItem
             console.log("Err:", error);  
         }}
       getRes()  
-    },[])
+    },[searchVal, setFilteredItems])
 
     useEffect(() => {
     const searchRes = products.filter((itm)=> itm.Title.toLowerCase().includes(searchVal.toLocaleLowerCase()))
@@ -36,7 +36,7 @@ function Header({cartOpen, cartIcon, accountOpts, setSearchMode, setFilteredItem
     } else {
         setSearchMode(false)
     }
-});
+},[setFilteredItems, searchVal, products, setSearchMode]);
 
     return(
         <header data-aos="fade-down" data-aos-duration="300" className="w-full flex justify-between p-6 bg-[#2c3639]">

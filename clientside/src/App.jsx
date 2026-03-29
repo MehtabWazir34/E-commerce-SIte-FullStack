@@ -26,6 +26,7 @@ import FloatingMenu from './Parts/MobileMenuOpt.jsx'
 import AOS from 'aos'
 import 'aos/dist/aos.css';
 import SearchResult from './Parts/SearchResult.jsx'
+import Review from './Pages/Review.jsx'
 
 // 
 function App() {
@@ -69,6 +70,7 @@ function App() {
           <Route path='/myaccount' element={<Profile/>}/>
           <Route path='/adminboard' element={<AdminBoard/>}/>
           <Route path='/orderdetails/:id' element={ <OrderDetails/>} />
+          <Route path='/addreview/:id' element={<Review/>}/>
         </Routes>
      {/* <OrderStatusDropdown/> */}
         </main>

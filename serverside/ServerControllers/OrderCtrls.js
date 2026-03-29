@@ -76,7 +76,7 @@ export const getAllOrders = async (req, res) => {
 export const myOrders = async (req, res) => {
   try {
     const orders = await theOrder
-      .find({ customerName: req.user.id })
+      .find({ customerId: req.user.id })
       .sort({ createdAt: -1 });
 
     res.status(200).json({
@@ -98,11 +98,13 @@ export const updateOrderStatus = async (req, res) => {
 
     // USER RULES
     if (req.user.role === "user") {
-      if (!USER_STATUSES.includes(orderStatus)) {
+      if (!USER_STATUSES.includes(orderStatus))
+      // if(orderStatus !== 'Cancel') 
+        {
         return res.status(403).json({ message: "Not allowed" });
       }
 
-      const orderUserId = order.customerName?._id?.toString() || order.customerName?.toString();
+      const orderUserId = order.customerId?._id?.toString() || order.customerId?.toString();
       if (orderUserId !== req.user.id) {
         return res.status(403).json({ message: "Unauthorized" });
       }

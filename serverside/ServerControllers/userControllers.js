@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken'
 import theUser from '../DBModels/UserModel.js';
 import theCart from "../DBModels/Add2Cart.js";
 import { OAuth2Client } from 'google-auth-library'
+import theProduct from "../DBModels/ProductModel.js";
+import { OrderReviews } from "../DBModels/OrderReviewModel.js";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const SignUp = async(req, res)=>{
@@ -248,4 +250,42 @@ export const updateUserRole = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: "Failed to update role" });
   }
+};
+
+export const reviewOrder = async (req, res) => {
+    try {
+        const { itemId, userId, comment } = req.body;
+
+        // ✅ Validate input
+        if (!itemId || !userId || !comment) {
+            return res.status(400).json({ Msg: "All fields are required!" });
+        }
+
+        // ✅ Check existence
+        const product = await theProduct.findById(itemId);
+        const user = await theUser.findById(userId);
+
+        if (!product || !user) {
+            return res.status(404).json({ Msg: "Product or User not found!" });
+        }
+
+        // ✅ Create review with IDs (not full objects)
+        const review = await OrderReviews.create({
+            userId: user._id,
+            itemId: product._id,
+            comment
+        });
+
+        return res.status(200).json({
+            Msg: "Review added ✅",
+            review
+        });
+
+    } catch (error) {
+        console.log("Error to add review:", error);
+        return res.status(500).json({
+            Msg: "Error to add review",
+            error: error.message
+        });
+    }
 };

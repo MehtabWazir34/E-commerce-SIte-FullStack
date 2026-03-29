@@ -1,11 +1,11 @@
 export const ADMIN_STATUSES = [
   "Pending",
   "Processing",
+  "Shipped",
   "Delivered",
-  "Cancelled"
+  "Cancel"
 ];
 
 export const USER_STATUSES = [
-  "Pending",
-  "Cancel Order"
+  "Cancel"
 ];

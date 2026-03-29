@@ -2,14 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { InPut, LaBel } from "../Inputs/InPuts";
+import { useUser } from "../Utility/THEUser";
 
 function Details() {
   const { id } = useParams();
+  const {theUser} = useUser()
 
   const [item, setItem] = useState(null);
   const [mainImg, setMainImg] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [theUser, setTheUser ] = useState();
+  // const [theUser, setTheUser ] = useState();
   const [msgBox, setMsgBox] = useState(false);
   let isAdmin = theUser?.role === 'admin'; 
   const [editMode, setEditMode] = useState(false);
@@ -29,7 +31,6 @@ function Details() {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/products/${id}`);
         const product = res.data.product;
-
         setItem(product);
         setMainImg(product?.Imgs?.[0]); // first image as main
       } catch (error) {
@@ -62,22 +63,22 @@ function Details() {
     }
   }
 
-  useEffect(()=>{
-    const getUser = async()=>{
-      try {
-          const theUser = await axios.get(`${import.meta.env.VITE_API_URL}/user/me`, {
-            headers:{
-              Authorization:`Bearer ${localStorage.getItem('token')}`
-            }
-          });
-          setTheUser(theUser.data.user)
-      } catch (error) {
-        console.log("UserErr:", error);
+  // useEffect(()=>{
+  //   const getUser = async()=>{
+  //     try {
+  //         const theUser = await axios.get(`${import.meta.env.VITE_API_URL}/user/me`, {
+  //           headers:{
+  //             Authorization:`Bearer ${localStorage.getItem('token')}`
+  //           }
+  //         });
+  //         setTheUser(theUser.data.user)
+  //     } catch (error) {
+  //       console.log("UserErr:", error);
         
-      }
-    }
-    getUser();
-  }, [theUser])
+  //     }
+  //   }
+  //   getUser();
+  // }, [theUser])
   // console.log(item);
 
   const deleteProduct = async()=>{

@@ -6,7 +6,7 @@ export const checkLogin = async()=>{
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }
             });
-            console.log(res.data);
+            // console.log(res.data);
             
             return res.data.LoggedIn === true
            } catch (error) {

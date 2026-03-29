@@ -84,7 +84,7 @@ function AdminBoard() {
                   <td className="p-3">{order?.orderedItem?.qty > 9 ? `${order?.orderedItem?.qty}` : 
                   `0${order?.orderedItem?.qty}`}</td>
                   <td className="p-3">{order.totalAmount}</td>
-                  <td className="p-3">{order.orderStatus}</td>
+                  <td className="p-3">{order.orderStatus ==='Cancel' ? 'Cancelled' : order.orderStatus}</td>
                   {/* <td className="p-3">{order._id}</td> */}
                   <td className="p-3">
                     <button

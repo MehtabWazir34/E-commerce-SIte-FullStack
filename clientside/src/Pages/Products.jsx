@@ -20,19 +20,17 @@ function Products() {
 
         let res = await axios.get(`${import.meta.env.VITE_API_URL}/products/filtereditems`, {params});
         setProducts(res.data.filteredItems);
-        console.log("Data", res.data, res.data.filteredItems);
+        // console.log("Data", res.data, res.data.filteredItems);
         
     } catch (error) {
       console.log("Filter err:", error);
-      
     }
    }
-
    getFilteredItems();
   }, [activeCategory, priceRange])
 
-  console.log("productsList", productsList);
-  console.log("Length", productsList.length);
+  // console.log("productsList", productsList);
+  // console.log("Length", productsList.length);
   
   return (
     <>

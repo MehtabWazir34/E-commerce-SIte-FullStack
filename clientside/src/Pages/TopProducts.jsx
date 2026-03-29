@@ -22,7 +22,7 @@ function ProductRow() {
     TopProducts();
   },[]);
   if(!productList) return null;
-  console.log("list",productList);
+  // console.log("list",productList);
   
   return (
     <div id="top-products" className="mx-auto flex justify-center w-full">

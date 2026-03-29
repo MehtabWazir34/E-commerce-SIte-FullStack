@@ -21,7 +21,7 @@ function OrderDetails() {
                 Authorization:`Bearer ${localStorage.getItem('token')}`
             }
         });
-        const userRes = await axios.get("`${import.meta.env.VITE_API_URL}/user/me",{
+        const userRes = await axios.get(`${import.meta.env.VITE_API_URL}/user/me`,{
           headers:{
               Authorization:`Bearer ${localStorage.getItem('token')}`}})
         setUser(userRes.data.user);

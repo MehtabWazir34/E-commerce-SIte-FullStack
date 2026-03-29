@@ -44,6 +44,7 @@ function Order() {
 
   if (!theItem) return null;
 
+  
   const subTotal = theItem.Price * qty;
   const deliveryFee = theItem.deliveryFee || 0;
   const discount = theItem.offPrice || 0;
@@ -51,7 +52,6 @@ function Order() {
 
   const placeOrder = async (e) => {
     e.preventDefault();
-
     const payload = {
       orderedItem: 
         {
@@ -70,7 +70,7 @@ function Order() {
     };
 
     const res = await axios.post(
-      "`${import.meta.env.VITE_API_URL}/user/order/create",
+      `${import.meta.env.VITE_API_URL}/user/order/create`,
       payload,
       {
         headers: {
@@ -78,9 +78,9 @@ function Order() {
         }
       }
     );
-
     console.log("Order placed:", res.data);
     alert("Order placed successfully!");
+    window.location.href = `/product/details/${theItem._id}`;
   };
 
   return (

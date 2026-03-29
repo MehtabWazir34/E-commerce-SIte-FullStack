@@ -1,6 +1,4 @@
-// pages/MyAccount.jsx
 import { useEffect, useState } from "react";
-// import api from "../Utility/api.js";
 import axios from "axios";
 import OrderStatusDropdown from "../Parts/dropMenu.jsx";
 import UserRoleDropdown from "../Utility/userRole.jsx";
@@ -9,13 +7,12 @@ import { NaVLink } from "../Inputs/InPuts.jsx";
 
 export default function Profile() {
   const {theUser} = useUser();
-  // const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
 
   useEffect( () => {
     const getData = async () => {
     try {
-        const orders = await axios.get(`${import.meta.env.VITE_API_URL}/user/orders`,{headers:{
+        const orders = await axios.get(`${import.meta.env.VITE_API_URL}/user/myorders`,{headers:{
             Authorization:`Bearer ${localStorage.getItem("token")}`
         }});
         setOrders(orders.data.orders);
@@ -25,6 +22,7 @@ export default function Profile() {
     }
     getData()
   }, []);
+
 
   const activeOrders = orders.filter((o)=> o.orderStatus === 'Pending').length;
   const cancelledOrders = orders.filter((o)=> o.orderStatus === 'Cancelled').length;
@@ -41,11 +39,20 @@ export default function Profile() {
             <div className="space-y-2">
               <p><b>Name:</b> {theUser.fullName}</p>
               <p><b>Email:</b> {theUser.email}</p>
-              <div className="flex gap-x-4 items-center"><b>Role:</b> 
+              <div className="flex gap-x-4 items-center"><b>Role: {theUser.role !=='admin' ? 'User' : ''}</b> 
               <UserRoleDropdown
-                    userId={theUser._id}
-                    currentRole={theUser.role}
-                    />
+              userId={theUser._id}
+              currentRole={theUser.role}
+              />
+              {
+                theUser.role === 'admin' &&(
+                  
+                  <UserRoleDropdown
+                  userId={theUser._id}
+                  currentRole={theUser.role}
+                  />
+                )
+                }
                     </div>
 
             </div>
@@ -73,7 +80,8 @@ export default function Profile() {
         <NaVLink linkedTo={'/adminboard'} Name={'See Details'}/>
       </div>
         </section>
-        
+
+        {/* User only */}
         <div className={`${theUser?.role !== 'admin' ? '' : 'hidden'} bg-[#1f2a27] rounded-2xl p-6`}>
           <h2 className="text-xl font-semibold mb-4">My Orders</h2>
 
@@ -85,12 +93,24 @@ export default function Profile() {
                 <p><b>Order ID:</b> {order._id}</p>
                 <p><b>Total:</b> Rs {order.totalAmount}</p>
                 <div className="mt-1 flex gap-x-2 items-center">
-                <p><b>Status:</b></p>
-                <OrderStatusDropdown
-                  orderId={order._id}
-                  currentStatus={order.orderStatus}
-                  role={theUser?.role}
-                  />
+                <p><b>Status: {order.orderStatus === 'Cancel' ? 'Cancelled' : order.orderStatus}</b></p>
+
+                {/* <button className="p-2 cursor-pointer border border-amber-200">Cancel Order</button> */}
+                {
+                  order.orderStatus !== 'Cancel' && (
+                    <OrderStatusDropdown
+                    orderId={order._id}
+                    currentStatus={order.orderStatus}
+                    role={theUser?.role}
+                    />
+                  )
+                  }
+                  {
+                    order.orderStatus === 'Delivered' &&(
+                      <NaVLink linkedTo={`/addreview/${order._id}`} Name={'Add Review'}/>
+                    )
+                  }
+
                   </div>
               </div>
               
