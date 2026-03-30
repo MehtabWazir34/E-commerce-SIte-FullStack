@@ -12,7 +12,7 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
   const STATUS_STYLES = {
     Pending: "bg-yellow-600/85",
     Processing: "bg-blue-600/85",
-    Shipped: "bg-purple-600/85",
+    Shipping: "bg-purple-600/85",
     Delivered: "bg-green-600/85",
     Cancel: "bg-red-600/85",
   };
@@ -53,9 +53,9 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
     updateOrderStatus("Cancel");
   };
 
-  // ❗ Disable cancel if already shipped or delivered
+  // ❗ Disable cancel if already Shipping or delivered
   const isCancelDisabled =
-    status === "Shipped" || status === "Delivered" || status === "Cancel";
+    status === "Shipping" || status === "Delivered" || status === "Cancel";
 
   return (
     <div className="flex gap-3 items-center">

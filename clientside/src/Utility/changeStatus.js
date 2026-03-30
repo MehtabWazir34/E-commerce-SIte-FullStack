@@ -2,7 +2,7 @@ export const ORDER_STATUS_RULES = {
   admin: [
     "Pending",
     "Processing",
-    "Shipped",
+    "Shipping",
     "Delivered",
     "Cancel"
   ],

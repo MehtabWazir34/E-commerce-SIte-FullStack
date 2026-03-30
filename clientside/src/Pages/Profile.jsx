@@ -107,7 +107,7 @@ export default function Profile() {
                   }
                   {
                     order.orderStatus === 'Delivered' &&(
-                      <NaVLink linkedTo={`/addreview/${order._id}`} Name={'Add Review'}/>
+                      <NaVLink linkedTo={`/user/addreview/${order._id}`} Name={'Add Review'}/>
                     )
                   }
 

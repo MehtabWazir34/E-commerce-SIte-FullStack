@@ -1,7 +1,7 @@
 export const ADMIN_STATUSES = [
   "Pending",
   "Processing",
-  "Shipped",
+  "Shipping",
   "Delivered",
   "Cancel"
 ];

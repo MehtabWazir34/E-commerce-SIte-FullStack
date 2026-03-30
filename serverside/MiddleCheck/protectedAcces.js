@@ -20,7 +20,6 @@ const authCheck = async (req, res, next) => {
         if (!decoded) {
             return res.status(403).json({ mssg: "Invalid Credentials" });
         }
-
         // Find user by ID from token
         const user = await theUser.findById(decoded.id).select("-password");
         if (!user) {

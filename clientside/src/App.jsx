@@ -70,7 +70,7 @@ function App() {
           <Route path='/myaccount' element={<Profile/>}/>
           <Route path='/adminboard' element={<AdminBoard/>}/>
           <Route path='/orderdetails/:id' element={ <OrderDetails/>} />
-          <Route path='/addreview/:id' element={<Review/>}/>
+          <Route path='/user/addreview/:id' element={<Review/>}/>
         </Routes>
      {/* <OrderStatusDropdown/> */}
         </main>
