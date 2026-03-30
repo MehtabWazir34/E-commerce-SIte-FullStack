@@ -1,17 +1,17 @@
 import express from 'express'
 import cors from 'cors'
-import { ConnectDb } from '../DB';
+import { ConnectDb } from '../serverside/DB/ConnectDB.js';
 import { configDotenv } from 'dotenv';
-import { userRoutes } from '../Routes/userRoutes.js';
-import { productRoutes } from '../Routes/productRoutes.js';
+import { userRoutes } from '../serverside/Routes/userRoutes.js';
+import { productRoutes } from '../serverside/Routes/productRoutes.js';
 import path from 'path'
-import { adminRoutes } from '../Routes/AdminRoutes.js';
+import { adminRoutes } from '../serverside/Routes/AdminRoutes.js';
 // import { orderRoutes } from '../Routes/orderRoutes.js';
 configDotenv()
 const myApp = express();
 myApp.use(express.json());
 myApp.use(cors({
-    frontURL : process.env.FRONTEND_urL || 'http://localhost:5173/',
+    origin : process.env.FRONTEND_urL || 'http://localhost:5173/',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
     credentials: true
 }));
