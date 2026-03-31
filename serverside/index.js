@@ -23,12 +23,12 @@ App.use('/products', productRoutes);
 App.use('/admin', adminRoutes);
 
 App.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
-
-if(process.env.NODE_ENV === 'development'){
-    App.listen(3400, ()=>{
+const port = process.env.MYAPP_PORT_NO || 3400
+// if(process.env.NODE_ENV === 'development'){
+    App.listen(port, ()=>{
     console.log(
-        `Its running in development mode! localhost:3400`
+        `Its running! localhost:${port}`
     );
     })
-}
+// }
 export default App
