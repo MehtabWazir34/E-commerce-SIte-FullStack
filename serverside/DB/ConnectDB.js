@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const ConnectDb = async()=>{
     try {
-            mongoose.connect(
+          await mongoose.connect(
                 // process.env.NODE_ENV === "production" ?
                 process.env.mongoDB_URL 
                 // :
