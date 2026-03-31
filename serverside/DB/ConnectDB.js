@@ -5,8 +5,8 @@ export const ConnectDb = async()=>{
           await mongoose.connect(
                 // process.env.NODE_ENV === "production" ?
                 process.env.mongoDB_URL 
-                // :
-                // "mongodb://localhost:27017/"
+                ||
+                "mongodb://localhost:27017/"
             );
             console.log("MongooseDB Connected✅ ");
             
