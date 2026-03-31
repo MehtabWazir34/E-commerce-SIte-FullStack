@@ -24,7 +24,7 @@ myApp.use('/admin', adminRoutes);
 
 myApp.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
 
-if(process.env.NODE_ENV !== 'production'){
+if(process.env.NODE_ENV == 'development'){
     myApp.listen(3400, ()=>{
     console.log(
         `Its running in development mode! localhost:3400`
