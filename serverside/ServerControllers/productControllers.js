@@ -116,7 +116,11 @@ export const getProducts = async(req, res)=>{
         })
     } catch (error) {
         console.log("Err", error);
-        
+        res.json({
+            succes: false,
+            Msg:"Faild to get products",
+            error: error.message
+        })
     }
 }
 

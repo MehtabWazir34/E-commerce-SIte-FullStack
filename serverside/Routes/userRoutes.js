@@ -4,6 +4,11 @@ import authCheck from "../MiddleCheck/protectedAcces.js";
 import { createOrder, deleteOrder, getAllOrders, myOrders, updateOrderStatus } from "../ServerControllers/OrderCtrls.js";
 
 export const userRoutes = Router();
+userRoutes.get('/', (req, res)=>{
+    res.json({
+        Msg:"User route is working"
+    })
+})
 
 userRoutes.post('/register', SignUp);
 userRoutes.post('/login', Login);
