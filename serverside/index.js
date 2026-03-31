@@ -17,11 +17,13 @@ App.use(cors({
 }));
 
 ConnectDb()
+App.get('/', (req, res) => {
+  res.send('Backend is running 🚀');
+});
 
 App.use("/user", userRoutes);
 App.use('/products', productRoutes);
 App.use('/admin', adminRoutes);
-
 App.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
 const port = process.env.MYAPP_PORT_NO || 3400
 // if(process.env.NODE_ENV === 'development'){
