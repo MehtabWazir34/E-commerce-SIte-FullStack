@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
+// process.env.NODE_ENV === "production" ?
 export const ConnectDb = async()=>{
     try {
-          await mongoose.connect(
-                // process.env.NODE_ENV === "production" ?
+        await mongoose.connect(
                 process.env.mongoDB_URL 
                 ||
                 "mongodb://localhost:27017/"
