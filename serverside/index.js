@@ -8,9 +8,9 @@ import path from 'path'
 import { adminRoutes } from './Routes/AdminRoutes.js';
 // import { orderRoutes } from './Routes/orderRoutes.js';
 configDotenv()
-const myApp = express();
-myApp.use(express.json());
-myApp.use(cors({
+const App = express();
+App.use(express.json());
+App.use(cors({
     origin : process.env.FRONTEND_urL || 'http://localhost:5173/',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
     credentials: true
@@ -18,17 +18,17 @@ myApp.use(cors({
 
 ConnectDb()
 
-myApp.use("/user", userRoutes);
-myApp.use('/products', productRoutes);
-myApp.use('/admin', adminRoutes);
+App.use("/user", userRoutes);
+App.use('/products', productRoutes);
+App.use('/admin', adminRoutes);
 
-myApp.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
+App.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
 
-if(process.env.NODE_ENV == 'development'){
-    myApp.listen(3400, ()=>{
+if(process.env.NODE_ENV === 'development'){
+    App.listen(3400, ()=>{
     console.log(
         `Its running in development mode! localhost:3400`
     );
     })
 }
-export default myApp
+export default App
