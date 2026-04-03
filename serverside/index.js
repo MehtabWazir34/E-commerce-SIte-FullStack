@@ -11,7 +11,7 @@ configDotenv()
 const App = express();
 App.use(express.json());
 App.use(cors({
-    origin : process.env.FRONTEND_urL,
+    origin : process.env.FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
     credentials: true
 }));
