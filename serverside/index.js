@@ -35,7 +35,7 @@ App.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
 
 // Add this AFTER all your routes, before App.listen
 App.use((err, req, res, next) => {
-    res.header('Access-Control-Allow-Origin', process.env.FRONTEND_urL);
+    res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
     res.header('Access-Control-Allow-Credentials', 'true');
     res.status(500).json({ Msg: 'Server error', error: err.message });
 });
