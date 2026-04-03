@@ -10,9 +10,14 @@ import { adminRoutes } from './Routes/AdminRoutes.js';
 configDotenv()
 const App = express();
 App.use(express.json());
+App.options('*', cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}))
 App.use(cors({
     origin : process.env.FRONTEND_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // add OPTIONS
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
 
@@ -27,6 +32,13 @@ App.use("/user", userRoutes);
 App.use('/products', productRoutes);
 App.use('/admin', adminRoutes);
 App.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
+
+// Add this AFTER all your routes, before App.listen
+App.use((err, req, res, next) => {
+    res.header('Access-Control-Allow-Origin', process.env.FRONTEND_urL);
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.status(500).json({ Msg: 'Server error', error: err.message });
+});
 const port = process.env.MYAPP_PORT_NO || 3400
 // if(process.env.NODE_ENV === 'development'){
     App.listen(port, ()=>{

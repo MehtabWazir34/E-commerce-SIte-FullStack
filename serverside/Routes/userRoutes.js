@@ -32,3 +32,10 @@ userRoutes.get('/myorders', authCheck, myOrders);
 userRoutes.patch('/:orderId/status', authCheck, updateOrderStatus);
 userRoutes.patch('/:userId/role', authCheck, updateUserRole)
 userRoutes.post('/addreview/:id', authCheck, reviewOrder )
+userRoutes.get('/debug-env', (req, res) => {
+    res.json({
+        googleClientId: process.env.GOOGLE_CLIENT_ID ? 'SET ✅' : 'MISSING ❌',
+        jwtSecret: process.env.MY_APP_JWT_SECRET_KEY ? 'SET ✅' : 'MISSING ❌',
+        frontendUrl: process.env.FRONTEND_urL
+    });
+});
