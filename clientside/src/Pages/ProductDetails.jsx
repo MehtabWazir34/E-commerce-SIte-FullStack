@@ -48,12 +48,7 @@ function Details() {
   const addToCart = async()=>{
     try {
           let theItemToadd = await axiosInstance.post(`/user/addtocart`,
-            addItem,
-          {
-            headers:{
-              Authorization:`Bearer ${localStorage.getItem('token')}`
-            }
-          }
+            addItem
           );
           console.log(theItemToadd);
                 

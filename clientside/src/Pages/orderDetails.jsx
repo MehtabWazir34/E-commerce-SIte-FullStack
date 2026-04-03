@@ -16,11 +16,7 @@ function OrderDetails() {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const res = await axiosInstance.get(`/admin/order/info/${id}`,{
-            headers:{
-                Authorization:`Bearer ${localStorage.getItem('token')}`
-            }
-        });
+        const res = await axiosInstance.get(`/admin/order/info/${id}`);
         const userRes = await axiosInstance.get(`/user/me`)
         setUser(userRes.data.user);
         console.log('User',userRes.data.user);
@@ -45,11 +41,7 @@ function OrderDetails() {
 
   const deleteOrder = async()=>{
     try {
-          const theOrd = await axiosInstance.delete(`/user/deleteorder/${id}`, {
-            headers:{
-              Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-          });
+          const theOrd = await axiosInstance.delete(`/user/deleteorder/${id}`);
           alert("Order deleted ✅")
           setDelOrder(false)  
           // setDelOrder(theOrd.data.delOrdr)
@@ -63,41 +55,10 @@ function OrderDetails() {
     }
   }
 
-  // const confirmDelteOrder = (id)=>{
-  //     deleteOrder(id)
-  // }
-  // console.log("user", user);
-  
-  // const updateStatus = async (newStatus) => {
-  //   if (!order) return;
-  //   setUpdating(true);
-
-  //   try {
-  //     const res = await axiosInstance.put(
-  //       ``/admin/order/info/${id}`,
-  //       { orderStatus: newStatus },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //         },
-  //       }
-  //     );
-
-  //     // IMPORTANT: Replace full order with updated order returned from backend
-  //     setOrder(res.data.updatedOrder);
-  //   } catch (error) {
-  //     console.log("Error updating status:", error);
-  //   } finally {
-  //     setUpdating(false);
-  //   }
-  // };
+ 
   let qty = order?.orderedItem?.qty || 0  ;
 
-// if (delOrder) {
-//   return (
-    
-//   );
-// }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#2c3936] text-white flex items-center justify-center">

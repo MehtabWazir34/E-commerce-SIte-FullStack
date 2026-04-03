@@ -1,11 +1,7 @@
-import axiosInstance from "../Utility/axiosInstance";
+import axiosInstance from "../Utility/axiosInstance.js";
 export const checkLogin = async()=>{
            try {
-            let res = await axiosInstance.get(`/user/protected`,{
-                headers:{
-                    Authorization:`Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            let res = await axiosInstance.get(`/user/protected`);
             // console.log(res.data);
             
             return res.data.LoggedIn === true
