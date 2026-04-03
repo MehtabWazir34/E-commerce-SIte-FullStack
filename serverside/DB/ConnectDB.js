@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 export const ConnectDb = async()=>{
     try {
         await mongoose.connect(
-            process.env.NODE_ENV === "development" ?
-            "mongodb://localhost:27017/" :
+            // process.env.NODE_ENV === "development" ?
+            "mongodb://localhost:27017/" ||
                 process.env.mongoDB_URL 
             
             );
