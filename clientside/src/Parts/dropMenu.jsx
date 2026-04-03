@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ORDER_STATUS_RULES } from "../Utility/changeStatus.js";
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 
 export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
 
@@ -22,14 +22,9 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
     try {
       setLoading(true);
 
-      await axios.patch(
-        `${import.meta.env.VITE_API_URL}/user/${orderId}/status`,
-        { orderStatus: newStatus },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+      await axiosInstance.patch(
+        `/user/${orderId}/status`,
+        { orderStatus: newStatus }
       );
       setStatus(newStatus);
       alert("Status updated successfully!");

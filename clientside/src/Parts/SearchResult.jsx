@@ -42,7 +42,7 @@ return (
                   src={
                     item.Imgs?.[0]?.startsWith("http")
                       ? item.Imgs[0]
-                      : `${import.meta.env.VITE_API_URL}${item.Imgs?.[0] || ""}`
+                      : `${item.Imgs?.[0] || ""}`
                   }
                   alt={item.Title}
                   className="w-full h-full object-cover rounded-t-2xl"

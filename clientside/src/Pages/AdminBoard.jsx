@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 import { useNavigate } from "react-router";
 import { useUser } from "../Utility/THEUser";
 
@@ -13,13 +13,8 @@ function AdminBoard() {
   useEffect(() => {
     const getAllOrders = async () => {
       try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/admin/orders`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
+        const res = await axiosInstance.get(
+          `/admin/orders`
         );
 
         setOrders(res?.data?.allOrders || []);
@@ -128,7 +123,7 @@ function AdminBoard() {
                 src={
                   selectedOrder.Imgs[0].startsWith("http")
                     ? selectedOrder.Imgs[0]
-                    : `${import.meta.env.VITE_API_URL}${selectedOrder.Imgs[0]}`
+                    : `${selectedOrder.Imgs[0]}`
                 }
                 alt="product"
                 className="w-full h-40 object-cover rounded-lg mb-4"

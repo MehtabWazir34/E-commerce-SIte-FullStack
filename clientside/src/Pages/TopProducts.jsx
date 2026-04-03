@@ -3,7 +3,7 @@ import football from "../Pics/football.jfif";
 import vollyball from "../Pics/vollyball.jpg";
 import wears from "../Pics/wears.jpg";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 
 function ProductRow() {
   const [productList, setProductList] = useState([]);
@@ -11,7 +11,7 @@ function ProductRow() {
   useEffect(()=>{
     const TopProducts = async()=>{
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/products/`);
+        const res = await axiosInstance.get(`/products/`);
         // setProductList(products.data.products);
         setProductList(res.data.products.slice(0, 8)); 
       } catch (error) {
@@ -43,7 +43,7 @@ function ProductRow() {
               </span>
 
               <img
-                src={item?.Imgs?.[0] || item?.Imgs?.[1] ? item.Imgs[0].startsWith('http') || item.Imgs[1].startsWith('http') ? item.Imgs[0] || item.Imgs[1] : `${import.meta.env.VITE_API_URL}${item.Imgs[0] || item.Imgs[1]}` : '/placeholder.png'}
+                src={item?.Imgs?.[0] || item?.Imgs?.[1] ? item.Imgs[0].startsWith('http') || item.Imgs[1].startsWith('http') ? item.Imgs[0] || item.Imgs[1] : `${item.Imgs[0] || item.Imgs[1]}` : '/placeholder.png'}
                 alt={item.Title}
                 className="w-full h-full object-cover rounded-t-2xl"
               />

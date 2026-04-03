@@ -15,7 +15,7 @@ export function THEUser({children}){
                 setLoading(false)
                 return
             };
-            let theRes = await axios.get(`${import.meta.env.VITE_API_URL}/user/me`,{
+            let theRes = await axiosInstance.get(`/user/me`,{
                 headers:{
                     Authorization: `Bearer ${token}`
                 }

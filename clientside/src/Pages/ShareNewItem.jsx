@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts";
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 
 function ShareNewItem() {
   const [formData, setFormData] = useState({
@@ -59,12 +59,7 @@ console.log(formData);
 
     console.log("Ready for backend upload");
     // axios.post("/api/products", payload)
-    await axios.post('`${import.meta.env.VITE_API_URL}/products/addnew', payload,{
-      headers:{
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-          "Content-Type": "multipart/form-data"
-      }
-    } )
+    await axiosInstance.post('`/products/addnew', payload)
   };
 
   return (

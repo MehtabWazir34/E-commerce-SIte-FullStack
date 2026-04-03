@@ -1,7 +1,7 @@
 import axios from "axios"
 export const checkLogin = async()=>{
            try {
-            let res = await axios.get(`${import.meta.env.VITE_API_URL}/user/protected`,{
+            let res = await axiosInstance.get(`/user/protected`,{
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }

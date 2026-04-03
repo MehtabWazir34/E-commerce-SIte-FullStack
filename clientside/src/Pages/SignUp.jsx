@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts.jsx";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 import { GoogleLogin } from "@react-oauth/google";
 
 function SignUp() {
@@ -31,8 +31,8 @@ function SignUp() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        "`${import.meta.env.VITE_API_URL}/user/register",
+      const res = await axiosInstance.post(
+        "/user/register",
         formData
       );
 
@@ -50,8 +50,8 @@ function SignUp() {
   const handleGoogleSignup = async (credentialResponse) => {
     try {
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/user/google-auth`,
+      const res = await axiosInstance.post(
+        `/user/google-auth`,
         {
           credential: credentialResponse.credential
         }

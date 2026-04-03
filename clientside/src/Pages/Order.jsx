@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts";
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 import { useParams } from "react-router";
 
 function Order() {
@@ -18,7 +18,7 @@ function Order() {
 
   useEffect(() => {
     const getItem = async () => {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/products/${id}`);
+      const res = await axiosInstance.get(`/products/${id}`);
       setTheItem(res.data.product);
     };
     getItem();
@@ -26,11 +26,7 @@ function Order() {
 
   useEffect(() => {
     const loadUser = async () => {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/user/me`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-      });
+      const res = await axiosInstance.get(`/user/me`, );
 
       setFormData(prev => ({
         ...prev,
@@ -69,14 +65,10 @@ function Order() {
       phoneNo: formData.contactNo
     };
 
-    const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/user/order/create`,
+    const res = await axiosInstance.post(
+      `/user/order/create`,
       payload,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-      }
+      
     );
     console.log("Order placed:", res.data);
     alert("Order placed successfully!");

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 import { useState } from "react";
 import { MdAddBusiness, MdLogout, MdOutlinePerson, } from "react-icons/md"
 import { ImHistory } from "react-icons/im"
@@ -13,12 +13,7 @@ function AccountOpt({setAccOpts}){
     const {setLoggedIn} = useAuth()
     const Logout = async()=>{
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/user/logout`,{},
-                {
-                    headers:{
-                        Authorization:`Bearer ${localStorage.getItem('token')}`
-                    }
-                }
+            await axiosInstance.post(`/user/logout`,{}
             )
             setTimeout(()=>{
                 setAccOpts(false);

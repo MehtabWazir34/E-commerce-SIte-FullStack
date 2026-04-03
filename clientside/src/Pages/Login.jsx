@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts.jsx"
 // import LoginAccount from "./LoginAccount";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 import { useAuth } from "../Config/AuthProvider.jsx";
 import { GoogleLogin } from "@react-oauth/google";
 
@@ -21,7 +21,7 @@ function Login() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/login`, {email, password});
+      const res = await axiosInstance.post(`/user/login`, {email, password});
       localStorage.setItem("token", res.data.token);
       console.log(res);
       setLoggedIn(true)
@@ -36,7 +36,7 @@ function Login() {
 
   const handleGoogleLogin = async (credentialRes) =>{
     try {
-        const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/google-auth`,{
+        const res = await axiosInstance.post(`/user/google-auth`,{
           credential : credentialRes.credential
         });
 

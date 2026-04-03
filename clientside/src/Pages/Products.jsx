@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import ContactForm from "../Parts/MsgForm";
@@ -18,7 +18,7 @@ function Products() {
         if(priceRange.low) params.lowPrice = priceRange.low;
         if(priceRange.high) params.highPrice = priceRange.high;
 
-        let res = await axios.get(`${import.meta.env.VITE_API_URL}/products/filtereditems`, {params});
+        let res = await axiosInstance.get(`/products/filtereditems`, {params});
         setProducts(res.data.filteredItems);
         // console.log("Data", res.data, res.data.filteredItems);
         
@@ -89,7 +89,7 @@ function Products() {
                   </span>
 
                   <img
-                    src={item.Imgs[0].startsWith('http') || item.Imgs[1].startsWith('http') ? item.Imgs[0] : `${import.meta.env.VITE_API_URL}${item.Imgs[0] || item.Imgs[1]}`}
+                    src={item.Imgs[0].startsWith('http') || item.Imgs[1].startsWith('http') ? item.Imgs[0] : `${item.Imgs[0] || item.Imgs[1]}`}
                     alt={item.Title}
                     className="w-full h-full object-cover rounded-t-2xl"
                   />

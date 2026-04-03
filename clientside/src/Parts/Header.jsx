@@ -5,7 +5,7 @@ import {  useEffect, useState } from 'react'
 import { IoSettings } from 'react-icons/io5';
 // import { checkLogin } from '../Config/authCheck';
 import { useAuth } from '../Config/AuthProvider';
-import axios from 'axios';
+import axiosInstance from '../Utility/axiosInstance.js';
 import { Link } from 'react-router';
 
 function Header({cartOpen, cartIcon, accountOpts, setSearchMode, setFilteredItems, searchVal, setSearchVal}) {
@@ -18,7 +18,7 @@ function Header({cartOpen, cartIcon, accountOpts, setSearchMode, setFilteredItem
     useEffect(()=>{
         const getRes = async()=>{
         try {
-            const rsp = await axios.get(`${import.meta.env.VITE_API_URL}/products/`);
+            const rsp = await axiosInstance.get(`/products/`);
             setProducts(rsp.data.products);
             setFilteredItems(rsp.data.products)
         } catch (error) {

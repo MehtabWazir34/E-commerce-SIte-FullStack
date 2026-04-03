@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 import { ROLE_OPTIONS } from "../Utility/changeStatus.js";
 
 export default function UserRoleDropdown({ userId, currentRole }) {
@@ -10,8 +10,8 @@ export default function UserRoleDropdown({ userId, currentRole }) {
   const updateRole = async () => {
     try {
       setLoading(true);
-      await axios.patch(
-        `${import.meta.env.VITE_API_URL}/user/${userId}/role`,
+      await axiosInstance.patch(
+        `/user/${userId}/role`,
         { role },
         {
           headers: {

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import OrderStatusDropdown from "../Parts/dropMenu.jsx";
 import UserRoleDropdown from "../Utility/userRole.jsx";
 import { useUser } from "../Utility/THEUser.jsx";
 import { NaVLink } from "../Inputs/InPuts.jsx";
-
+import axiosInstance from '../Utility/axiosInstance.js'
 export default function Profile() {
   const {theUser} = useUser();
   const [orders, setOrders] = useState([]);
@@ -12,9 +11,7 @@ export default function Profile() {
   useEffect( () => {
     const getData = async () => {
     try {
-        const orders = await axios.get(`${import.meta.env.VITE_API_URL}/user/myorders`,{headers:{
-            Authorization:`Bearer ${localStorage.getItem("token")}`
-        }});
+        const orders = await axiosInstance.get(`/user/myorders`);
         setOrders(orders.data.orders);
     } catch (error) {
         console.log("Erro", error);

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { InPut, LaBel } from "../Inputs/InPuts";
@@ -29,7 +29,7 @@ function Details() {
   useEffect(() => {
     const getItem = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/products/${id}`);
+        const res = await axiosInstance.get(`/products/${id}`);
         const product = res.data.product;
         setItem(product);
         setMainImg(product?.Imgs?.[0]); // first image as main
@@ -47,7 +47,7 @@ function Details() {
   }
   const addToCart = async()=>{
     try {
-          let theItemToadd = await axios.post(`${import.meta.env.VITE_API_URL}/user/addtocart`,
+          let theItemToadd = await axiosInstance.post(`/user/addtocart`,
             addItem,
           {
             headers:{
@@ -66,7 +66,7 @@ function Details() {
   // useEffect(()=>{
   //   const getUser = async()=>{
   //     try {
-  //         const theUser = await axios.get(`${import.meta.env.VITE_API_URL}/user/me`, {
+  //         const theUser = await axiosInstance.get(`/user/me`, {
   //           headers:{
   //             Authorization:`Bearer ${localStorage.getItem('token')}`
   //           }
@@ -83,7 +83,7 @@ function Details() {
 
   const deleteProduct = async()=>{
     try {
-        const delPro = await axios.delete(`${import.meta.env.VITE_API_URL}/admin/delpro/${id}`, {
+        const delPro = await axiosInstance.delete(`/admin/delpro/${id}`, {
           headers:{
             Authorization:`Bearer ${localStorage.getItem('token')}`
           }
@@ -99,7 +99,7 @@ function Details() {
   const updateProduct = async (a)=>{
     a.preventDefault();
 
-        await axios.put(`${import.meta.env.VITE_API_URL}/admin/editpro/${id}`, editData,{
+        await axiosInstance.put(`/admin/editpro/${id}`, editData,{
           headers:{
             Authorization:`Bearer ${localStorage.getItem('token')}`
             // ,
@@ -144,7 +144,7 @@ function Details() {
           {/* Main Image */}
           <div className="w-full rounded-xl overflow-hidden">
             <img
-              src={mainImg.startsWith('http') ? mainImg : `${import.meta.env.VITE_API_URL}${mainImg}`}
+              src={mainImg.startsWith('http') ? mainImg : `${mainImg}`}
               alt={item.Title}
               className="w-full h-80 object-cover rounded-xl transition-all duration-300 hover:scale-[1.02]"
             />
@@ -154,7 +154,7 @@ function Details() {
             {item.Imgs?.map((img, index) => (
               <img
                 key={index}
-                src={img.startsWith('http') ? img : `${import.meta.env.VITE_API_URL}${img}`}
+                src={img.startsWith('http') ? img : `${img}`}
                 alt="thumbnail"
                 onClick={() => setMainImg(img)}
                 className={`w-16 h-16 object-cover rounded-lg cursor-pointer border transition-all duration-300

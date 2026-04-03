@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from '../Utility/axiosInstance.js'
 import { useParams } from "react-router";
 import { useUser } from "../Utility/THEUser";
 import { useEffect, useState } from "react";
@@ -28,14 +28,10 @@ function Review(){
         // }
         e.preventDefault();
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/user/addreview/${id}`,{
+            await axiosInstance.post(`/user/addreview/${id}`,{
                 itemId: formData.itemId,
                 userId: formData.userId,
                 comment: formData.comment
-            },{
-                headers:{
-                    Authorization:`Bearer ${localStorage.getItem("token")}`
-                }
             })
         } catch (error) {
             console.log("Err to add review!", error);
