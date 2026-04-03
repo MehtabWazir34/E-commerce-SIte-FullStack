@@ -22,6 +22,11 @@ App.use(cors({
     preflightContinue: false,   // ✅ handles OPTIONS automatically
     optionsSuccessStatus: 204
 }));
+App.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
+    next();
+});
 
 ConnectDb()
 
