@@ -1,44 +1,44 @@
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 
-// export const ConnectDb = async()=>{
-//     try {
-//         await mongoose.connect(
-//             process.env.NODE_ENV === "development" ?
-//             "mongodb://localhost:27017/" :
-//                 process.env.mongoDB_URL 
+export const ConnectDb = async()=>{
+    try {
+        await mongoose.connect(
+            process.env.NODE_ENV === "development" ?
+            "mongodb://localhost:27017/" :
+                process.env.mongoDB_URL 
             
-//             );
-//             console.log("MongooseDB Connected✅ ");
+            );
+            console.log("MongooseDB Connected✅ ");
             
-//     } catch (error) {
-//         console.log('DB Connection error❌', error);
+    } catch (error) {
+        console.log('DB Connection error❌', error);
         
-//     }
-// }
+    }
+}
 
 // import {MongoClient, ServerApiVersion} from 'mongoose'
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://mehtabwazir34_db_user:<db_password>@cluster0-js.adtfkoc.mongodb.net/?appName=Cluster0-JS";
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = "mongodb+srv://mehtabwazir34_db_user:<db_password>@cluster0-js.adtfkoc.mongodb.net/?appName=Cluster0-JS";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+// const client = new MongoClient(uri, {
+//   serverApi: {
+//     version: ServerApiVersion.v1,
+//     strict: true,
+//     deprecationErrors: true,
+//   }
+// });
 
-async function run() {
-  try {
+// async function run() {
+//   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
+  //   await client.db("admin").command({ ping: 1 });
+  //   console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  // } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
+//     await client.close();
+//   }
+// }
+// run().catch(console.dir);
