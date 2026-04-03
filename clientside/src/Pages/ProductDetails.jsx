@@ -58,24 +58,6 @@ function Details() {
     }
   }
 
-  // useEffect(()=>{
-  //   const getUser = async()=>{
-  //     try {
-  //         const theUser = await axiosInstance.get(`/user/me`, {
-  //           headers:{
-  //             Authorization:`Bearer ${localStorage.getItem('token')}`
-  //           }
-  //         });
-  //         setTheUser(theUser.data.user)
-  //     } catch (error) {
-  //       console.log("UserErr:", error);
-        
-  //     }
-  //   }
-  //   getUser();
-  // }, [theUser])
-  // console.log(item);
-
   const deleteProduct = async()=>{
     try {
         const delPro = await axiosInstance.delete(`/admin/delpro/${id}`, {

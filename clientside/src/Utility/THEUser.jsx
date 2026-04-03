@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios'
+import axiosInstance from '../Utility/axiosInstance.js'
 const userContext = createContext()
 
 export function THEUser({children}){
@@ -15,11 +15,7 @@ export function THEUser({children}){
                 setLoading(false)
                 return
             };
-            let theRes = await axiosInstance.get(`/user/me`,{
-                headers:{
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            let theRes = await axiosInstance.get(`/user/me`);
             setUser(theRes.data.user);
 
         } catch (error) {
