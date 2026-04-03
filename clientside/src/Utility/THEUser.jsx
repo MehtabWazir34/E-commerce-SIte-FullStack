@@ -9,12 +9,12 @@ export function THEUser({children}){
 
     const getUser = async()=>{
         try {
-            let token = localStorage.getItem('token');
-            if(!token){
-                setUser(null);
-                setLoading(false)
-                return
-            };
+            // let token = localStorage.getItem('token');
+            // if(!token){
+            //     setUser(null);
+            //     setLoading(false)
+            //     return
+            // };
             let theRes = await axiosInstance.get(`/user/me`);
             setUser(theRes.data.user);
 
