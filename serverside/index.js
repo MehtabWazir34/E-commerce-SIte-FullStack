@@ -10,7 +10,7 @@ import { adminRoutes } from './Routes/AdminRoutes.js';
 configDotenv()
 const App = express();
 App.use(express.json());
-App.options('*', cors({
+App.options('/{*path}', cors({
     origin: process.env.FRONTEND_URL,
     credentials: true
 }))
@@ -18,7 +18,9 @@ App.use(cors({
     origin : process.env.FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // add OPTIONS
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    credentials: true,
+    preflightContinue: false,   // ✅ handles OPTIONS automatically
+    optionsSuccessStatus: 204
 }));
 
 ConnectDb()
