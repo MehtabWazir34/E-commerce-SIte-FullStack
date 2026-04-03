@@ -1,4 +1,4 @@
-import axios from "axios"
+import axiosInstance from "../Utility/axiosInstance";
 export const checkLogin = async()=>{
            try {
             let res = await axiosInstance.get(`/user/protected`,{

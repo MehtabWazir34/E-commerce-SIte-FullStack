@@ -13,7 +13,7 @@ function ProductRow() {
       try {
         const res = await axiosInstance.get(`/products/`);
         // setProductList(products.data.products);
-        setProductList(res.data.products.slice(0, 8)); 
+        setProductList((res.data.products ?? []).slice(0, 8)); 
       } catch (error) {
         console.log("Err to getTTopProducts:", error);
         

@@ -29,9 +29,6 @@ function Products() {
    getFilteredItems();
   }, [activeCategory, priceRange])
 
-  // console.log("productsList", productsList);
-  // console.log("Length", productsList.length);
-  
   return (
     <>
     <section className="max-w-7xl mx-auto min-h-[calc(100vh-120px)] grid grid-cols-1 

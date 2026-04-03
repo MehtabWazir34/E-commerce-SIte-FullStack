@@ -27,7 +27,8 @@ function Header({cartOpen, cartIcon, accountOpts, setSearchMode, setFilteredItem
       getRes()  
     },[searchVal, setFilteredItems])
 
-    useEffect(() => {
+useEffect(() => {
+    if(!products || products.length === 0) return;
     const searchRes = products.filter((itm)=> itm.Title.toLowerCase().includes(searchVal.toLocaleLowerCase()))
 
     setFilteredItems(searchRes);
@@ -36,7 +37,7 @@ function Header({cartOpen, cartIcon, accountOpts, setSearchMode, setFilteredItem
     } else {
         setSearchMode(false)
     }
-},[setFilteredItems, searchVal, products, setSearchMode]);
+},[searchVal, products]);
 
     return(
         <header data-aos="fade-down" data-aos-duration="300" className="w-full flex justify-between p-6 bg-[#2c3639]">
