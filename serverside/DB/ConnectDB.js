@@ -4,11 +4,11 @@ export const ConnectDb = async()=>{
     try {
         await mongoose.connect(
             // process.env.NODE_ENV === "development" ?
-            "mongodb://localhost:27017/" ||
-                process.env.mongoDB_URL 
+
+            process.env.mongoDB_URL
             
             );
-            console.log("MongooseDB Connected✅ ");
+            console.log(`"MongooseDB Connected✅":${process.env.mongoDB_URL}`);
             
     } catch (error) {
         console.log('DB Connection error❌', error);
