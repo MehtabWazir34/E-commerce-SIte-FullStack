@@ -15,7 +15,7 @@ App.options('/{*path}', cors({
     credentials: true
 }))
 App.use(cors({
-    origin :'http://localhost:5173',
+    origin : process.env.FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // add OPTIONS
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
