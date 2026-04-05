@@ -8,7 +8,7 @@ export const ConnectDb = async()=>{
             process.env.mongoDB_URL
             
             );
-            console.log(`"MongooseDB Connected✅":${process.env.mongoDB_URL}`);
+            console.log(`"MongooseDB Connected✅"`);
             
     } catch (error) {
         console.log('DB Connection error❌', error);

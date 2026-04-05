@@ -10,10 +10,10 @@ import { adminRoutes } from './Routes/AdminRoutes.js';
 configDotenv()
 const App = express();
 App.use(express.json());
-App.options('/{*path}', cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true
-}))
+// App.options('/{*path}', cors({
+//     origin: process.env.FRONTEND_URL,
+//     credentials: true
+// }))
 App.use(cors({
     origin :'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // add OPTIONS

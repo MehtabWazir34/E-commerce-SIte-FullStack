@@ -38,7 +38,7 @@ function App() {
   const [searchVal, setSearchVal] = useState('');
   useEffect(()=>{
     AOS.init({
-      duration: 500,
+      duration: 300,
       easing: 'ease-in-out',
       // once: true,
     })

@@ -39,6 +39,7 @@ useEffect(() => {
     }
 },[searchVal, products]);
 
+
     return(
         <header data-aos="fade-down" data-aos-duration="300" className="w-full flex justify-between p-6 bg-[#2c3639]">
             <Link data-aos="fade-down" data-aos-duration="400" to={'/'} className='cursor-pointer text-[#FFE2AF] hover:text-[#F2D39A] font-semibold text-xl'>Jan'Sports</Link>

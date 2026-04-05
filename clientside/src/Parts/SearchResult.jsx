@@ -6,6 +6,7 @@ function SearchResult({FilteredItems, setSearchMode, setSearchVal}) {
         setSearchVal('');
     }
 
+    
 return (
     <section className="fixed inset-0 top-16 z-500 flex justify-center p-2 bg-black/70">
     <div className="min-h-[90vh] w-full overflow-y-auto bg-[#2c3639] rounded-2xl p-6  ">

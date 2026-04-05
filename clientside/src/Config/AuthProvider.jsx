@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { checkLogin } from "./authCheck";
+import { Loader } from "../Parts/Loader";
 
 const AuthContext = createContext();
 
@@ -41,10 +42,12 @@ export const AuthProvider = ({ children }) => {
         };
     }, []);
 
-    if (loading) return <h1>Loading...</h1>;
+    if (loading){
+        return <Loader/>
+    };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+        <AuthContext.Provider value={{ isLoggedIn, setLoggedIn, Loader }}>
             {children}
         </AuthContext.Provider>
     );
