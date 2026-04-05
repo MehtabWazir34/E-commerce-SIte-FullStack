@@ -6,13 +6,16 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from '../Utility/axiosInstance.js'
 import { useAuth } from "../Config/AuthProvider.jsx";
 import { GoogleLogin } from "@react-oauth/google";
+import { useUser} from '../Utility/THEUser.jsx'
 
 function Login() {
+
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
   let navigateTo = useNavigate()
   const [loading, setLoading] = useState(false);
   const {setLoggedIn} = useAuth()
+  const {theUser } = useUser()
   useEffect(()=>{
     setEmail('')
     setPass('')
@@ -22,15 +25,17 @@ function Login() {
     try {
       setLoading(true);
       const res = await axiosInstance.post(`/user/login`, {email, password});
-      localStorage.setItem("token", res.data.token);
+      if(res.data.token){
+        localStorage.setItem("token", res.data.token);
+        setLoggedIn(true)
+        navigateTo('/')
+      }
       console.log(res);
-      setLoggedIn(true)
       
     } catch (error) {
       console.error("Registration failed:", error);
     } finally {
       setLoading(false);
-      navigateTo('/')
     }
   };
 
@@ -40,8 +45,12 @@ function Login() {
           credential : credentialRes.credential
         });
 
-        localStorage.setItem('token', res.data.token )
-        navigateTo('/');
+        let token = res.data.token
+        if(token){
+          localStorage.setItem('token', token);
+          await theUser()
+          navigateTo('/');
+        }
     } catch (error) {
       console.log("Google Auth fialed!", error);
       

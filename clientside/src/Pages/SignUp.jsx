@@ -3,6 +3,8 @@ import { InPut, LaBel } from "../Inputs/InPuts.jsx";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from '../Utility/axiosInstance.js'
 import { GoogleLogin } from "@react-oauth/google";
+import { useUser } from "../Utility/THEUser.jsx";
+import { useAuth } from "../Config/AuthProvider.jsx";
 
 function SignUp() {
 
@@ -17,7 +19,8 @@ function SignUp() {
   });
 
   const [loading, setLoading] = useState(false);
-
+  const {theUser} = useUser();
+  const {setLoggedIn} = useAuth()
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -35,11 +38,11 @@ function SignUp() {
         "/user/register",
         formData
       );
-
-      localStorage.setItem("token", res.data.token);
-
-      navigateTo("/");
-
+      if(res.data.token){
+        localStorage.setItem("token", res.data.token);
+        setLoggedIn(true);
+        navigateTo("/");
+      }
     } catch (error) {
       console.error("Registration failed:", error);
     } finally {
@@ -56,10 +59,11 @@ function SignUp() {
           credential: credentialResponse.credential
         }
       );
-
-      localStorage.setItem("token", res.data.token);
-
-      navigateTo("/");
+      if(res.data.token){
+        localStorage.setItem("token", res.data.token);
+        await theUser()
+        navigateTo("/");
+      }
 
     } catch (error) {
       console.log("Google signup failed", error);
