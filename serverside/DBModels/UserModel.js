@@ -18,7 +18,7 @@ let theUserSchema = new mongoose.Schema({
         type: String, default:''
     },
     phoneNo:{
-        type: Number, required: true, unique: true
+        type: Number, required: true, unique: true, default: '0123456789'
     },
     role:{
         type: String, enum: ["user", "admin"], default: "user"

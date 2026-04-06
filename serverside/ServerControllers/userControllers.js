@@ -91,7 +91,7 @@ export const googleAuth = async(req, res)=>{
                 email,
                 userName: email.split('@')[0] + Math.floor(Math.random()*100),
                 profileImg: pic,
-                phoneNo: "03123456789",
+                phoneNo: "",
                 googleId: sub,
                 password: null
             });
