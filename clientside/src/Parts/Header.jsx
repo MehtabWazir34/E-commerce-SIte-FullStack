@@ -4,7 +4,7 @@ import {  useEffect, useState } from 'react'
 // import { MdCabin, MdShoppingCart, MdShoppingCartCheckout } from 'react-icons/md';
 import { IoSettings } from 'react-icons/io5';
 // import { checkLogin } from '../Config/authCheck';
-import { useAuth } from '../Config/AuthProvider';
+// import { useAuth } from '../Config/AuthProvider';
 import axiosInstance from '../Utility/axiosInstance.js';
 import { Link } from 'react-router';
 import { useUser } from '../Utility/THEUser.jsx';

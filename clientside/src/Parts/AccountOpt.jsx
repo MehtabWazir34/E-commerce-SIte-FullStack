@@ -1,22 +1,22 @@
 import axiosInstance from '../Utility/axiosInstance.js'
-import { useState } from "react";
+// import { useState } from "react";
 import { MdAddBusiness, MdLogout, MdOutlinePerson, } from "react-icons/md"
 import { ImHistory } from "react-icons/im"
 import { RiAdminLine } from 'react-icons/ri'
 import { NavLink, useNavigate } from "react-router"
-import { useAuth } from "../Config/AuthProvider";
+// import { useAuth } from "../Config/AuthProvider";
 import { useUser } from "../Utility/THEUser";
 
 function AccountOpt({setAccOpts}){
     const {theUser, setUser} = useUser()
     let navigateTo = useNavigate();
-    const {setLoggedIn} = useAuth()
+    // const {setLoggedIn} = useAuth()
     const handleLogout = async()=>{
         try {
             await axiosInstance.post(`/user/logout`,{})
             setTimeout(()=>{
                 setUser(null);
-                setLoggedIn(false);
+                // setLoggedIn(false);
                 setAccOpts(false);
                 navigateTo('/login');
             }, 300)
