@@ -7,6 +7,7 @@ import { IoSettings } from 'react-icons/io5';
 import { useAuth } from '../Config/AuthProvider';
 import axiosInstance from '../Utility/axiosInstance.js';
 import { Link } from 'react-router';
+import { useUser } from '../Utility/THEUser.jsx';
 
 function Header({cartOpen, cartIcon, accountOpts, setSearchMode, setFilteredItems, searchVal, setSearchVal}) {
     // const [search, setSearch] = useState('')
@@ -14,7 +15,7 @@ function Header({cartOpen, cartIcon, accountOpts, setSearchMode, setFilteredItem
     const [products, setProducts] = useState([]);
     // const [FilteredItems, setFilteredItems] = useState([]);
 
-    const {isLoggedIn} = useAuth();
+    const {loggedIn} = useUser();
     useEffect(()=>{
         const getRes = async()=>{
         try {
@@ -57,7 +58,7 @@ useEffect(() => {
           <div className='hidden md:flex md:justify-between gap-x-4'>
             <button data-aos="fade-down" data-aos-duration="600" onClick={cartOpen} className='rounded-sm text-xl bg-[#ffe2af] px-2 cursor-pointer'>{cartIcon}</button>
             {
-                isLoggedIn ? (
+                loggedIn ? (
                 <button data-aos="fade-down" data-aos-duration="600" onClick={()=>accountOpts()} className='text-xl bg-[#ffe2af] rounded-sm px-2 cursor-pointer'><IoSettings/> </button> 
                 ) : (
                 <NaVLink linkedTo={'/login'} Name={'Login'}/>

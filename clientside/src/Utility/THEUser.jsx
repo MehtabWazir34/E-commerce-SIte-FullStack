@@ -30,7 +30,7 @@ export function THEUser({children}){
     }, []);
     const loggedIn = !!theUser;
     return(
-        <userContext.Provider value={{theUser, setUser, loading, getUser}}>
+        <userContext.Provider value={{theUser, setUser, loading, getUser, loggedIn}}>
             {children}
         </userContext.Provider>
     )
