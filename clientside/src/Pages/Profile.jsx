@@ -36,12 +36,15 @@ export default function Profile() {
             <div className="space-y-2">
               <p><b>Name:</b> {theUser.fullName}</p>
               <p><b>Email:</b> {theUser.email}</p>
-              <div className="flex gap-x-4 items-center"><b>Role: {theUser.role !=='admin' ? 'User' : ''}</b> 
+              <div className="flex gap-x-4 items-center"><b>Role: {theUser.role !=='admin' ? 'User' : 'Admin'}</b> 
               <UserRoleDropdown
               userId={theUser._id}
               currentRole={theUser.role}
               />
-              {
+              <p className="text-sm text-gray-400">
+                <strong>NOTE!</strong> This is just for demonstration purposes. Later, it will be accessable to admins only.
+              </p>
+              {/* {
                 theUser.role === 'admin' &&(
                   
                   <UserRoleDropdown
@@ -49,7 +52,7 @@ export default function Profile() {
                   currentRole={theUser.role}
                   />
                 )
-                }
+                } */}
                     </div>
 
             </div>
