@@ -11,10 +11,9 @@ function AccountOpt({setAccOpts}){
     const {theUser} = useUser()
     let navigateTo = useNavigate();
     const {setLoggedIn} = useAuth()
-    const Logout = async()=>{
+    const handleLogout = async()=>{
         try {
-            await axiosInstance.post(`/user/logout`,{}
-            )
+            await axiosInstance.post(`/user/logout`,{})
             setTimeout(()=>{
                 setAccOpts(false);
                 setLoggedIn(false);
@@ -73,7 +72,7 @@ function AccountOpt({setAccOpts}){
 
     <button
         data-aos="fade-down" data-aos-duration="600"
-        onClick={Logout}
+        onClick={handleLogout}
         className="flex items-center cursor-pointer gap-2 text-xl font-semibold p-2 rounded-2xl 
                    hover:bg-[#ffe2af] hover:text-[#2c3639] transition-all duration-300 
                    text-left"

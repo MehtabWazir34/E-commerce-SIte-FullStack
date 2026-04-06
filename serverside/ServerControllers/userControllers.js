@@ -112,10 +112,10 @@ export const googleAuth = async(req, res)=>{
 }
 export const Logout = async(req, res)=>{
     try {
-        await theUser.findByIdAndUpdate(
-            req.user.id
+        // await theUser.findByIdAndUpdate(
+        //     req.user.id
+        // );
             // {refreshToken: null} 
-        );
 
         res.status(200).json({msg:"Logged out✅", success: true})
     } catch (error) {
