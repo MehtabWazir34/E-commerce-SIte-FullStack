@@ -8,17 +8,18 @@ import { useAuth } from "../Config/AuthProvider";
 import { useUser } from "../Utility/THEUser";
 
 function AccountOpt({setAccOpts}){
-    const {theUser} = useUser()
+    const {theUser, setUser} = useUser()
     let navigateTo = useNavigate();
     const {setLoggedIn} = useAuth()
     const handleLogout = async()=>{
         try {
             await axiosInstance.post(`/user/logout`,{})
             setTimeout(()=>{
-                setAccOpts(false);
+                setUser(null);
                 setLoggedIn(false);
+                setAccOpts(false);
                 navigateTo('/login');
-            }, 500)
+            }, 300)
             localStorage.removeItem('token')
         } catch (error) {
             console.log("Failed to log out", error);

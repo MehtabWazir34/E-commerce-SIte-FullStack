@@ -19,6 +19,7 @@ export function THEUser({children}){
             setUser(theRes.data.user);
 
         } catch (error) {
+            setUser(null);
             console.log("Failed to getUser!", error);
        } finally{
         setLoading(false)
@@ -27,6 +28,7 @@ export function THEUser({children}){
     useEffect(()=>{
         getUser()
     }, []);
+    const loggedIn = !!theUser;
     return(
         <userContext.Provider value={{theUser, setUser, loading, getUser}}>
             {children}
