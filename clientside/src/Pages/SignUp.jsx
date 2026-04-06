@@ -19,7 +19,7 @@ function SignUp() {
   });
 
   const [loading, setLoading] = useState(false);
-  const {theUser} = useUser();
+  const { getUser } = useUser();
   const {setLoggedIn} = useAuth()
   const handleChange = (e) => {
     setFormData({
@@ -61,7 +61,7 @@ function SignUp() {
       );
       if(res.data.token){
         localStorage.setItem("token", res.data.token);
-        await theUser()
+        await getUser()
         navigateTo("/");
       }
 
@@ -70,9 +70,7 @@ function SignUp() {
     }
   };
 
-  useEffect(()=>{
-    handleGoogleSignup();
-  },[])
+
   return (
     <div className="min-h-screen flex items-center justify-center">
 

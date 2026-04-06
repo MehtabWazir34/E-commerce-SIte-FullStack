@@ -12,20 +12,18 @@ let theUserSchema = new mongoose.Schema({
         type: String, required: true, unique: true
     },
     password:{
-        type: String, required: true
+        type: String, default: null
     },
     profileImg:{
         type: String, default:''
     },
     phoneNo:{
-        type: Number, required: true, unique: true, default: '0123456789'
+        type: String, default: ''
     },
     role:{
         type: String, enum: ["user", "admin"], default: "user"
     },
-    password:{
-        type:String, default: null
-    },
+    
     googleId:{
         type: String
     },

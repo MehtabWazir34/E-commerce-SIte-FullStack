@@ -15,7 +15,7 @@ function Login() {
   let navigateTo = useNavigate()
   const [loading, setLoading] = useState(false);
   const {setLoggedIn} = useAuth()
-  const {theUser } = useUser()
+  const { getUser } = useUser()
   useEffect(()=>{
     setEmail('')
     setPass('')
@@ -48,7 +48,7 @@ function Login() {
         let token = res.data.token
         if(token){
           localStorage.setItem('token', token);
-          await theUser()
+          await getUser()
           navigateTo('/');
         }
     } catch (error) {
