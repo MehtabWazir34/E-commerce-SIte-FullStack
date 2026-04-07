@@ -41,18 +41,21 @@ export default function Profile() {
               userId={theUser._id}
               currentRole={theUser.role}
               />
-              <p className="text-sm text-gray-400">
-                <strong>NOTE!</strong> This is just for demonstration purposes. Later, it will be accessable to admins only.
-              </p>
               {/* {
                 theUser.role === 'admin' &&(
                   
-                  <UserRoleDropdown
-                  userId={theUser._id}
-                  currentRole={theUser.role}
-                  />
+                <UserRoleDropdown
+                userId={theUser._id}
+                currentRole={theUser.role}
+                />
                 )
                 } */}
+                    </div>
+                    <div className="w-full">
+
+                <p className="text-sm text-[#ffe2af] mt-1">
+                  <strong>NOTE!</strong> This is just for demonstration purposes. Later, it will be accessable to admins only.
+                </p>
                     </div>
 
             </div>
