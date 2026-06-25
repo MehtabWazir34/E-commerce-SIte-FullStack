@@ -8,7 +8,7 @@ import AccountOpt from "./AccountOpt";
 import MyCart from "./MyCart";
 import Draggable from 'react-draggable'
 function FloatingMenu() {
-  const nodeRef = useRef(null);
+//   const nodeRef = useRef(null);
     const [menuOpen, setMenuOpen] = useState(false);  
     const [cartOpn, setCartOpn] = useState(false);
     const [settingOpn, setSettingOpn] = useState(false);
@@ -17,9 +17,9 @@ function FloatingMenu() {
   return (
       <>
             { menuOpen && (
-                <div className={`transition-all duration-300 fixed top-0 right-0 place-items-center py-6 w-full bg-[#2c3936] flex justify-around rounded-md p-4 ${menuOpen ? 'opacity-100 " ': "opacity-0 hidden" } `}> 
-                    <ul className="flex justify-around gap-x-3">
-                        <li data-aos="fade-right" data-aos-duration="300">
+                <div className={`transition-all duration-300 fixed top-0 right-0 place-items-center py-6 w-full bg-[#2c3936] flex justify-around rounded-md  ${menuOpen ? 'opacity-100 " ': "opacity-0 hidden" } `}> 
+                    <ul className="flex justify-around gap-x-2">
+                        <li data-aos="fade-right"  data-aos-duration="300">
                             <NaVLink onClick={()=> setMenuOpen(false)} linkedTo={'/'} Name={'Home'}/>
                             </li>
                         <li data-aos="fade-right" data-aos-duration="400">
@@ -52,7 +52,7 @@ function FloatingMenu() {
         // ref={nodeRef}
         // 
         onClick={()=>setMenuOpen(!menuOpen)}
-        className="fixed md:hidden bottom-10 right-10 w-12 h-12 flex items-center justify-center border-4 border-[#2c3936] rounded-full bg-[#f2d39a] shadow-2xl cursor-grab z-9999"
+        className="fixed md:hidden bottom-10 right-1 w-12 h-12 flex items-center justify-center border-2 border-[#2c3936] rounded-full bg-[#f2d39a] shadow-2xl cursor-grab z-9999"
       >
         <IoMenu className="text-xl animate-bounce font-bold"/>
       </div>
