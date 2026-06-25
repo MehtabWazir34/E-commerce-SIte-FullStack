@@ -47,11 +47,11 @@ App.use((err, req, res, next) => {
     res.status(500).json({ Msg: 'Server error', error: err.message });
 });
 const port = process.env.MYAPP_PORT_NO || 3400
-if(process.env.NODE_ENV === 'development'){
+// if(process.env.NODE_ENV === 'development'){
     App.listen(port, ()=>{
     console.log(
         `Its running! localhost:${port}`
     );
     })
-}
+// }
 export default App
