@@ -9,6 +9,7 @@ function Products() {
   const [activeCategory, setActiveCategory] = useState([]);
   const [priceRange, setPriceRange] = useState({'low':'', 'high':''})
   const [productsList, setProducts] = useState([]);
+  console.log('prod:', productsList);
   
   useEffect(()=>{
    const getFilteredItems = async()=>{
@@ -86,8 +87,8 @@ function Products() {
                   </span>
 
                   <img
-                    src={item.Imgs[0].startsWith('http') || item.Imgs[1].startsWith('http') ? item.Imgs[0] : `${item.Imgs[0] || item.Imgs[1]}`}
-                    alt={item.Title}
+                    src={item?.Imgs[0]?.startsWith('http') || item?.Imgs[1]?.startsWith('http') ? item?.Imgs[0] : `${item?.Imgs[0] || item?.Imgs[1]}`}
+                    alt={item?.Title}
                     className="w-full h-full object-cover rounded-t-2xl"
                   />
                 </div>

@@ -15,14 +15,15 @@ function Details() {
   const [msgBox, setMsgBox] = useState(false);
   let isAdmin = theUser?.role === 'admin'; 
   const [editMode, setEditMode] = useState(false);
-  // const [previewImages, setPreviewImages] = useState([]);
-  const [editData, seteditData] = useState({
+  const [previewImages, setPreviewImages] = useState([]);
+  const [editData, setEditData] = useState({
     Title: '',
     Detail:'',
     Category:'',
     Price:'',
     deliveryFee: '',
-    offPrice: ''
+    offPrice: '',
+    Imgs: []
   });
 
   let navigateTo = useNavigate();
@@ -33,6 +34,7 @@ function Details() {
         const product = res.data.product;
         setItem(product);
         setMainImg(product?.Imgs?.[0]); // first image as main
+        setPreviewImages(editData?.Imgs)
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -73,14 +75,41 @@ function Details() {
     }
   }
 
+  const handleImageChange = (a)=>{
+    let files = Array.from(a.target.files)
+    if(files.length + previewImages.length > 6){
+      alert("Maximum 6 images you can upload!")
+    };
+    setEditData((pre)=>({ 
+      ...pre, 
+      Imgs:[...pre.Imgs, ...files]
+    }));
+    const dispImg = files.map((img)=> URL.createObjectURL(img));
+    setPreviewImages((pre)=> [...pre, ...dispImg]);
+  }
+  const removeImage = (idx)=>{
+    setPreviewImages((pre)=> pre.filter((_, i)=> i !== idx));
+
+    setEditData((pre)=>({
+      ...pre, Imgs: pre.Imgs.filter((_, i)=> i !== idx),
+    }));
+  }
   const updateProduct = async (a)=>{
     a.preventDefault();
-
-        await axiosInstance.put(`/admin/editpro/${id}`, editData,{
+      const myFormData = new FormData();
+      myFormData.append("Title", editData.Title)
+      myFormData.append("Detail", editData.Detail)
+      myFormData.append("deliveryFee", editData.deliveryFee)
+      myFormData.append("Price", editData.Price)
+      myFormData.append("offPrice", editData.offPrice)
+      myFormData.append("Category", editData.Category)
+      editData.Imgs.forEach((file)=>{
+        myFormData.append("Imgs", file)
+      })
+        await axiosInstance.put(`/admin/editpro/${id}`, myFormData,{
           headers:{
-            Authorization:`Bearer ${localStorage.getItem('token')}`
-            // ,
-            // "Content-Type": "multipart/form-data"
+            Authorization:`Bearer ${localStorage.getItem('token')}`,
+            "Content-Type": "multipart/form-data"
           }
         })
         window.location.reload()
@@ -90,14 +119,14 @@ function Details() {
 
   const handleEdit = ()=>{
     setEditMode(true)
-    seteditData({
+    setEditData({
         Title: item.Title,
         Detail: item.Detail,
         Category: Array.isArray(item?.Category) ? item.Category[0] : item.Category ,
         Price: item?.Price,
         offPrice: item?.offPrice,
         deliveryFee: item.deliveryFee,
-        // Imgs: item?.Imgs?.slice(0,6) // limit to 6 images
+        Imgs: item?.Imgs?.slice(0,6) // limit to 6 images
         
       
       })
@@ -121,9 +150,11 @@ function Details() {
           {/* Main Image */}
           <div className="w-full rounded-xl overflow-hidden">
             <img
-              src={mainImg.startsWith('http') ? mainImg : `${mainImg}`}
+              src={mainImg
+                // .startsWith('http') ? mainImg : `${mainImg}`
+            }
               alt={item.Title}
-              className="w-full h-80 object-cover rounded-xl transition-all duration-300 hover:scale-[1.02]"
+              className="w-full h-80 object-contain rounded-xl transition-all duration-300 hover:scale-[1.5]"
             />
           </div>
 
@@ -131,7 +162,9 @@ function Details() {
             {item.Imgs?.map((img, index) => (
               <img
                 key={index}
-                src={img.startsWith('http') ? img : `${img}`}
+                src={img
+                  // .startsWith('http') ? img : `${img}`
+                  }
                 alt="thumbnail"
                 onClick={() => setMainImg(img)}
                 className={`w-16 h-16 object-cover rounded-lg cursor-pointer border transition-all duration-300
@@ -176,14 +209,14 @@ function Details() {
               }
               {
                 editMode && (
-                  <section className="w-full min-h-screen bg-black/60 inset-0 fixed z-30 px-4 py-8">
-        <div className="max-w-6xl mx-auto bg-[#364145] mt-10 rounded-2xl shadow-xl p-6">
+                  <section className="w-full min-h-screen overflow-auto bg-black/60 inset-0 fixed z-30 p-4">
+        <div className="max-w-6xl mx-auto bg-[#364145] rounded-2xl shadow-xl p-6">
           <h2 className="text-3xl text-[#f2d39a] text-center mb-6 font-semibold">
             Update Product
           </h2>
-                  <span className="absolute top-22 right-28 font-semibold text-[#2c3936] bg-[#f2d39a] p-2 rounded-full transition-all duration-200  cursor-pointer" 
+                  <span className="absolute top-10 right-28 font-semibold text-[#2c3936] bg-[#f2d39a] px-3 py-1 rounded-full transition-all duration-200  cursor-pointer" 
                   onClick={() => setEditMode(false)}
-                  > Close</span>
+                  > X</span>
           <form
             onSubmit={updateProduct}
             className="grid grid-cols-1 lg:grid-cols-2 gap-6"
@@ -192,18 +225,18 @@ function Details() {
               <LaBel lblFor="Category" lblName="Category" />
               <select
                 id="Category"
-                className="rounded-md border border-gray-500 px-2 py-2 text-sm text-center outline-none"
+                className="rounded-md border border-gray-500 px-2 py-2 text-[#f2d39a] text-sm text-center outline-none"
                 value={editData.Category}
                 onChange={(e) =>
-                  seteditData({ ...editData, Category: e.target.value })
+                  setEditData({ ...editData, Category: e.target.value })
                 }
                 required
               >
                 <option value="">-- Select Category --</option>
-                <option value="Cricket">Cricket</option>
-                <option value="Football">Football</option>
-                <option value="Volleyball">Volleyball</option>
-                <option value="Wears">Wears</option>
+                <option className='bg-[#364145]' value="Cricket">Cricket</option>
+                <option className='bg-[#364145]' value="Football">Football</option>
+                <option className='bg-[#364145]' value="Volleyball">Volleyball</option>
+                <option className='bg-[#364145]' value="Wears">Wears</option>
               </select>
             </div>
   
@@ -217,14 +250,14 @@ function Details() {
                 placeholder="Enter product Title"
                 value={editData.Title}
                 onChange={(e) =>
-                  seteditData({ ...editData, Title: e.target.value })
+                  setEditData({ ...editData, Title: e.target.value })
                 }
                 required
               />
             </div>
   
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:col-span-2">
-              <div>
+              <div className='grid'>
                 <LaBel lblFor="original" lblName="Original Price" />
                 <InPut
                   type="number"
@@ -232,14 +265,14 @@ function Details() {
                   placeholder="Original Price"
                   value={editData.Price}
                   onChange={(e) =>
-                    seteditData({ ...editData, Price: e.target.value }
+                    setEditData({ ...editData, Price: e.target.value }
                   )
                   }
                   required
                 />
               </div>
   
-              <div>
+              <div className='grid'>
                 <LaBel lblFor="deliveryFee" lblName="Delivery Fee" />
                 <InPut
                   type="number"
@@ -247,7 +280,7 @@ function Details() {
                   placeholder="Delivery Fee"
                   value={editData.deliveryFee}
                   onChange={(e) =>
-                    seteditData({
+                    setEditData({
                       ...editData,
                       deliveryFee: e.target.value,
                     })
@@ -255,7 +288,7 @@ function Details() {
                 />
               </div>
   
-              <div>
+              <div className='grid'>
                 <LaBel lblFor="Discount" lblName="Discount" />
                 <InPut
                   type="number"
@@ -263,7 +296,7 @@ function Details() {
                   placeholder="Discount"
                   value={editData.offPrice}
                   onChange={(e) =>
-                    seteditData({...editData, offPrice: e.target.value})
+                    setEditData({...editData, offPrice: e.target.value})
                   }
                 />
               </div>
@@ -278,11 +311,38 @@ function Details() {
                 placeholder="Write Detailed description of the item"
                 value={editData.Detail}
                 onChange={(e) =>
-                  seteditData({ ...editData, Detail: e.target.value })
+                  setEditData({ ...editData, Detail: e.target.value })
                 }
                 required
               />
             </div>
+            <div className="flex flex-col gap-2 lg:col-span-2">
+              <LaBel lblFor="" lblName="Images" />
+              <input
+                id="imgs"
+                type='file'
+                accept='image/*'
+                multiple hidden
+                className=" w-full text-sm text-gray-300 file:mr-4 file:rounded-md file:border-0 file:bg-[#f2d39a] file:px-4 file:py-2 file:text-black"
+                // placeholder="Write Detailed description of the item"
+                // value={editData.Imgs}
+                onChange={handleImageChange}
+                
+              />
+              <label htmlFor='imgs' className='bg-[#f2d39a] p-2 font-semibold text-center text-sm rounded-md cursor-pointer text-black max-w-28'>Select Files</label>
+            </div>
+              { previewImages.length > 0 && 
+                <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:col-span-2 gap-1'>
+                  {
+                    previewImages.map((file, idx)=>(
+                      <div key={idx} className='relative'>
+                        <img src={file} alt="product img" className='object-contain rounded-md h-24 w-full border rounded-sm ' />
+                        <span onClick={()=>removeImage(idx)} className='absolute top-0 right-0 rounded-full px-1 cursor-pointer bg-red-500'>X</span>
+                      </div>
+                    ))
+                  }
+                </div>
+              }
   
             <div className="lg:col-span-2 flex justify-center mt-6">
               <button

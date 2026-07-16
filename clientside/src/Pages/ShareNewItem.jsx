@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts";
 import axiosInstance from '../Utility/axiosInstance.js'
+import { useNavigate } from "react-router";
 
 function ShareNewItem() {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ function ShareNewItem() {
   });
 
   const [previewImages, setPreviewImages] = useState([]);
-
+  let navigateTo = useNavigate()
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
 
@@ -40,26 +41,30 @@ function ShareNewItem() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-
-    const payload = new FormData();
-    payload.append("Title", formData.Title);
-    payload.append("Detail", formData.Detail);
-    payload.append("Category", formData.Category);
-    payload.append("Price", formData.Price)
-    payload.append("offPrice", formData.offPrice);
-    payload.append("deliveryFee", formData.deliveryFee)
-    // payload.append("originalPrice", formData.Price.original);
-    // payload.append("mrp", formData.Price.mrp);
-    // payload.append("offPrice", formData.Price.offPrice);
-
-    formData.Imgs.forEach((img) => {
-      payload.append("Imgs", img);
-    });
-console.log(formData);
-
-    console.log("Ready for backend upload");
-    // axios.post("/api/products", payload)
-    await axiosInstance.post('`/products/addnew', payload)
+    try {
+      
+      const payload = new FormData();
+      payload.append("Title", formData.Title);
+      payload.append("Detail", formData.Detail);
+      payload.append("Category", formData.Category);
+      payload.append("Price", formData.Price)
+      payload.append("offPrice", formData.offPrice);
+      payload.append("deliveryFee", formData.deliveryFee)
+      
+      formData.Imgs.forEach((img) => {
+        payload.append("Imgs", img);
+      });
+      console.log(formData);
+      
+      console.log("Ready for backend upload");
+      // axios.post("/api/products", payload)
+      await axiosInstance.post('/products/addnew', payload)
+      alert("New item uploaded!")
+      navigateTo('/products');
+    } catch (error) {
+      console.log("Backend stopped!", error);
+      
+    }
   };
 
   return (
@@ -193,7 +198,7 @@ console.log(formData);
                   <button
                     type="button"
                     onClick={() => removeImage(index)}
-                    className="absolute top-1 right-1 bg-red-600 text-white text-xs px-2 py-1 rounded"
+                    className="absolute top-1 right-1 bg-red-600 text-white text-xs p-1 rounded-full"
                   >
                     X
                   </button>

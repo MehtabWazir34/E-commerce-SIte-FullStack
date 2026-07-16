@@ -1,5 +1,5 @@
+import cloudinary from "../Config/cloudinary.js";
 import theProduct from "../DBModels/ProductModel.js";
-
 // export const addProducts = async(req, res)=>{
 //     try {
 //         // let myProductsData = req.body;
@@ -49,14 +49,13 @@ export const addProducts = async (req, res) => {
     // 2. Extract body
     const { Title, Detail, Category, Price, offPrice, deliveryFee } = req.body;
 
-    // 3. Parse Price if needed
-    // const parsedPrice =
-    //   typeof Price === "string" ? JSON.parse(Price) : Price;
-
     // 4. Convert files to paths
-    const images = req.files.map(
-      file => `/uploads/products/${file.filename}`
-    );
+    let imgUrls = req.files;
+    if(imgUrls){
+        let thePrms = imgUrls.map((img)=> cloudinary.uploader.upload(img.path, {folder:'janSports/products'}))
+        let res = await Promise.all(thePrms);
+        imgUrls = res.map(file => file.secure_url)
+    }
 
     // 5. Create product
     const newProduct = await theProduct.create({
@@ -64,7 +63,7 @@ export const addProducts = async (req, res) => {
       Detail,
       Category,
       Price, offPrice, deliveryFee,
-      Imgs: images
+      Imgs: imgUrls
     });
 
     // 6. Respond once
@@ -194,24 +193,38 @@ export const deleteProduct = async(req, res) =>{
         })
     }
 }
-export const editProduct = async(req, res)=>{
+export const updateProduct = async (req, res) => {
     try {
-        const updatedProduct = await theProduct.findByIdAndUpdate(req.params.id, req.body, {new: true});
-        if(!updatedProduct){
-            return res.status(404).json({
-                succes: false,
-                Msg: "Product not found"
-            })
+        console.log("TEST")
+        const productId = req.params.id;
+        const {Title, Detail, offPrice, Price, deliveryFee, Category} = req.body;
+        let Imgs = req.files;
+        if (Imgs) {
+            let imgFiles = Imgs.map((file) => cloudinary.uploader.upload(file.path, {folder:'janSports/products'}));
+            let theResult = await Promise.all(imgFiles);
+            Imgs = theResult.map((file)=> file.secure_url)
         }
+        const updatedProduct = await theProduct.findByIdAndUpdate(
+            productId,
+            {Title, deliveryFee, Detail, offPrice, Price, Category, Imgs},
+            { new: true }
+        );
+
+        console.log(updatedProduct);
+
         res.status(200).json({
-            succes: true,
-            Msg: "Product updated ✅",
+            success: true,
             updatedProduct
-        })
-    } catch (error) {
-        res.json({
-            Succes: false,
-            Msg: error.message
-        })
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
     }
-}
+};

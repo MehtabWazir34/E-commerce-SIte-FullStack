@@ -9,6 +9,8 @@ export const ConnectDb = async()=>{
             
             );
             console.log(`"MongooseDB Connected✅"`);
+    //         console.log("Connected to:", mongoose.connection.host);
+    // console.log("Database:", mongoose.connection.name);
             
     } catch (error) {
         console.log('DB Connection error❌', error);

@@ -1,27 +1,4 @@
 import mongoose from "mongoose";
-// const priceSchema = new mongoose.Schema(
-//   {
-//     originalPrice: { type: mongoose.Schema.Types.Decimal128, required: true },
-//     mrp: { type: mongoose.Schema.Types.Decimal128, required: true },
-//     offPrice: { type: mongoose.Schema.Types.Decimal128, required: true }
-//   },
-//   {
-//     toJSON: {
-//       transform: (_, ret) => {
-//         if (ret.originalPrice)
-//           ret.originalPrice = ret.originalPrice.toString();
-
-//         if (ret.mrp)
-//           ret.mrp = ret.mrp.toString();
-
-//         if (ret.offPrice)
-//           ret.offPrice = ret.offPrice.toString();
-//         return ret;
-//       }
-//     }
-//   }
-// );
-
 
 let theProductSchema = new mongoose.Schema({
     Title:{
@@ -30,13 +7,8 @@ let theProductSchema = new mongoose.Schema({
     Detail:{
         type: String, required: true, 
     },
-    // Name:{
-    //     type: String, required: true, 
-    // },
     Price:{
-        type: mongoose.Schema.Types.Decimal128, required: true
-        // default:{originalPrice: 0.0, MRPrice:0.0, offPrice:0.0},
-        
+        type: mongoose.Schema.Types.Decimal128, required: true        
     },
     deliveryFee:{
         type: mongoose.Schema.Types.Decimal128, default: 100, 
@@ -45,11 +17,11 @@ let theProductSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.Decimal128, default: 0, 
     },
     Category:{
-        type: [String], default: []
+        type: String, default: []
     },
-    Imgs:{
-        type: [String], required: true
-    }
+    Imgs:[{
+        type: String, required: true
+    }]
 },
   {
     toJSON:{
