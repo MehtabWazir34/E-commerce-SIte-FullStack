@@ -180,10 +180,10 @@ function ShareNewItem() {
               type="file"
               id="images"
               accept="image/*"
-              multiple
+              multiple hidden
               onChange={handleImageChange}
-              className="block w-full text-sm text-gray-300 file:mr-4 file:rounded-md file:border-0 file:bg-[#f2d39a] file:px-4 file:py-2 file:text-black"
             />
+            <label htmlFor="images" className="block w-full text-sm bg-[#f2d39a] p-2 rounded-md max-w-24 text-center font-semibold cursor-pointer " >Select Files</label>
           </div>
 
           {previewImages.length > 0 && (
