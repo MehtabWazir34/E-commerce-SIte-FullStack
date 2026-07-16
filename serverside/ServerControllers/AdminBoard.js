@@ -20,8 +20,6 @@ export const allAdminOrders = async (req, res)=>{
 export const getOrder = async(req, res)=>{
     console.log(req.params.id);
     try {
-        
-        // const {id} = req.params.id
         let tOrder = await theOrder.findById(req.params.id);
         if(!tOrder){
             return res.json({

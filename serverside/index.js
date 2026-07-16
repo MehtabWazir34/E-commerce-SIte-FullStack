@@ -7,7 +7,6 @@ import { productRoutes } from './Routes/productRoutes.js';
 import path from 'path'
 import { adminRoutes } from './Routes/AdminRoutes.js';
 import { log } from 'console';
-// import { orderRoutes } from './Routes/orderRoutes.js';
 configDotenv()
 const App = express();
 App.use(express.json());
@@ -43,12 +42,10 @@ App.use((req, res, next) => {
 });
 
 ConnectDb()
-console.log("Allwd:", allowedOrigins);
-console.log("Frnt:", process.env.FRONTEND_URL);
 
 
 App.get('/', (req, res) => {
-  res.send('Backend is running 🚀');
+  res.send('Backend is running');
 });
 
 App.use("/user", userRoutes);
@@ -56,12 +53,6 @@ App.use('/products', productRoutes);
 App.use('/admin', adminRoutes);
 App.use('/uploads', express.static(path.join(process.cwd(),"uploads")))
 
-// Add this AFTER all your routes, before App.listen
-// App.use((err, req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
-//     res.header('Access-Control-Allow-Credentials', 'true');
-//     res.status(500).json({ Msg: 'Server error', error: err.message });
-// });
 const port = process.env.MYAPP_PORT_NO || 3400
 // if(process.env.NODE_ENV === 'development'){
     App.listen(port, ()=>{

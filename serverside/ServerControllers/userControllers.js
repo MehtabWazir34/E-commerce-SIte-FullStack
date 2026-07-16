@@ -15,7 +15,6 @@ export const SignUp = async(req, res)=>{
     if(!fullName || !userName || !email || !phoneNo || !password){
         return res.status(404).json({Msg:"All fields are required to fill."})
     };
-
     // check existence
     let lowerUserName = userName.toLowerCase();
     let accountExsts = await theUser.findOne({userName: lowerUserName});

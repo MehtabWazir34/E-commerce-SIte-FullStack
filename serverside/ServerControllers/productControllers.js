@@ -1,44 +1,8 @@
 import cloudinary from "../Config/cloudinary.js";
 import theProduct from "../DBModels/ProductModel.js";
-// export const addProducts = async(req, res)=>{
-//     try {
-//         // let myProductsData = req.body;
-//         // if(!Array.isArray(myProductsData)){
-//         //     res.status(400).json({Msg:"Invalid entery! Send an array of products."})
-//         // };
-        
-//         // const myAllProducts = [];
-//         // for(let newItem of myProductsData){
-//             if(!req.files || req.files.length === 0){
-//                 return res.status(400).json({Msg:"No images uploaded, atleast one image is required."});
-//             }
-//             const {Title, Detail,  Category, Price } = req.body;
-//             const imges = req.files.map(file => `uploads/products/${file.filename}`)
-//             const newProduct = await theProduct.create({
-//                 Title, Detail,  Price, Category, Imgs: imges
-//             });
-
-//             // const newAddedItem = await newProduct.save();
-//             // myAllProducts.push(await newProduct.save());
-        
-//         return res.status(200).json({
-//             succes: true,
-//             Msg:"New product added ✅",
-//             newProduct
-//         })
-//     } catch (error) {
-//         console.log("Error to add product!", error);
-//         res.status(404).json({
-//             succes: false,
-//             Msg:"Faild to add prodcut"
-//         })
-        
-//     }
-// }
 
 export const addProducts = async (req, res) => {
   try {
-    // 1. Validate files
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({
         success: false,
@@ -46,10 +10,10 @@ export const addProducts = async (req, res) => {
       });
     }
 
-    // 2. Extract body
+    //  Extract body itms
     const { Title, Detail, Category, Price, offPrice, deliveryFee } = req.body;
 
-    // 4. Convert files to paths
+    //  upload to cloudinary
     let imgUrls = req.files;
     if(imgUrls){
         let thePrms = imgUrls.map((img)=> cloudinary.uploader.upload(img.path, {folder:'janSports/products'}))
@@ -57,7 +21,7 @@ export const addProducts = async (req, res) => {
         imgUrls = res.map(file => file.secure_url)
     }
 
-    // 5. Create product
+    // Create product
     const newProduct = await theProduct.create({
       Title,
       Detail,
@@ -66,7 +30,7 @@ export const addProducts = async (req, res) => {
       Imgs: imgUrls
     });
 
-    // 6. Respond once
+    // Respond
     return res.status(201).json({
       success: true,
       Msg: "New product added ✅",
@@ -85,7 +49,6 @@ export const addProducts = async (req, res) => {
 
 export const getItemById = async(req, res)=>{
     try {
-        // let {itemId} = req.params;
         let product = await theProduct.findById(req.params.id);
         if(!product){
             res.status(404).json({Msg:"Not found item"});
@@ -160,9 +123,6 @@ export const getProductsAndApplyFilter = async(req, res)=>{
             succes: true,
             filteredItems
         })
-        console.log("Category:", req.query.Category);
-        console.log("Type:", typeof req.query.Category);
-
         
     } catch (error) {
         console.log("error❌", error);
@@ -195,7 +155,6 @@ export const deleteProduct = async(req, res) =>{
 }
 export const updateProduct = async (req, res) => {
     try {
-        console.log("TEST")
         const productId = req.params.id;
         const {Title, Detail, offPrice, Price, deliveryFee, Category} = req.body;
         let Imgs = req.files;
@@ -209,8 +168,6 @@ export const updateProduct = async (req, res) => {
             {Title, deliveryFee, Detail, offPrice, Price, Category, Imgs},
             { new: true }
         );
-
-        console.log(updatedProduct);
 
         res.status(200).json({
             success: true,
