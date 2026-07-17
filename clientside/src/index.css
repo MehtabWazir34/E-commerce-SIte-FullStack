@@ -5,3 +5,67 @@
 /* @tailwind base; */
 /* @tailwind components; */
 /* @tailwind utilities; */
+@import "tailwindcss";
+
+html {
+    scroll-behavior: smooth;
+}
+
+@keyframes itemAOS {
+    from {
+        opacity: 0;
+        /* scale: 0.5; */
+        transform: translateX(-175px);
+    }
+
+    to {
+        opacity: 1;
+        /* scale: 1; */
+        transform: translateX(0);
+    }
+}
+
+#animateItem {
+    animation: itemAOS 1s linear;
+    /* animation-timeline: view();
+    animation-range: entry 0; */
+}
+
+/* @theme {
+--color-court: #1C1C1E;
+--color-volt: #C4F135;
+--color-chalk: #FAFAFA;
+--color-matchRed: #E8332B;
+--color-slate: #6E6E73;
+--color-steel: #2C2C2E;
+    --color-btnClr: #FFE2AF;
+    --color-surfaceHover: #F2D39A;
+    --color-darkSurface: #2c3639;
+} */
+ @theme {
+  --color-court: #101828;        /* deep cool navy — now used for TEXT & dark accents, not full bg */
+  --color-chalk: #F7F9FC;        /* soft cool white — primary background */
+  --color-volt: #14B8A6;         /* teal — primary accent (was green) */
+  --color-volt-alt: #6366F1;     /* indigo — gradient partner for volt */
+  --color-matchRed: #F43F5E;     /* modern rose-red — sale/urgency */
+  --color-slate: #64748B;        /* cool gray — body text */
+  --color-steel: #E2E8F0;        /* light border/divider */
+
+  --gradient-brand: linear-gradient(135deg, #14B8A6 0%, #6366F1 100%);
+  --gradient-brand-soft: linear-gradient(135deg, #CCFBF1 0%, #E0E7FF 100%);
+}
+
+.bg-gradient-brand {
+  background: var(--gradient-brand);
+}
+
+.bg-gradient-brand-soft {
+  background: var(--gradient-brand-soft);
+}
+
+.text-gradient-brand {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -38,39 +38,39 @@ function ContactForm() {
   return (
     <section
       id="contact"
-      className="w-full bg-[#2c3639] text-[#f2d39a] py-16 rounded-2xl"
+      className="w-full bg-white text-gray-800 py-16 rounded-3xl border border-gray-100 font-sans antialiased shadow-sm"
     >
       <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
         {/* Left Content */}
         <div data-aos="fade-right" className="space-y-6">
-          <h2 className="text-3xl font-semibold text-[#FFE2AF]">
+          <h2 className="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-tight">
             Get in Touch
           </h2>
 
-          <p className="text-sm text-gray-300 leading-relaxed">
+          <p className="text-xs text-gray-400 leading-relaxed font-medium">
             Have questions about our products or need support?
             Fill out the form and our team will respond as soon as possible.
           </p>
 
-            <ul className="space-y-3 text-lg ">
-                      <a href="https://web.facebook.com/profile.php?id=61581245577311" className="flex items-center gap-3 hover:text-white transition">
-                        <MdFacebook /> Jan Sports
+            <ul className="space-y-3 text-xs font-semibold text-gray-600">
+                      <a href="https://web.facebook.com/profile.php?id=61581245577311" className="flex items-center gap-3 text-gray-600 hover:text-purple-600 transition-colors duration-150">
+                        <MdFacebook className="text-base text-gray-400" /> Jan Sports
                       </a>
-                      <a href="http://wa.me/+923159878075" className="flex items-center gap-3 hover:text-white transition">
-                        <MdWhatsapp /> +92 315 9878075
+                      <a href="http://wa.me/+923159878075" className="flex items-center gap-3 text-gray-600 hover:text-purple-600 transition-colors duration-150">
+                        <MdWhatsapp className="text-base text-gray-400" /> +92 315 9878075
                       </a>
-                      <li className="flex items-center gap-3 hover:text-white transition">
-                        <MdEmail /> jansports@email.com
+                      <li className="flex items-center gap-3 text-gray-600 hover:text-purple-600 transition-colors duration-150">
+                        <MdEmail className="text-base text-gray-400" /> jansports@email.com
                       </li>
                     </ul>
         </div>
 
         {/*MSg Form */}
-        <form data-aos="fade-left" onSubmit={sendMsg} ref={refForm} className="bg-[#3a464a] p-8 rounded-xl shadow-lg space-y-5">
+        <form data-aos="fade-left" onSubmit={sendMsg} ref={refForm} className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4 [&_label]:text-xs [&_label]:font-bold [&_label]:text-gray-400">
 
           
-          <div className="grid grid-cols-1">
+          <div className="grid grid-cols-1 gap-1">
             <LaBel lblFor={'name'} lblName={'Full Name'}/>
             <input
               id="name"
@@ -79,10 +79,10 @@ function ContactForm() {
               placeholder="Enter your name"
               required={'required'}
               value={name} onChange={(a)=> saveName(a.target.value)}
-              className="rounded-sm px-2  text-[#2c3639] font-semibold border border-gray-500 outline-0 bg-[#ffe2af] focus:bg-[#F2D39A]"
+              className="rounded-xl px-3 py-2.5 text-gray-700 text-sm font-medium border border-transparent bg-gray-50 focus:outline-none focus:border-purple-300 focus:bg-white transition-all"
             />
           </div>
-          <div className="grid grid-cols-1">
+          <div className="grid grid-cols-1 gap-1">
             <LaBel lblFor={'email'} lblName={'Email'}/>
             <input
               id="email"
@@ -90,24 +90,24 @@ function ContactForm() {
               name="email"
               placeholder="Enter your email@gmail.com"
               required={'required'}
-              className="rounded-sm px-2  text-[#2c3639] font-semibold border border-gray-500 outline-0 bg-[#ffe2af] focus:bg-[#F2D39A]"
+              className="rounded-xl px-3 py-2.5 text-gray-700 text-sm font-medium border border-transparent bg-gray-50 focus:outline-none focus:border-purple-300 focus:bg-white transition-all"
               value={email} onChange={(a)=> saveEmail(a.target.value)}
             />
           </div>
 
           {/* Message */}
-          <div className="grid grid-cols-1">
+          <div className="grid grid-cols-1 gap-1">
             <LaBel lblFor={'msg'} lblName={'Message'}/>
-            <textarea id={'message'} name="message" placeholder={'Wirte your messge.'} 
+            <textarea id={'message'} name="message" placeholder={'Write your message.'} 
             value={msg} onChange={(a)=> saveMsg(a.target.value)}
-        className="rounded-2xl border border-gray-500 outline-0 text-[#2c3639] p-4 bg-[#ffe2af] focus:bg-[#F2D39A] "
+        className="rounded-xl border border-transparent text-gray-700 p-3.5 bg-gray-50 focus:outline-none focus:border-purple-300 focus:bg-white font-medium text-sm transition-all resize-none h-28"
         ></textarea>
           </div>
 
           {/* Submit */}
           <button
             type="submit"
-            className="w-full py-2 rounded-md bg-amber-500 text-black font-semibold hover:bg-amber-400 transition duration-300"
+            className="w-full px-6 py-3 text-xs font-bold uppercase tracking-wider rounded-full transition-all bg-purple-600 text-white shadow-sm shadow-purple-100 hover:bg-purple-700 cursor-pointer"
           >
             Send Message
           </button>

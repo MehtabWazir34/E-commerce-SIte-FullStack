@@ -26,21 +26,23 @@ export default function Profile() {
   const completedOrders = orders.filter((o)=> o.orderStatus === 'Delivered').length
   
   return (
-    <div className="min-h-screen max-w-7xl mx-auto mt-8 rounded-2xl bg-[#2c3936] text-[#ffe2af] p-6">
-      <div className="max-w-6xl mx-auto space-y-6">
+    <div className="min-h-screen max-w-7xl mx-auto mt-8 rounded-3xl bg-transparent text-gray-800 p-4 md:p-6 font-sans antialiased">
+      <div className="max-w-6xl mx-auto space-y-8">
 
-        {/* Profile Card */}
-        <div className="bg-[#1f2a27] rounded-2xl p-6">
-          <h2 className="text-2xl font-semibold mb-4">My Profile</h2>
+        {/* Profile Card Container with soft drop shadow */}
+        <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
+          <h2 className="text-lg font-sans font-black text-gray-900 uppercase tracking-tight mb-4">My Profile</h2>
           {theUser && (
-            <div className="space-y-2">
-              <p><b>Name:</b> {theUser.fullName}</p>
-              <p><b>Email:</b> {theUser.email}</p>
-              <div className="flex gap-x-4 items-center"><b>Role: {theUser.role !=='admin' ? 'User' : 'Admin'}</b> 
-              <UserRoleDropdown
-              userId={theUser._id}
-              currentRole={theUser.role}
-              />
+            <div className="space-y-3 text-sm font-medium text-gray-500">
+              <p><b className="text-gray-700 font-bold">Name:</b> {theUser.fullName}</p>
+              <p><b className="text-gray-700 font-bold">Email:</b> {theUser.email}</p>
+              <div className="flex gap-x-3 items-center pt-1"><b className="text-gray-700 font-bold">Role: {theUser.role !=='admin' ? 'User' : 'Admin'}</b> 
+              <div className="[&_select]:rounded-full [&_select]:px-3 [&_select]:py-1 [&_select]:text-[11px] [&_select]:font-bold [&_select]:uppercase [&_select]:bg-gray-100 [&_select]:text-gray-600 [&_select]:border-none">
+                <UserRoleDropdown
+                userId={theUser._id}
+                currentRole={theUser.role}
+                />
+              </div>
               {/* {
                 theUser.role === 'admin' &&(
                   
@@ -51,9 +53,9 @@ export default function Profile() {
                 )
                 } */}
                     </div>
-                    <div className="w-full">
+                    <div className="w-full mt-4 pt-3 border-t border-gray-50">
 
-                <p className="text-sm text-[#ffe2af] mt-1">
+                <p className="text-xs text-amber-600 font-medium bg-amber-50 p-3 rounded-xl border border-amber-100/50">
                   <strong>NOTE!</strong> This is just for demonstration purposes. Later, it will be accessable to admins only.
                 </p>
                     </div>
@@ -62,55 +64,66 @@ export default function Profile() {
           )}
         </div>
 
-        {/* Miniboard for Admin only */}
-      <section data-aos="fade-down" data-aos-duration="300" className={`${theUser?.role === 'admin' ? '' : 'hidden'} min-h-1/3 bg-[#1f2a27] rounded-2xl p-6`}>
+        {/* Miniboard dashboard styled exactly like reference panels */}
+      <section data-aos="fade-down" data-aos-duration="300" className={`${theUser?.role === 'admin' ? '' : 'hidden'} bg-white border border-gray-100 shadow-sm rounded-3xl p-6`}>
 
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-[#ffe2af] gap-3">
-        <h2 className="text-2xl font-bold">Admin Dashboard</h2>
-        <h2 className="text-sm md:text-lg">
-          Welcome <span className="font-bold">{theUser?.fullName}</span>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-gray-900 gap-2 border-b border-gray-100 pb-4">
+        <h2 className="text-lg font-sans font-black uppercase tracking-tight">Admin Dashboard</h2>
+        <h2 className="text-xs font-medium text-gray-400">
+          Welcome <span className="font-bold text-gray-700">{theUser?.fullName}</span>
         </h2>
       </div>
 
-      {/* Stats Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 text-white">
-        <StatCard title="Total Orders" value={orders.length} color="bg-indigo-600/85" />
-        <StatCard title="Active Orders" value={activeOrders} color="bg-yellow-600/85" />
-        <StatCard title="Completed Orders" value={completedOrders} color="bg-green-600/85" />
-        <StatCard title="Cancelled Orders" value={cancelledOrders} color="bg-red-600/85" />
+      {/* Stats Section with subtle backgrounds */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+        <StatCard title="Total Orders" value={orders.length} color="bg-gray-50 text-gray-700 border border-gray-100 shadow-none" />
+        <StatCard title="Active Orders" value={activeOrders} color="bg-purple-50/50 text-purple-700 border border-purple-100 shadow-none" />
+        <StatCard title="Completed Orders" value={completedOrders} color="bg-emerald-50/50 text-emerald-700 border border-emerald-100 shadow-none" />
+        <StatCard title="Cancelled Orders" value={cancelledOrders} color="bg-rose-50/50 text-rose-700 border border-rose-100 shadow-none" />
       </div>
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-6 [&_a]:rounded-full [&_a]:px-6 [&_a]:py-2.5 [&_a]:text-xs [&_a]:font-bold [&_a]:uppercase [&_a]:tracking-wider [&_a]:bg-purple-600 [&_a]:text-white [&_a]:shadow-sm [&_a]:shadow-purple-100">
         <NaVLink linkedTo={'/adminboard'} Name={'See Details'}/>
       </div>
         </section>
 
-        {/* User only */}
-        <div className={`${theUser?.role !== 'admin' ? '' : 'hidden'} bg-[#1f2a27] rounded-2xl p-6`}>
-          <h2 className="text-xl font-semibold mb-4">My Orders</h2>
+        {/* User Specific Panel Grid */}
+        <div className={`${theUser?.role !== 'admin' ? '' : 'hidden'} bg-white border border-gray-100 shadow-sm rounded-3xl p-6`}>
+          <h2 className="text-lg font-sans font-black text-gray-900 uppercase tracking-tight mb-4">My Orders</h2>
 
-          {orders.length === 0 && <p>No orders yet.</p>}
+          {orders.length === 0 && <p className="text-xs text-gray-400 font-medium">No orders yet.</p>}
 
           <div className="grid md:grid-cols-2 gap-4">
             {orders.map(order => (
-              <div key={order._id} className="border border-[#ffe2af]/20 rounded-xl p-4">
-                <p><b>Order ID:</b> {order._id}</p>
-                <p><b>Total:</b> Rs {order.totalAmount}</p>
-                <div className="mt-1 flex gap-x-2 items-center">
-                <p><b>Status: {order.orderStatus === 'Cancel' ? 'Cancelled' : order.orderStatus}</b></p>
+              <div key={order._id} className="border border-gray-100 bg-gray-50/30 rounded-2xl p-4 flex flex-col justify-between gap-4">
+                <div className="text-xs font-medium text-gray-500 space-y-1">
+                  <p><b className="text-gray-700 font-bold">Order ID:</b> <span className="font-mono">{order._id}</span></p>
+                  <p><b className="text-gray-700 font-bold">Total:</b> Rs {order.totalAmount}</p>
+                </div>
+                <div className="mt-1 flex flex-wrap gap-2 items-center text-xs font-medium text-gray-500">
+                <p>
+                  <b className="text-gray-700 font-bold">Status: </b>
+                  <span className={`inline-block font-bold px-2 py-0.5 text-[10px] uppercase rounded-full border ${order.orderStatus === 'Cancel' ? 'bg-red-50 text-red-600 border-red-100' : 'bg-purple-50 text-purple-700 border-purple-100'}`}>
+                    {order.orderStatus === 'Cancel' ? 'Cancelled' : order.orderStatus}
+                  </span>
+                </p>
 
                 {/* <button className="p-2 cursor-pointer border border-amber-200">Cancel Order</button> */}
                 {
                   order.orderStatus !== 'Cancel' && (
-                    <OrderStatusDropdown
-                    orderId={order._id}
-                    currentStatus={order.orderStatus}
-                    role={theUser?.role}
-                    />
+                    <div className="[&_select]:rounded-full [&_select]:px-3 [&_select]:py-1 [&_select]:text-[10px] [&_select]:font-bold [&_select]:uppercase [&_select]:bg-white [&_select]:border-gray-200">
+                      <OrderStatusDropdown
+                      orderId={order._id}
+                      currentStatus={order.orderStatus}
+                      role={theUser?.role}
+                      />
+                    </div>
                   )
                   }
                   {
-                    order.orderStatus === 'Delivered' &&(
-                      <NaVLink linkedTo={`/user/addreview/${order._id}`} Name={'Add Review'}/>
+                    order.orderStatus === 'Delivered' && (
+                      <div className="[&_a]:rounded-full [&_a]:px-3 [&_a]:py-1 [&_a]:text-[10px] [&_a]:font-bold [&_a]:uppercase [&_a]:bg-purple-600 [&_a]:text-white [&_a]:border-none">
+                        <NaVLink linkedTo={`/user/addreview/${order._id}`} Name={'Add Review'}/>
+                      </div>
                     )
                   }
 
@@ -130,10 +143,10 @@ function StatCard({title, value, color}){
   let timeMns = new Date().getMinutes();
   let timeMode = timeHrs >= 12? 'PM' : 'AM';
   return(
-     <div data-aos="fade-right" data-aos-duration="500" className={`${color} rounded-xl p-4`}>
-      <h2 className="font-semibold">{title}</h2>
-      <p className="text-2xl font-bold mt-2">{value}</p>
-      <span className="text-xs">
+     <div data-aos="fade-right" data-aos-duration="500" className={`${color} rounded-2xl p-4 flex flex-col justify-between min-h-28`}>
+      <h2 className="text-xs font-bold uppercase tracking-wider opacity-80">{title}</h2>
+      <p className="text-2xl font-black tracking-tight mt-1">{value}</p>
+      <span className="text-[10px] opacity-60 font-medium block mt-3">
         Updated today at {title === "Total Orders"? new Date().toLocaleString() : timeHrs > 9 ? `${timeHrs}:${timeMns} ${timeMode}` : `0${timeHrs}:${timeMns} ${timeMode}`}
       </span>
     </div>

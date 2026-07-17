@@ -68,21 +68,21 @@ function ShareNewItem() {
   };
 
   return (
-    <section className="w-full min-h-screen bg-[#2c3936] px-4 py-8">
-      <div className="max-w-6xl mx-auto bg-[#364145] rounded-2xl shadow-xl p-6">
-        <h2 className="text-3xl text-[#f2d39a] text-center mb-6 font-semibold">
+    <section className="w-full min-h-screen bg-transparent px-4 py-8 font-sans antialiased text-gray-800">
+      <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 className="text-xl md:text-2xl font-black text-gray-900 text-center mb-8 uppercase tracking-tight">
           Upload New Product
         </h2>
 
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 [&_label]:text-xs [&_label]:font-bold [&_label]:text-gray-400 [&_input]:bg-gray-50 [&_input]:border-transparent [&_input]:rounded-xl [&_input]:text-sm [&_input]:py-2.5 focus-within:[&_input]:border-purple-300 focus-within:[&_input]:bg-white"
         >
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1.5">
             <LaBel lblFor="Category" lblName="Category" />
             <select
               id="Category"
-              className="rounded-md border border-gray-500 bg-[#ffe2af] px-2 py-2 text-sm text-center outline-none"
+              className="rounded-xl px-3 py-2.5 text-gray-700 text-sm bg-gray-50 border border-transparent focus:border-purple-300 focus:bg-white outline-none font-medium transition-all"
               value={formData.Category}
               onChange={(e) =>
                 setFormData({ ...formData, Category: e.target.value })
@@ -97,13 +97,12 @@ function ShareNewItem() {
             </select>
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1.5">
             <LaBel lblFor="Title" lblName="Title" />
             <textarea
               id="Title"
-              rows={2}
-              resize="none"
-              className="resize-none rounded-md border border-gray-500 bg-[#ffe2af] px-2 py-2 text-sm outline-none"
+              rows={1}
+              className="resize-none rounded-xl px-3 py-2.5 text-sm bg-gray-50 text-gray-700 font-medium border border-transparent focus:border-purple-300 focus:bg-white outline-none transition-all"
               placeholder="Enter product Title"
               value={formData.Title}
               onChange={(e) =>
@@ -113,8 +112,8 @@ function ShareNewItem() {
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:col-span-2">
-            <div>
+          <div className="grid grid-cols-3 gap-3 md:col-span-2">
+            <div className="grid gap-1">
               <LaBel lblFor="original" lblName="Original Price" />
               <InPut
                 type="number"
@@ -129,7 +128,7 @@ function ShareNewItem() {
               />
             </div>
 
-            <div>
+            <div className="grid gap-1">
               <LaBel lblFor="market" lblName="Delivery Fee" />
               <InPut
                 type="number"
@@ -145,7 +144,7 @@ function ShareNewItem() {
               />
             </div>
 
-            <div>
+            <div className="grid gap-1">
               <LaBel lblFor="off" lblName="Off Price" />
               <InPut
                 type="number"
@@ -159,12 +158,12 @@ function ShareNewItem() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 lg:col-span-2">
+          <div className="flex flex-col gap-1.5 md:col-span-2">
             <LaBel lblFor="Detail" lblName="Detail" />
             <textarea
               id="Detail"
-              rows={5}
-              className="rounded-md border border-gray-500 bg-[#ffe2af] px-2 py-2 text-sm outline-none"
+              rows={4}
+              className="rounded-xl px-3 py-2.5 text-sm bg-gray-50 text-gray-700 font-medium border border-transparent focus:border-purple-300 focus:bg-white outline-none transition-all"
               placeholder="Write Detailed description of the item"
               value={formData.Detail}
               onChange={(e) =>
@@ -174,7 +173,7 @@ function ShareNewItem() {
             />
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="md:col-span-2 flex flex-col gap-1.5">
             <LaBel lblFor="images" lblName="Upload Images (Max 6)" />
             <input
               type="file"
@@ -183,34 +182,34 @@ function ShareNewItem() {
               multiple hidden
               onChange={handleImageChange}
             />
-            <label htmlFor="images" className="block w-full text-sm bg-[#f2d39a] p-2 rounded-md max-w-24 text-center font-semibold cursor-pointer " >Select Files</label>
+            <label htmlFor="images" className="block w-full text-xs bg-gray-100 hover:bg-gray-200 border border-gray-200 p-2.5 rounded-xl max-w-xs text-center font-bold cursor-pointer uppercase tracking-wider transition-all" >Select Files</label>
           </div>
 
           {previewImages.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 lg:col-span-2">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 md:col-span-2 mt-2">
               {previewImages.map((img, index) => (
-                <div key={index} className="relative">
+                <div key={index} className="relative aspect-square border border-gray-100 rounded-xl p-1 bg-gray-50/50 flex items-center justify-center">
                   <img
                     src={img}
                     alt="preview"
-                    className="h-24 w-full object-cover rounded-md"
+                    className="max-h-full max-w-full object-contain rounded-lg"
                   />
                   <button
                     type="button"
                     onClick={() => removeImage(index)}
-                    className="absolute top-1 right-1 bg-red-600 text-white text-xs p-1 rounded-full"
+                    className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-[10px] shadow-sm cursor-pointer"
                   >
-                    X
+                    ✕
                   </button>
                 </div>
               ))}
             </div>
           )}
 
-          <div className="lg:col-span-2 flex justify-center mt-6">
+          <div className="md:col-span-2 flex justify-center mt-6">
             <button
               type="submit"
-              className="px-8 py-3 rounded-xl bg-[#f2d39a] text-black font-semibold hover:opacity-90 transition-all duration-300 cursor-pointer"
+              className="px-6 py-3 text-xs font-bold uppercase tracking-wider rounded-full transition-all bg-purple-600 text-white shadow-sm shadow-purple-100 hover:bg-purple-700 w-full md:w-auto cursor-pointer"
             >
               Upload Item
             </button>
