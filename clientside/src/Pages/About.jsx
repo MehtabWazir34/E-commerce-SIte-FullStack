@@ -2,103 +2,56 @@ import { MdOutlineFacebook } from "react-icons/md";
 import khush from "../Pics/pic3.png";
 import ContactForm from "../Parts/MsgForm";
 import jan from '../Pics/jan.jpg'
+
 function About() {
   return (
-    <section className="max-w-7xl mx-auto min-h-screen mt-8 p-6 rounded-2xl bg-transparent">
-      <div className="bg-[#2c3639] rounded-2xl shadow-lg p-6 space-y-12 mb-8">
+    <section className="max-w-7xl mx-auto min-h-screen mt-8 p-4 md:p-6 rounded-3xl bg-transparent font-sans antialiased text-gray-800">
+      <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 md:p-10 space-y-16 mb-8">
 
         {/* INTRO SECTION */}
-        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="300" id="about">
-          <h1 className="text-3xl font-bold text-[#f2d39a] mb-4">About Jan’Sports</h1>
-          <p className="text-lg text-[#ffe2af] leading-relaxed max-w-4xl">
-            Jan’Sports is more than an online sports shop. It is a vision born in Bannu,
-            built for the people who believe in strength, discipline, and perseverance.
-            We provide quality sports products while actively working to promote a
-            healthy, active, and positive lifestyle among the youth.
+        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="300" id="about" className="text-center max-w-3xl mx-auto">
+          <h1 className="text-2xl md:text-3xl font-black text-gray-900 mb-4 uppercase tracking-tight">About Jan’Sports</h1>
+          <p className="text-sm md:text-base text-gray-500 leading-relaxed font-medium">
+            Jan’Sports is a premier multi-sport e-commerce platform dedicated to delivering high-performance sports gear, athletic apparel, and premium equipment. Built on a foundation of reliability, discipline, and absolute athletic excellence, we serve enthusiasts and professionals alike across the region, empowering athletes to achieve their peak potential.
           </p>
         </div>
 
         {/* MISSION SECTION */}
-        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="350" id="mission" className="bg-[#364145] rounded-2xl p-6 shadow-md my-5">
-          <h2 className="text-2xl font-semibold text-[#f2d39a] mb-4">Our Mission</h2>
-          <p className="text-[#ffe2af] leading-relaxed">
-            Bannu is known for its strong, hardworking, and resilient people. However,
-            due to limited resources and long-standing unrest in the region, the youth
-            often face mental pressure, lack of opportunities, and limited access to
-            structured sports activities.
+        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="350" id="mission" className="bg-gray-50/60 border border-gray-100 rounded-3xl p-6 md:p-8 shadow-none my-5">
+          <h2 className="text-lg md:text-xl font-black text-gray-900 mb-4 uppercase tracking-tight">Our Mission & Vision</h2>
+          <p className="text-xs md:text-sm text-gray-500 leading-relaxed font-medium">
+            Our mission is to democratize access to world-class sporting goods. We bridge the gap between passion and performance by offering an optimized online marketplace that guarantees authenticity, continuous technical innovation, and exceptional durability. 
             <br /><br />
-            Our mission is to use sports as a positive force — to keep young boys
-            mentally and physically active, provide them healthy entertainment, and
-            create pathways toward their favorite sports. Through Jan’Sports, we aim
-            to encourage discipline, teamwork, confidence, and hope in a region that
-            deserves growth and stability.
+            Through Jan’Sports, we utilize the transformative power of sports to drive community enrichment, promote active mental and physical well-being, and equip the next generation of athletes with the reliable tools they require to build confidence, execute teamwork, and master competitive play.
           </p>
-        </div>
-
-        {/* FOUNDER SECTION */}
-        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="300" className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center ">
-          <div data-aos="fade-right" data-aos-once="true" data-aos-duration="400" className="space-y-4 text-center md:text-left">
-            <h2 className="text-xl font-semibold text-[#f2d39a]">Jangin Nawaz</h2>
-            <h3 className="text-lg text-[#ffe2af]">Founder & Owner</h3>
-            <p className="text-[#ffe2af] leading-relaxed">
-              Jangin Nawaz is a young entrepreneur from Bannu with a strong belief in
-              the power of sports to transform lives. Despite challenges, he chose
-              action over limitation — creating Jan’Sports with a clear purpose:
-              to serve the community, uplift youth, and promote physical and mental
-              well-being.
-              <br /><br />
-              His positive mindset, leadership, and dedication to social impact reflect
-              a new generation of entrepreneurs who build not only businesses, but
-              meaningful change.
-            </p>
-            <div  className="flex justify-center gap-4">
-              <a
-                href="https://www.facebook.com/jan.waxir.79"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-300 hover:text-[#f2d39a] transition-all duration-300"
-              >
-                <MdOutlineFacebook className="text-3xl" />
-              </a>
-            </div>
-          </div>
-
-          <div data-aos="fade-left" data-aos-once="true" data-aos-duration="400" className="w-full items-end flex justify-center ">
-            <img
-              src={jan}
-              alt="Jangin Nawaz"
-              className="rounded-2xl w-full max-w-md object-contain shadow-lg hover:scale-105 transition-all duration-300"
-            />
-          </div>
         </div>
 
         {/* BRAND AMBASSADOR SECTION */}
         <div data-aos="fade-down" data-aos-once="true" data-aos-duration="300" className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div data-aos="fade-right" data-aos-once="true" data-aos-duration="400" className="flex justify-center">
+          <div data-aos="fade-right" data-aos-once="true" data-aos-duration="400" className="w-full flex justify-center bg-gray-50/50 rounded-2xl p-4 md:p-6 mix-blend-multiply">
             <img
               src={khush}
               alt="Khushdil Shah"
-              className="max-w-md w-full rounded-2xl shadow-lg hover:scale-105 transition-all duration-300"
+              className="max-w-md w-full rounded-2xl shadow-sm hover:scale-102 transition-all duration-300"
             />
           </div>
 
           <div data-aos="fade-left" data-aos-once="true" data-aos-duration="400" className="space-y-4 text-center md:text-left">
-            <h2 className="text-xl font-semibold text-[#f2d39a]">Khushdil Shah</h2>
-            <h3 className="text-lg text-[#ffe2af]">Brand Ambassador</h3>
-            <p className="text-[#ffe2af] leading-relaxed">
-              Khushdil Shah is a professional Pakistani international cricketer and a
-              proud brand ambassador of Jan’Sports. Known for his all-round abilities,
-              he has represented Pakistan at the highest level and played in major
-              leagues including PSL, BPL, and CPL.
+            <span className="bg-purple-50 text-purple-700 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider border border-purple-100 inline-block">
+              Official Partner
+            </span>
+            <h2 className="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-tight">Khushdil Shah</h2>
+            <h3 className="text-xs font-bold text-gray-400 tracking-wide uppercase">International Brand Ambassador</h3>
+            <p className="text-xs md:text-sm text-gray-500 leading-relaxed font-medium">
+              Khushdil Shah is an elite professional Pakistani international cricketer and the proud global brand ambassador of Jan’Sports. Widely recognized for his dynamic all-round match-winning capabilities, he has represented Pakistan at the pinnacle of international cricket and clean-hitting leagues globally, including the PSL, BPL, and CPL.
               <br /><br />
-              His journey, discipline, and performances inspire young athletes to
-              believe in their potential and work relentlessly toward excellence.
+              His strict operational discipline, resilience under pressure, and elite competitive integrity perfectly represent the core standards of our brand, inspiring young athletes to pursue systematic excellence.
             </p>
             <a
               href="https://en.wikipedia.org/wiki/Khushdil_Shah"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-300 hover:text-[#f2d39a] transition-all duration-300"
+              className="inline-block text-xs font-bold text-purple-600 hover:text-purple-700 underline mt-2 transition-colors"
             >
               Read more about Khushdil Shah
             </a>
@@ -106,22 +59,40 @@ function About() {
         </div>
 
         {/* CORE VALUES */}
-        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="300" className="bg-[#364145] rounded-2xl p-6 shadow-md">
-          <h2 className="text-2xl font-semibold text-[#f2d39a] mb-4">Our Core Values</h2>
-          <ul className="list-disc list-inside text-[#ffe2af] space-y-2">
-            <li>Community empowerment through sports</li>
-            <li>Youth development and mental well-being</li>
-            <li>Quality, integrity, and affordability</li>
-            <li>Discipline, teamwork, and resilience</li>
-            <li>Positive change through consistent action</li>
-          </ul>
+        <div data-aos="fade-down" data-aos-once="true" data-aos-duration="300" className="bg-gray-50/60 border border-gray-100 rounded-3xl p-6 md:p-8 shadow-none">
+          <h2 className="text-lg md:text-xl font-black text-gray-900 mb-6 uppercase tracking-tight">Our Operational Values</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs font-bold uppercase tracking-wider text-gray-600">
+            <div className="p-4 bg-white rounded-2xl border border-gray-100 flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-purple-600 shrink-0"></span>
+              Authenticity Guaranteed
+            </div>
+            <div className="p-4 bg-white rounded-2xl border border-gray-100 flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-purple-600 shrink-0"></span>
+              Uncompromised Quality
+            </div>
+            <div className="p-4 bg-white rounded-2xl border border-gray-100 flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-purple-600 shrink-0"></span>
+              Affordable Excellence
+            </div>
+            <div className="p-4 bg-white rounded-2xl border border-gray-100 flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-purple-600 shrink-0"></span>
+              Customer-Centric Logistics
+            </div>
+            <div className="p-4 bg-white rounded-2xl border border-gray-100 flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-purple-600 shrink-0"></span>
+              Elite Performance Design
+            </div>
+            <div className="p-4 bg-white rounded-2xl border border-gray-100 flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-purple-600 shrink-0"></span>
+              Community Advancement
+            </div>
+          </div>
         </div>
 
         {/* CLOSING */}
-        <div data-aos="fade-up" data-aos-once="true" data-aos-duration="300" className="text-center">
-          <p className="text-[#ffe2af] text-lg">
-            Jan’Sports is not just about selling products — it is about building hope,
-            strength, and opportunity through sports.
+        <div data-aos="fade-up" data-aos-once="true" data-aos-duration="300" className="text-center pt-4 border-t border-gray-50">
+          <p className="text-gray-400 text-xs md:text-sm font-medium">
+            Jan’Sports is more than a store — it is your ultimate digital locker room, fostering competitive capability through reliable service.
           </p>
         </div>
 

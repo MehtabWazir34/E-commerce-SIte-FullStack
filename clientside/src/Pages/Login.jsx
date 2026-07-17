@@ -39,7 +39,7 @@ function Login() {
     }
   };
 
-  const handleGoogleLogin = async (credentialRes) =>{
+  const handleGoogleLogin = async (credentialRes) => {
     try {
         const res = await axiosInstance.post(`/user/google-auth`,{
           credential : credentialRes.credential
@@ -57,23 +57,23 @@ function Login() {
     }
   }
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-md bg-[#2C3639] px-16 py-6 rounded-xl shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50/50 font-sans antialiased text-gray-800 px-4">
+      <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
         
-        {/* Header */}
-        <div className="text-center mb-6 border-b-2 border-[#FFE2AF] pb-2">
-          <h2 className="text-2xl font-semibold text-[#F2D39A]">
+        {/* Header Block with Clean Micro-Typography Layout */}
+        <div className="text-center mb-6">
+          <h2 className="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-tight">
             Welcome back!
           </h2>
-          <p className="text-sm text-[#FFE2AF] mt-1">
+          <p className="text-xs text-gray-400 mt-1.5 font-medium">
             Login to continue playing!
           </p>
         </div>
 
-        {/* Form */}
-        <form onSubmit={submitForm} autoComplete="off" className="space-y-4 flex flex-col justify-center w-full ">
+        {/* Input Elements Structural Global Form Element Hook Wrapper */}
+        <form onSubmit={submitForm} autoComplete="off" className="space-y-4 flex flex-col justify-center w-full [&_label]:text-xs [&_label]:font-bold [&_label]:text-gray-400 [&_input]:bg-gray-50 [&_input]:border-transparent [&_input]:rounded-xl [&_input]:text-sm [&_input]:py-2.5 focus-within:[&_input]:border-purple-300 focus-within:[&_input]:bg-white">
           
-          <div className="grid grid-cols-1">
+          <div className="grid grid-cols-1 gap-1">
             <LaBel lblFor="email" 
               lblName={'Email'}
             />
@@ -87,7 +87,7 @@ function Login() {
             />
           </div>
 
-          <div className="grid grid-cols-1">
+          <div className="grid grid-cols-1 gap-1">
             <LaBel lblFor="password"
               lblName={'Password'}
             />
@@ -104,29 +104,33 @@ function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="mx-auto w-1/2 cursor-pointer p-2 bg-[#FFE2AF] text-[#2c3639] font-semibold rounded-md hover:bg-[#F2D39A] transition-colors disabled:opacity-60"
+            className="w-full mt-2 px-6 py-3 text-xs font-bold uppercase tracking-wider rounded-full transition-all bg-purple-600 text-white shadow-sm shadow-purple-100 hover:bg-purple-700 disabled:opacity-60 cursor-pointer"
           >
             {loading ? "Logging In..." : "Login"}
           </button>
-          {/* Divdider */}
-          <div className="flex items-center my-2">
-          <div className="flex-1 h-1 bg-[#F2D39A]"></div>
-          <p className="px-3 text-[#FFE2AF] text-sm">OR</p>
-          <div className="flex-1 h-1 bg-[#F2D39A]"></div>
-        </div>
 
-        {/* Google Sign Up */}
+          {/* Minimalist Visual Line Splitter Elements */}
+          <div className="flex items-center py-2">
+            <div className="flex-1 h-px bg-gray-100"></div>
+            <p className="px-3 text-gray-400 text-[10px] font-bold tracking-wider">OR</p>
+            <div className="flex-1 h-px bg-gray-100"></div>
+          </div>
 
-        <div className="flex justify-center">
-
-          <GoogleLogin
-            onSuccess={handleGoogleLogin}
-            onError={() => console.log("Google Login Failed")}
-          />
-
-        </div>
+          {/* Google Single Sign-On Alignment Frame */}
+          <div className="flex justify-center w-full [&_.nsm7bb-HzN1uf-jh178d]:rounded-full">
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={() => console.log("Google Login Failed")}
+            />
+          </div>
         </form>
-        <p className="text-center text-amber-500 my-4">Don't have an account? <a href="/register" className="underline text-[#FFE2AF]">Create Now</a></p>
+
+        <p className="text-center text-xs text-gray-400 font-medium mt-6">
+          Don't have an account?{" "}
+          <a href="/register" className="font-bold text-purple-600 hover:text-purple-700 transition-colors">
+            Create Now
+          </a>
+        </p>
       </div>
     </div>
   );

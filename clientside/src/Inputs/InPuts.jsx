@@ -1,20 +1,34 @@
+
 import { NavLink } from "react-router"
 
 export function InPut({type, id, placeholder, onChange, value, required}){
     return(
         <input type={type} id={id} required={required} placeholder={placeholder} onChange={onChange} value={value} autoComplete="off"
-        className="rounded-sm p-1  text-[#2c3639] font-semibold border border-gray-500 outline-0 bg-[#ffe2af] focus:bg-[#F2D39A]"
+        className="w-full bg-chalk text-sm px-4 py-2.5 rounded-xl border border-steel focus:outline-none focus:bg-white focus:border-volt transition-all placeholder-slate/50 text-court font-body"
         />
     )
 }
+
 export function LaBel({lblFor, lblName}){
     return(
-        <label htmlFor={lblFor} className="text-[#F2D39A]" >{lblName}</label>
+        <label htmlFor={lblFor} className="text-gray-400 font-body font-bold uppercase tracking-wider text-[11px]" >{lblName}</label>
     )
 }
 
 export function NaVLink({linkedTo, Name, onClick}){
     return(
-        <NavLink to={linkedTo} onClick={onClick} className={'cursor-pointer px-2 py-1 text-center bg-[#ffe2af] rounded-sm outline-0 hover:bg-[#F2D39A] text-[#2C3639] font-semibold'}>{Name}</NavLink>
+        <NavLink 
+            to={linkedTo} 
+            onClick={onClick} 
+            className={({ isActive }) => 
+                `px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all border ${
+                    isActive 
+                        ? 'bg-purple-600 text-white hover:bg-purple-700 transition-all shadow-sm shadow-purple-100' 
+                        : 'bg-white text-purple-500 border-steel hover:bg-chalk hover:text-purple-700'
+                }`
+            }
+        >
+            {Name}
+        </NavLink>
     )
 }

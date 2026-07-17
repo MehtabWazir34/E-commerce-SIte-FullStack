@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ORDER_STATUS_RULES } from "../Utility/changeStatus.js";
 import axiosInstance from '../Utility/axiosInstance.js'
 
@@ -10,11 +10,11 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
   const allowedStatuses = ORDER_STATUS_RULES[role] || [];
 
   const STATUS_STYLES = {
-    Pending: "bg-yellow-600/85",
-    Processing: "bg-blue-600/85",
-    Shipping: "bg-purple-600/85",
-    Delivered: "bg-green-600/85",
-    Cancel: "bg-red-600/85",
+    Pending: "bg-amber-50 text-amber-700 border-amber-200",
+    Processing: "bg-blue-50 text-blue-700 border-blue-200",
+    Shipping: "bg-purple-50 text-purple-700 border-purple-200",
+    Delivered: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    Cancel: "bg-rose-50 text-rose-700 border-rose-200",
   };
 
   // 🚀 Common API function
@@ -53,7 +53,7 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
     status === "Shipping" || status === "Delivered" || status === "Cancel";
 
   return (
-    <div className="flex gap-3 items-center">
+    <div className="flex gap-3 items-center font-sans antialiased text-gray-800">
 
       {/* 🔵 ADMIN UI */}
       {role === "admin" ? (
@@ -62,18 +62,23 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
             value={status}
             onChange={(e) => setStatus(e.target.value)}
             className={`cursor-pointer
-              ${STATUS_STYLES[status]}
-              border border-[#ffe2af]/30
-              rounded-xl
-              px-3 py-2
+              ${STATUS_STYLES[status] || 'bg-gray-50 text-gray-700 border-gray-200'}
+              border
+              rounded-full
+              text-xs
+              font-bold
+              uppercase
+              tracking-wider
+              px-4 py-2.5
               focus:outline-none
+              transition-all
             `}
           >
             {allowedStatuses.map((s) => (
               <option
                 key={s}
                 value={s}
-                className="bg-[#2c3936] cursor-pointer text-[#ffe2af]"
+                className="bg-white text-gray-700 font-semibold text-xs lowercase"
               >
                 {s}
               </option>
@@ -83,14 +88,7 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
           <button
             onClick={handleUpdate}
             disabled={loading || status === currentStatus}
-            className="
-              bg-[#ffe2af]
-              text-[#2c3936]
-              px-4 py-2
-              rounded-xl
-              font-semibold
-              disabled:opacity-40
-            "
+            className="px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full transition-all bg-purple-600 text-white shadow-sm shadow-purple-100 disabled:opacity-40 cursor-pointer"
           >
             Update Status
           </button>
@@ -100,14 +98,7 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
         <button
           onClick={handleCancelOrder}
           disabled={loading || isCancelDisabled}
-          className="
-            bg-[#ffe2af]
-            text-[#2c3936]
-            px-4 py-2
-            rounded-xl
-            font-semibold
-            disabled:opacity-40
-          "
+          className="px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full transition-all bg-gray-100 border border-gray-200 text-gray-600 disabled:opacity-40 cursor-pointer hover:bg-gray-200"
         >
           Cancel Order
         </button>

@@ -256,24 +256,26 @@ export const reviewOrder = async (req, res) => {
         const { itemId, userId, comment } = req.body;
 
         // ✅ Validate input
-        if (!itemId || !userId || !comment) {
-            return res.status(400).json({ Msg: "All fields are required!" });
+        if (!comment || comment.trim() === '') {
+            return res.status(400).json({ Msg: "Fill the review field!" });
         }
 
         // ✅ Check existence
         const product = await theProduct.findById(itemId);
         const user = await theUser.findById(userId);
 
-        if (!product || !user) {
+        if (!product && !user) {
             return res.status(404).json({ Msg: "Product or User not found!" });
         }
 
         // ✅ Create review with IDs (not full objects)
         const review = await OrderReviews.create({
-            userId: user._id,
-            itemId: product._id,
+            userId: user._id || user.id,
+            itemId: product._id || product.id,
             comment
         });
+        console.log("REview", review);
+        
 
         return res.status(200).json({
             Msg: "Review added ✅",

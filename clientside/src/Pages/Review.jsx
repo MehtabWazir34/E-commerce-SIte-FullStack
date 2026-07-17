@@ -8,59 +8,63 @@ import { TextArea } from "../Inputs/textArea";
 function Review(){
     const {id} = useParams();
     const { theUser} = useUser();
-
-    const [formData, setFormData] = useState({
-        itemId:'', userId:'', comment:''
-    });
-    useEffect(() => {
-        if (theUser && id) {
-            setFormData({
-                itemId: id,
-                userId: theUser.id || theUser._id,
-                comment: ''
-            });
-        }
-    }, [theUser, id]);
+    const [reviewComment, setReviewComment] = useState('')
 
     const addReview = async (e) => {
-        // if(theUser && id) {
-        //     setFormData({itemId: id, userId: theUser.id || theUser._id, comment:''})
-        // }
         e.preventDefault();
         try {
-            await axiosInstance.post(`/user/addreview/${id}`,{
-                itemId: formData.itemId,
-                userId: formData.userId,
-                comment: formData.comment
+            if(!reviewComment || reviewComment.trim() === '') return;
+
+            // Strict fallback check to prevent passing undefined tokens to MongoDB
+            const currentUserId = theUser?._id || theUser?.id;
+            
+            if (!id || !currentUserId) {
+                alert("Authentication or Product parameter trace missing. Please re-login.");
+                return;
+            }
+            
+            // Send clear, flat destructured strings directly matching req.body
+            const res = await axiosInstance.post(`/user/addreview/${id}`, {
+                itemId: id,
+                userId: currentUserId,
+                comment: reviewComment.trim()
             })
+            
+            if (res.status === 200) {
+                alert("Review added ✅");
+                setReviewComment('');
+            }
         } catch (error) {
             console.log("Err to add review!", error);
-            
+            alert(error.response?.data?.Msg || "Server side processing exception.");
         }
-        }
+    }
 
     if(!theUser || !id) return null;
-    console.log('FormData', formData);
+    console.log('IdData', id);
     
     return(
-        <div className="min-h-[80vh] w-full my-6 bg-black p-6  flex justify-center ">
-            <div className="max-w-7xl bg-[#2c3936] rounded-md p-10">
-            <div className="flex gap-x-4 mt-6">
-            <form onSubmit={addReview} className="w-full space-y-3 border border-amber-200 rounded-md p-4">
-            <h1 className="text-3xl font-bold text-[#ffe2af] text-center">How was your experience?</h1>
-            <p className="text-[#ffe2af] mt-4">We would love to hear your feedback! Please share your thoughts about our service and products.</p>
+        <div className="min-h-[75vh] w-full my-6 p-4 flex justify-center items-center font-sans antialiased text-gray-800">
+            <div className="max-w-xl w-full bg-white border border-gray-100 shadow-sm rounded-3xl p-6 md:p-8">
+            <div className="flex gap-x-4">
+            <form onSubmit={addReview} className="w-full space-y-5">
+            <div className="text-center mb-2">
+                <h1 className="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-tight">How was your experience?</h1>
+                <p className="text-xs text-gray-400 mt-2 font-medium leading-relaxed">We would love to hear your feedback! Please share your thoughts about our service and the product.</p>
+            </div>
 
-                    <div className="grid">
+                    {/* Mapping style custom properties over standard input field containers */}
+                    <div className="grid [&_textarea]:w-full [&_textarea]:bg-gray-50 [&_textarea]:text-sm [&_textarea]:p-3.5 [&_textarea]:rounded-2xl [&_textarea]:border [&_textarea]:border-transparent [&_textarea]:focus:border-purple-300 [&_textarea]:focus:bg-white [&_textarea]:transition-all [&_textarea]:placeholder-gray-400 [&_textarea]:outline-none [&_textarea]:resize-none">
                     {/* <LaBel lblFor={'review'} lblName={'How it was?'}/> */}
-                    <TextArea id={'review'} placeholder={'Write you thought here...'} 
-                    value={formData.comment} 
-                    onChange={(a)=> setFormData({...formData, comment: a.target.value})}/>
+                    <TextArea id={'review'} placeholder={'Write your thought here...'} 
+                    value={reviewComment} 
+                    onChange={(a)=> setReviewComment(a.target.value)}/>
                     </div>
-                <button type="submit" className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">Add Review</button>
+                <button type="submit" className="w-full px-6 py-3 text-xs font-bold uppercase tracking-wider rounded-full transition-all bg-purple-600 text-white shadow-sm shadow-purple-100 hover:bg-purple-700 cursor-pointer">Add Review</button>
                 </form>
             </div>
             </div>
         </div>
     )
 }
-export default Review
+export default Review;
