@@ -16,8 +16,8 @@ function FloatingMenu() {
   return (
       <>
             { menuOpen && (
-                <div className={`transition-all duration-300 fixed top-0 right-0 py-4 px-2 bg-white shadow-md border border-gray-100 flex justify-between items-center rounded-2xl z-50 font-sans antialiased text-gray-800 w-full ${menuOpen ? 'opacity-100' : "opacity-0 hidden" } `}> 
-                    <ul className="flex items-center gap-x-2 text-xs font-bold uppercase tracking-wider ">
+                <div className={`transition-all duration-300 fixed top-0 right-0 py-4 px-6 bg-white shadow-md border border-gray-100 flex justify-between items-center rounded-2xl z-50 font-sans antialiased text-gray-800 w-full ${menuOpen ? 'opacity-100' : "opacity-0 hidden" } `}> 
+                    <ul className="flex items-center gap-x-1 text-sm font-bold uppercase  ">
                         <li data-aos="fade-right"  data-aos-duration="300">
                             <NaVLink onClick={()=> setMenuOpen(false)} linkedTo={'/'} Name={'Home'}/>
                             </li>
@@ -28,14 +28,16 @@ function FloatingMenu() {
                         <NaVLink onClick={()=> setMenuOpen(false)} linkedTo={'/about'} Name={'About'} />
                             </li>
                     </ul>
-                        <div  className="flex items-center gap-x-3">
-                        <button data-aos="fade-right" data-aos-duration="600" className="w-8 h-8 rounded-full bg-gray-100 hover:bg-purple-100 text-purple-600 hover:text-purple-700 border border-gray-100 flex items-center justify-center transition-all cursor-pointer"
+                        <div  className="flex items-center gap-x-2">
+                        <button data-aos="fade-right" data-aos-duration="600" className={`${isLoggedIn ? " w-8 h-8 rounded-full bg-gray-100 hover:bg-purple-100 text-purple-600 hover:text-purple-700 border border-gray-100 flex items-center justify-center transition-all cursor-pointer" : "hidden"} `}
                          onClick={()=> setCartOpn(!cartOpn)} >{cartOpn ? <BsCartXFill/> : <BsCartCheckFill/> }
                         </button>
+                        
                         { cartOpn && (
                             <MyCart/>
                         )}
                         <button data-aos="fade-right" data-aos-duration="700" className="w-8 h-8 rounded-full bg-gray-100 hover:bg-purple-100 text-purple-600 hover:text-purple-700 border border-gray-100 flex items-center justify-center transition-all cursor-pointer"
+
                          onClick={()=> setSettingOpn(!settingOpn)} >
                             {isLoggedIn ? <IoSettings/> : <NaVLink linkedTo={'/login'} Name={'Login'}/>}
                         </button>
