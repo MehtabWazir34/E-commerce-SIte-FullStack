@@ -44,8 +44,8 @@ useEffect(() => {
     return(
         <header data-aos="fade-down" data-aos-duration="300" className="w-full bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between sticky top-0 z-50">
             {/* Brand Logo styled exactly like the reference 'MLC' */}
-            <Link data-aos="fade-down" data-aos-duration="400" to={'/'} className='cursor-pointer text-gray-900 font-sans font-black text-2xl uppercase tracking-tighter transition-colors duration-150'>
-                Jan'Sports
+            <Link data-aos="fade-down" data-aos-duration="400" to={'/'} className='cursor-pointer text-gray-900 font-sans font-black text-lg md:text-2xl uppercase tracking-tighter transition-colors duration-150'>
+                J<span className='text-[12px] md:text-md tracking-wide'>an'</span>S<span className='text-[12px] md:text-md tracking-wide'>ports</span>
             </Link>
             
             {/* Nav links positioned cleanly between logo and controls */}
@@ -64,6 +64,8 @@ useEffect(() => {
             
             {/* Right side controls matching clean, purple accents and text hierarchy */}
             <div className='hidden md:flex md:justify-between items-center gap-x-6 text-gray-600 font-medium text-sm'>
+                {
+                    loggedIn && (
                 <button 
                     data-aos="fade-down" 
                     data-aos-duration="600" 
@@ -73,6 +75,8 @@ useEffect(() => {
                     <span className="relative w-8 h-8 rounded-full bg-gray-100 flex items-center text-purple-600 hover:text-purple-700 hover:bg-purple-100 cursor-pointer [&_svg]:w-8 [&_svg]:h-5">{cartIcon}</span>
                     
                 </button>
+                    )
+                }
 
                 {
                     loggedIn ? (

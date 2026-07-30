@@ -21,7 +21,7 @@ export function NaVLink({linkedTo, Name, onClick}){
             to={linkedTo} 
             onClick={onClick} 
             className={({ isActive }) => 
-                `px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all border ${
+                `p-2.5 md:px-4 md:py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all border ${
                     isActive 
                         ? 'bg-purple-600 text-white hover:bg-purple-700 transition-all shadow-sm shadow-purple-100' 
                         : 'bg-white text-purple-500 border-steel hover:bg-chalk hover:text-purple-700'
