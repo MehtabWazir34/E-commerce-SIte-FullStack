@@ -30,7 +30,6 @@ function Login() {
         setLoggedIn(true)
         navigateTo('/')
       }
-      console.log(res);
       
     } catch (error) {
       console.error("Registration failed:", error);

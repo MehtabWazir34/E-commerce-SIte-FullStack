@@ -1,12 +1,11 @@
 // import Draggable from "react-draggable";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { IoMenu, IoSettings } from "react-icons/io5";
 import { NaVLink } from "../Inputs/InPuts";
 import { BsCartCheckFill, BsCartXFill } from "react-icons/bs";
 import { useAuth } from "../Config/AuthProvider";
 import AccountOpt from "./AccountOpt";
 import MyCart from "./MyCart";
-import Draggable from 'react-draggable'
 function FloatingMenu() {
 //   const nodeRef = useRef(null);
     const [menuOpen, setMenuOpen] = useState(false);  
@@ -30,7 +29,7 @@ function FloatingMenu() {
                             </li>
                     </ul>
                         <div  className="flex justify-between ml-2 gap-x-4">
-                        <button data-aos="fade-right" data-aos-duration="600" className="bg-[#f2d39a] py-1 px-2 text-xl rounded-sm text-center"
+                        <button data-aos="fade-right" data-aos-duration="600" className={`${isLoggedIn ? "bg-[#f2d39a] py-1 px-2 text-xl rounded-sm text-center" : "hidden"} `}
                          onClick={()=> setCartOpn(!cartOpn)} >{cartOpn ? <BsCartXFill/> : <BsCartCheckFill/> }
                         </button>
                         { cartOpn && (
@@ -47,16 +46,12 @@ function FloatingMenu() {
                     
                 </div>
             )}
-    {/* <Draggable nodeRef={nodeRef} onStop={(a, data)=>{ if(data.deltaX === 0 && data.deltaY === 0) {setMenuOpen(pre => !pre)}}} > */}
-      <div
-        // ref={nodeRef}
-        // 
+      <div 
         onClick={()=>setMenuOpen(!menuOpen)}
         className="fixed md:hidden bottom-10 right-1 w-12 h-12 flex items-center justify-center border-2 border-[#2c3936] rounded-full bg-[#f2d39a] shadow-2xl cursor-grab z-9999"
       >
         <IoMenu className="text-xl animate-bounce font-bold"/>
       </div>
-    {/* </Draggable> */}
     </>
   );
 }

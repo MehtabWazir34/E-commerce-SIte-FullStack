@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts.jsx";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from '../Utility/axiosInstance.js'

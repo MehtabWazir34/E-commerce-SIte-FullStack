@@ -17,7 +17,7 @@ export default function OrderStatusDropdown({ orderId, currentStatus, role }) {
     Cancel: "bg-red-600/85",
   };
 
-  // 🚀 Common API function
+  // API functions
   const updateOrderStatus = async (newStatus) => {
     try {
       setLoading(true);

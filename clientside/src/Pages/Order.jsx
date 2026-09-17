@@ -65,12 +65,13 @@ function Order() {
       phoneNo: formData.contactNo
     };
 
-    const res = await axiosInstance.post(
+    // const res = 
+    await axiosInstance.post(
       `/user/order/create`,
       payload,
       
     );
-    console.log("Order placed:", res.data);
+    // console.log("Order placed:", res.data);
     alert("Order placed successfully!");
     window.location.href = `/product/details/${theItem._id}`;
   };

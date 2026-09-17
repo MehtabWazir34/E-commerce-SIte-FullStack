@@ -9,7 +9,6 @@ function Products() {
   const [activeCategory, setActiveCategory] = useState([]);
   const [priceRange, setPriceRange] = useState({'low':'', 'high':''})
   const [productsList, setProducts] = useState([]);
-  console.log('prod:', productsList);
   
   useEffect(()=>{
    const getFilteredItems = async()=>{

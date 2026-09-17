@@ -1,20 +1,13 @@
-// import  { Link } from 'react-router-dom'
 import { InPut, NaVLink } from '../Inputs/InPuts'
 import {  useEffect, useState } from 'react'
-// import { MdCabin, MdShoppingCart, MdShoppingCartCheckout } from 'react-icons/md';
+
 import { IoSettings } from 'react-icons/io5';
-// import { checkLogin } from '../Config/authCheck';
-// import { useAuth } from '../Config/AuthProvider';
 import axiosInstance from '../Utility/axiosInstance.js';
 import { Link } from 'react-router';
 import { useUser } from '../Utility/THEUser.jsx';
 
 function Header({cartOpen, cartIcon, accountOpts, setSearchMode, setFilteredItems, searchVal, setSearchVal}) {
-    // const [search, setSearch] = useState('')
-    // const [searchMode, setSearchMode] = useState(false)
     const [products, setProducts] = useState([]);
-    // const [FilteredItems, setFilteredItems] = useState([]);
-
     const {loggedIn} = useUser();
     useEffect(()=>{
         const getRes = async()=>{
@@ -38,7 +31,7 @@ useEffect(() => {
     } else {
         setSearchMode(false)
     }
-},[searchVal, products]);
+},[searchVal, products,setSearchMode, setFilteredItems]);
 
 
     return(

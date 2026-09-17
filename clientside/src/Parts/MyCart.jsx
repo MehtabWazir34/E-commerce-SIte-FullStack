@@ -6,14 +6,11 @@ import { NavLink } from "react-router";
 function MyCart({setCartOpen}){
     const [cartItems, setCartItems] = useState([]);
     // console.log(cartItems);
-    
     useEffect(()=>{
         const fetchCartItems = async()=>{
             try {
                 let theItems = await axiosInstance.get(`/user/mycart`);
                 setCartItems(Array.isArray(theItems.data.theItems) ? theItems.data.theItems : []);
-                // console.log(theItems);
-                
             }
             catch (error) {
                 console.log("error to fetch cart items", error);
@@ -25,14 +22,13 @@ function MyCart({setCartOpen}){
 
     const deleteCartItem = async(itemId)=>{
         try {
-            let theItem = await axiosInstance.delete(`/user/deletecartitem/${itemId}`,
+            await axiosInstance.delete(`/user/deletecartitem/${itemId}`,
                 {
                     headers:{
                         Authorization:`Bearer ${localStorage.getItem('token')}`
                     }
                 }
             );
-            console.log(theItem);
             setCartItems(prev => prev.filter((item)=> item.itemId._id !== itemId))
             
         } catch (error) {

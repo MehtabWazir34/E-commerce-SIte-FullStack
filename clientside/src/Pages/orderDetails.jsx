@@ -19,13 +19,13 @@ function OrderDetails() {
         const res = await axiosInstance.get(`/admin/order/info/${id}`);
         const userRes = await axiosInstance.get(`/user/me`)
         setUser(userRes.data.user);
-        console.log('User',userRes.data.user);
+        // console.log('User',userRes.data.user);
         (userRes.data.user);
         // if(res.data.success){
         //     setOrder(res.data.tOrder);
         // }
         setOrder(res.data.tOrder);
-        console.log("OrderRes:",res);
+        // console.log("OrderRes:",res);
         
       } catch (error) {
         console.log("Error fetching order:", error);
@@ -41,13 +41,14 @@ function OrderDetails() {
 
   const deleteOrder = async()=>{
     try {
-          const theOrd = await axiosInstance.delete(`/user/deleteorder/${id}`);
+          // const theOrd = 
+          await axiosInstance.delete(`/user/deleteorder/${id}`);
           alert("Order deleted ✅")
           setDelOrder(false)  
           // setDelOrder(theOrd.data.delOrdr)
           window.location.reload()
           navigate(-1)
-          console.log('Delted order:', theOrd);
+          // console.log('Delted order:', theOrd);
           
     } catch (error) {
       console.log("Err:", error);
@@ -56,7 +57,7 @@ function OrderDetails() {
   }
 
  
-  let qty = order?.orderedItem?.qty || 0  ;
+  // let qty = order?.orderedItem?.qty || 0  ;
 
 
   if (loading) {

@@ -41,7 +41,7 @@ function Details() {
     };
 
     getItem();
-  }, [id]);
+  }, );
 
   const addItem = {
       "itemId" : id,
@@ -49,10 +49,11 @@ function Details() {
   }
   const addToCart = async()=>{
     try {
-          let theItemToadd = await axiosInstance.post(`/user/addtocart`,
+          // let theItemToadd = 
+          await axiosInstance.post(`/user/addtocart`,
             addItem
           );
-          console.log(theItemToadd);
+          // console.log(theItemToadd);
                 
     } catch (error) {
       console.log("error to add item", error);
@@ -62,12 +63,13 @@ function Details() {
 
   const deleteProduct = async()=>{
     try {
-        const delPro = await axiosInstance.delete(`/admin/delpro/${id}`, {
+        // const delPro = 
+        await axiosInstance.delete(`/admin/delpro/${id}`, {
           headers:{
             Authorization:`Bearer ${localStorage.getItem('token')}`
           }
         });
-        console.log("Deleted product:", delPro);
+        // console.log("Deleted product:", delPro);
         navigateTo('/products');
     } catch (error) {
       console.log("Error:", error);

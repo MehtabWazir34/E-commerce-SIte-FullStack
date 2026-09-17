@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { InPut, LaBel } from "../Inputs/InPuts";
 import axiosInstance from '../Utility/axiosInstance.js'
 import { useNavigate } from "react-router";
@@ -54,7 +54,7 @@ function ShareNewItem() {
       formData.Imgs.forEach((img) => {
         payload.append("Imgs", img);
       });
-      console.log(formData);
+      // console.log(formData);
       
       console.log("Ready for backend upload");
       // axios.post("/api/products", payload)

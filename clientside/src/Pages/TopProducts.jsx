@@ -1,7 +1,7 @@
 import { Link } from "react-router";
-import football from "../Pics/football.jfif";
-import vollyball from "../Pics/vollyball.jpg";
-import wears from "../Pics/wears.jpg";
+// import football from "../Pics/football.jfif";
+// import vollyball from "../Pics/vollyball.jpg";
+// import wears from "../Pics/wears.jpg";
 import { useEffect, useState } from "react";
 import axiosInstance from '../Utility/axiosInstance.js'
 

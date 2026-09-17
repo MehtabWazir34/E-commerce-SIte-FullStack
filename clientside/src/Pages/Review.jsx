@@ -2,7 +2,7 @@ import axiosInstance from '../Utility/axiosInstance.js'
 import { useParams } from "react-router";
 import { useUser } from "../Utility/THEUser";
 import { useEffect, useState } from "react";
-import { LaBel } from "../Inputs/InPuts";
+// import { LaBel } from "../Inputs/InPuts";
 import { TextArea } from "../Inputs/textArea";
 
 function Review(){
@@ -40,7 +40,7 @@ function Review(){
         }
 
     if(!theUser || !id) return null;
-    console.log('FormData', formData);
+    // console.log('FormData', formData);
     
     return(
         <div className="min-h-[80vh] w-full my-6 bg-black p-6  flex justify-center ">
